@@ -1,8 +1,11 @@
 
 export default function Page(){
     return (
-        <div>
+        <section>
+            <div>
+
+            </div>
             방명록 프로젝트
-        </div>
+        </section>
     )
 }

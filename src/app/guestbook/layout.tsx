@@ -8,9 +8,11 @@ export default function GuestbookLayout({
     return (
         <section>
             {/* Include shared UI here e.g. a header or sidebar */}
-            <nav></nav>
+            <tr>
+                {children}
+            </tr>
 
-            {children}
+
         </section>
     )
 }

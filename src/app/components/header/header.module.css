@@ -1,0 +1,119 @@
+
+.title {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 2px solid #E46060;
+    width: 50%; /* 요소의 가로폭을 조절 */
+    margin: 0 auto; /* 가로 중앙 정렬을 위한 margin 설정 */
+    margin-bottom: 20px;
+
+}
+
+.title p {
+    text-align: center;
+    font-size: 3.5em;
+    font-family: "Pacifico";
+    margin-bottom: 15px;
+}
+
+.sortCondition {
+    display: flex;
+    align-items: center;
+    gap: 1rem; /* 간격 조절 */
+}
+
+
+.searchArea {
+    width: 100%;
+    display: flex;
+    justify-content: space-between; /* 좌우 정렬 */
+    align-items: center; /* 수직 가운데 정렬 */
+}
+
+.searchArea ul {
+    list-style: none;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+}
+
+.searchArea li {
+    float: left;
+
+
+
+}
+/*토글 버튼*/
+.toggle label {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+}
+.toggle input[role=switch] {
+
+    appearance: none; /*기본 스타일 제거*/
+    position: relative;
+    border: max(2px, 0.1em) solid gray;
+    border-radius: 1.25em;
+    width: 2.25em;
+    height: 1.25em;
+
+}
+
+.toggle input[role=switch]::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    width: 1em;
+    height: 1em;
+    border-radius: 50%;
+    transform: scale(0.8);
+    background-color: gray;
+    transition: left 250ms linear;
+}
+
+.toggle input[role=switch]:checked::before {
+    left: 1em;
+}
+
+.toggle input[role=switch]:hover {
+    box-shadow: 0 0 0 max(4px, 0.2em) darkgreen;
+}
+
+.searchBar{
+    display: flex; /* 좌우 정렬을 위해 flex 사용 */
+    align-items: center; /* 수직 가운데 정렬 */
+    margin-left: auto;
+}
+
+.searchBar input[role=search] {
+
+    transition: box-shadow 1.5s ease; /* 변화를 부드럽게 만들기 위한 트랜지션 설정 */
+    border: none;
+    border-bottom: 2px solid black;
+    outline: none;
+    background: none;
+
+}
+
+.searchBar input[role=search]::placeholder{
+    text-align: center;
+}
+
+.searchBar input[role=search]:focus {
+    box-shadow: 0px 5px 3px -1px rgba(0, 0, 0, 0.1); /* 그림자 설정 */
+}
+
+.searchBar button {
+
+    width: 20px;
+    height: 20px;
+    border: none; /* 기본 테두리 제거 */
+    cursor: pointer; /* 포인터 모양으로 변경하여 클릭 가능한 상태로 표시 */
+    background: url("/icon/search.png") no-repeat center center;
+    background-size: cover;
+
+}

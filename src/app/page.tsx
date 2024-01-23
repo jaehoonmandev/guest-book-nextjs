@@ -1,11 +1,15 @@
-import Image from 'next/image'
-import styles from './page.module.css'
+import styles from './styles/page.module.css'
+import React from "react";
+import Cards from "@/app/components/card/cards";
 
 export default function Home() {
-  return (
-   <div>
+    return (
+        <section className={styles.cardSection}>
 
-   </div>
+            <Cards></Cards>
 
-  )
+        </section>
+
+
+    )
 }

@@ -1,8 +1,15 @@
 import type {Metadata} from 'next'
 import {Inter} from 'next/font/google'
-import './globals.css'
 import React from "react";
 import "@fontsource/pacifico";
+
+import './styles/globals.css'
+import SearchConditions from "@/app/components/header/searchConditions";
+import SearchBar from "@/app/components/header/searchBar";
+import {Main} from "next/document";
+import MainTitle from "@/app/components/header/mainTitle";
+import SearchArea from "@/app/components/header/searchArea";
+import Header from "@/app/components/header/header";
 
 const inter = Inter({subsets: ['latin']})
 
@@ -19,44 +26,17 @@ export default function RootLayout({
     return (
         <html lang="kr">
         <body className={inter.className}>
-        <div className={"header"}>
 
-            <div className={"title"}>
-                <p> Guest Book</p>
-            </div>
-
-            <div className={"menu"}>
-                <div>
-                    <span>Sort By</span>
-                </div>
-
-                <div>
-                    <ul>
-                        <li>Date</li>
-                        <li>Title</li>
-                        <li>Writer</li>
-                        <li className={"toggle"}>
-                            <label>
-                                <span>DES</span>
-                                <input id="order_by" role="switch" type="checkbox"/>
-                                <span>AES</span>
-                            </label>
-                        </li>
-                    </ul>
-                </div>
-                <div className={"searchBar"}>
-                    <label>
-                        <input role="search" type="text" placeholder="Search as Writer" />
-                        <button></button>
-                    </label>
-                </div>
-
-            </div>
-
-        </div>
+        <main className={"container"}>
+            <header>
+                <Header/>
+            </header>
 
 
-        {children}
+                {children}
+
+
+        </main>
         </body>
         </html>
     )

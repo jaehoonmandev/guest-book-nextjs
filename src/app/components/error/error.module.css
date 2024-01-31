@@ -1,0 +1,10 @@
+
+.guestBookConnectError {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.guestBookConnectError p{
+    font-size: 2em;
+    color: #888888;
+}

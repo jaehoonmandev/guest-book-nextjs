@@ -4,11 +4,7 @@ import React from "react";
 import "@fontsource/pacifico";
 
 import './styles/globals.css'
-import SearchConditions from "@/app/components/header/searchConditions";
-import SearchBar from "@/app/components/header/searchBar";
-import {Main} from "next/document";
-import MainTitle from "@/app/components/header/mainTitle";
-import SearchArea from "@/app/components/header/searchArea";
+
 import Header from "@/app/components/header/header";
 
 const inter = Inter({subsets: ['latin']})
@@ -31,9 +27,10 @@ export default function RootLayout({
             <header>
                 <Header/>
             </header>
+            {children}
 
-
-                {children}
+            {/*modal 띄울 위치*/}
+            <div id={"portal"}></div>
 
 
         </main>

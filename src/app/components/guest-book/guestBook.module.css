@@ -1,5 +1,5 @@
 
-.commonCardStyle {
+.commonGuestBookStyle {
     /* 공통 스타일 속성 */
     width: 100%;
     height: 70%;
@@ -18,25 +18,31 @@
 }
 
 
-.addCard {
-    composes: commonCardStyle;
+.addGuestBook {
+    composes: commonGuestBookStyle;
     border: 2px dotted black;
     background: none;
     font-size: 5em;
-    transition: font-size 1s, background-color 1s; /* 부드러운 애니메이션을 위한 트랜지션 설정 */
+    align-items: center; /* 수직 가운데 정렬 */
+    transition: font-size 1s;/* 부드러운 애니메이션을 위한 트랜지션 설정 */
+    cursor: pointer;
 }
 
-.addCard:hover{
+.addGuestBook:hover{
     font-size: 8em;
-    background-color: rgba(128, 128, 128, 0.8);
+
 }
 
 
-.addedCard {
-    composes: commonCardStyle;
+.addedGuestBook {
+    composes: commonGuestBookStyle;
     border: 2px solid black;
     flex-direction: column;
+    transition: background-color 1s; /* 부드러운 애니메이션을 위한 트랜지션 설정 */
+}
 
+.addedGuestBook:visited{
+    background-color: rgba(128, 128, 128, 0.8);
 }
 
 .title {
@@ -58,7 +64,7 @@
     left: 0;
 }
 
-.addedCard .contents {
+.addedGuestBook .contents {
     flex: 1; /* 컨텐츠 영역이 남은 공간을 모두 차지하도록 설정 */
     width: 100%;
     height: 70%;

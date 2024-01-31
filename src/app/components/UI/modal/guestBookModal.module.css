@@ -1,0 +1,11 @@
+
+
+.modalBox {
+    padding: 1.5rem 3rem;
+    width: 28.125rem;
+    border-radius: 0.313rem;
+    display: flex;
+    flex-direction: column;
+    background-color: #ffffff;
+    z-index: 30;
+}

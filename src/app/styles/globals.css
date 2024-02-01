@@ -1,16 +1,22 @@
+html, body{
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow-y: auto; /* 수직 스크롤 활성화 */
+}
+
 
 html{
-    height: 100vh;
+    /*그라디언트 설정*/
+    background: linear-gradient(170deg ,rgba(236,160,160,1) 0%, rgba(255,255,255,1) 100%);
 }
 
 body{
-    /*그라디언트 설정*/
-    background: linear-gradient(170deg ,rgba(236,160,160,1) 0%, rgba(255,255,255,1) 100%);
-
     /*화면 전체*/
     margin: 0;
     padding: 0;
     width: 100%;
+
 
 
     .container {

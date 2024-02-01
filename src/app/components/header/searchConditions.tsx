@@ -1,21 +1,28 @@
 import React from "react";
 import styles from './header.module.css'
 export default function SearchConditions(){
+
     return (
         <div className={styles.sortCondition}>
             <div>
-                <span>Sort By</span>
+                <span>정렬 기준</span>
             </div>
 
             <ul>
-                <li>Date</li>
-                <li>Title</li>
-                <li>Writer</li>
+                <li>
+                    <a href="#">날짜</a>
+                </li>
+                <li>
+                    <a href="#">제목</a>
+                </li>
+                <li>
+                    <a href="#">작성자</a>
+                </li>
                 <li className={styles.toggle}>
                     <label>
-                        <span>DES</span>
+                        내림차순
                         <input role="switch" type="checkbox"/>
-                        <span>AES</span>
+                        오름차순
                     </label>
                 </li>
             </ul>

@@ -24,6 +24,21 @@
     gap: 1rem; /* 간격 조절 */
 }
 
+.sortCondition ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sortCondition ul li {
+    margin-right: 10px; /* Adjust the value as needed */
+}
+
+/* Add this style to the last child to remove the margin on the last item */
+.sortCondition ul li:last-child {
+    margin-right: 0;
+}
+
 
 .searchArea {
     width: 100%;

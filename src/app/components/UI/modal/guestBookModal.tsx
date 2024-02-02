@@ -7,6 +7,7 @@ import {ModalProps} from '@/app/interfaces/guestBook'
 
 export default function GuestBookModal( {toggleHandler, guestBookData, type} : ModalProps,) {
 
+
     return (
         <>
             <Backdrop toggleHandler={toggleHandler}>

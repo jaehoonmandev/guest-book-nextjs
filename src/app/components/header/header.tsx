@@ -9,10 +9,13 @@ export default function Header() {
         <div>
             <MainTitle></MainTitle>
 
+            {/*Header의 Search condition에 따른 GET 요청이 가능하도록 */}
+
             <SearchArea>
                 <SearchConditions></SearchConditions>
                 <SearchBar></SearchBar>
             </SearchArea>
+
         </div>
 
     )

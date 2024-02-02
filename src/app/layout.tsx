@@ -1,3 +1,5 @@
+"use client"
+
 import type {Metadata} from 'next'
 import {Inter} from 'next/font/google'
 import React from "react";
@@ -6,33 +8,33 @@ import "@fontsource/pacifico";
 import './styles/globals.css'
 
 import Header from "@/app/components/header/header";
+import {GuestBookProvider} from "@/app/store/guestBook-context";
 
 const inter = Inter({subsets: ['latin']})
 
-export const metadata: Metadata = {
+/*export const metadata: Metadata = {
     title: 'Guest Book',
     description: '게스트북 토이프로젝트',
-}
+}*/
 
-export default function RootLayout({
-                                       children,
-                                   }: {
-    children: React.ReactNode
-}) {
+export default function RootLayout(
+    {children,}: { children: React.ReactNode }
+) {
     return (
         <html lang="kr">
         <body className={inter.className}>
 
+
         <main className={"container"}>
-            <header>
-                <Header/>
-            </header>
+        <GuestBookProvider>
+                <header>
+                    <Header/>
+                </header>
             {children}
+        </GuestBookProvider>
 
-            {/*modal 띄울 위치*/}
-            <div id={"portal"}></div>
-
-
+                {/*modal 띄울 위치*/}
+                <div id={"portal"}></div>
         </main>
         </body>
         </html>

@@ -1,6 +1,11 @@
-import React from "react";
+import React, {ChangeEvent, useEffect, useState} from "react";
 import styles from './header.module.css'
+import {useGuestBookContext} from "@/app/store/guestBook-context";
+import {HtmlContext} from "next/dist/shared/lib/html-context.shared-runtime";
 export default function SearchConditions(){
+
+    //context에 등록한 검색조건 State를 변경하기 위해.
+    const { changeOrderDirection, changeOrderField} = useGuestBookContext();
 
     return (
         <div className={styles.sortCondition}>
@@ -10,20 +15,24 @@ export default function SearchConditions(){
 
             <ul>
                 <li>
-                    <a href="#">날짜</a>
+                    <button onClick={() => changeOrderField('createdTime')}>날짜</button>
                 </li>
                 <li>
-                    <a href="#">제목</a>
+                    <button onClick={() => changeOrderField('title')}>제목</button>
                 </li>
                 <li>
-                    <a href="#">작성자</a>
+                    <button onClick={() => changeOrderField('writer')}>작성자</button>
                 </li>
                 <li className={styles.toggle}>
-                    <label>
+                <label>
                         내림차순
-                        <input role="switch" type="checkbox"/>
+                        <input
+                            role="switch"
+                            type="checkbox"
+                            onClick={changeOrderDirection}
+                        />
                         오름차순
-                    </label>
+                </label>
                 </li>
             </ul>
         </div>

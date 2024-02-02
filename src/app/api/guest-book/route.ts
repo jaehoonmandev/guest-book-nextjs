@@ -34,14 +34,16 @@ import {NextRequest, NextResponse} from "next/server";
  * @param field : 정렬 기준 field(date,title,writer)
  * @constructor
  */
-export async function GET(direction:string, field : string) {
+export async function GET(orderDirection:string, orderField : string) {
     //let url = "http://localhost:8080/guestbook"
 
     //정렬할 요소 RequestParam으로 넣어주기
     /*let direction = "ASC";
     let field = "title";*/
 
-    let url = `http://localhost:8080/guestbook?direction=${direction}&field=${field}`;
+    let url =
+        `http://localhost:8080/guestbook`
+        +`?orderDirection=${orderDirection}&orderField=${orderField}`;
 
     return fetch(url)
         .then((response) => {

@@ -1,32 +1,8 @@
 
-import type { GuestBook } from '@/app/interfaces/guestBook'
+import type {GuestBook} from '@/app/interfaces/guestBook'
 import {NextRequest, NextResponse} from "next/server";
+import {PutFormData} from "@/app/interfaces/modal";
 
-
-/*export async function GET() {
-    try {
-        const response =
-            await fetch('http://localhost:8080/guestbook')
-
-        if (!response.ok) {
-            throw new Error('데이터를 불러올 수 없습니다.');
-        }
-        const data = await response.json();
-
-        const transformCards = data.map((card: GuestBook) => ({
-            id: card.id,
-            title: card.title,
-            writer: card.writer,
-            contents: card.contents,
-            createdTime: card.createdTime
-        }));
-
-        return NextResponse.json(transformCards, { status: 200 })
-    }
-    catch (error : any) {
-        return NextResponse.json({error : error.message}, { status: 500 })
-    }
-}*/
 
 /**
  *  방명록 데이터 가져오기
@@ -47,7 +23,6 @@ export async function GET(orderDirection:string, orderField : string) {
 
     return fetch(url)
         .then((response) => {
-            console.log(response)
             if (!response.ok) {
                 throw new Error('데이터를 불러올 수 없습니다.');
             }
@@ -73,9 +48,13 @@ export async function GET(orderDirection:string, orderField : string) {
 
 //TODO : 작성자로 GET
 
+/*export async function POST(
+    req: NextRequest){*/
 export async function POST(
-    req: NextRequest){
-    const data = await req.json()
+    //formData : PostGuestBook
+formData : any
+) {
+    //const data = await formData.json()
 
     try{
         const response = await fetch('http://localhost:8080/guestbook', {
@@ -83,7 +62,7 @@ export async function POST(
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify(data),
+            body: JSON.stringify(formData),
         });
 
         if (!response.ok) {
@@ -98,10 +77,10 @@ export async function POST(
 }
 
 export async function PUT(
-    req: NextRequest){
-    const data = await req.json()
+    formData : PutFormData){
+    const data = formData;
     const id = data.id;
-    console.log(id)
+
     try{
         const response = await fetch(`http://localhost:8080/guestbook/${id}`, {
             method: 'PUT',

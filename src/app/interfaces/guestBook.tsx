@@ -1,27 +1,26 @@
-import React from "react";
 
-export type GuestBook = {
-    id: string;
+export interface GuestBook {
+    id? : string;
+    permitCode? : string;
+
     title: string;
     writer: string;
     contents: string;
-    createdTime: string;
+    createdTime? : string;
 }
 
 export type GuestBookProps = {
     guestBooks: GuestBook[];
+    guestBook? : GuestBook;
 }
 
-export type ModalContents = {
-    permitCode: React.ReactNode | null;
-    id: React.ReactNode | null;
-    submitButtonType: string;
-    httpMethod: string
-
-}
-
-export type ModalProps = {
-    toggleHandler: () => void;
-    guestBookData : GuestBook | null;
-    type : string;
+export interface GuestBookContextProps {
+    guestBooks: GuestBook[];
+    orderDirection: string;
+    orderField: string;
+    isLoading: boolean;
+    error: string;
+    fetchGuestBooks: (orderDirection: string, orderField: string) => void;
+    changeOrderDirection: () => void;
+    changeOrderField: (field: string) => void;
 }

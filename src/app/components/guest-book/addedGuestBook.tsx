@@ -1,12 +1,13 @@
 // AddedCard 컴포넌트
 import styles from "@/app/components/guest-book/guestBook.module.css";
-import React, {useCallback, useRef, useState} from "react";
+import React, {useCallback} from "react";
 import {GuestBookProps} from '@/app/interfaces/guestBook'
-import SaveGuestBook from "@/app/components/guest-book/saveGuestBook";
+import ModifyGuestBook from "@/app/components/guest-book/modifyGuestBook";
 
-export default function AddedGuestBook({guestBooks} : GuestBookProps) {
+export default function AddedGuestBook( {guestBooks}:GuestBookProps) {
 
-    const handleDeleteButtonClick = useCallback((id: string) => {
+
+    const handleDeleteButtonClick = useCallback((id: string | undefined) => {
 
         fetch(`/api/guest-book/`,
             {
@@ -24,7 +25,8 @@ export default function AddedGuestBook({guestBooks} : GuestBookProps) {
 
     return (
         <>
-            {guestBooks.map(guestBook => (
+            {
+                guestBooks.map(guestBook => (
                 <div key={guestBook.id} className={styles.addedGuestBook}>
                     <div className={styles.title}>
                         <span>{guestBook.title}</span>
@@ -38,7 +40,7 @@ export default function AddedGuestBook({guestBooks} : GuestBookProps) {
                         <span>{guestBook.createdTime}</span>
                     </div>
                     <button onClick={() => handleDeleteButtonClick(guestBook.id)}> 삭제</button>
-                    <SaveGuestBook type={"edit"} guestBook={guestBook}/>
+                    <ModifyGuestBook {...guestBook}/>
                 </div>
             ))}
         </>

@@ -1,18 +1,30 @@
 
 import Backdrop from "@/app/components/UI/modal/backdrop";
 
-import GuestBookForm from "@/app/components/UI/form/guestBookForm";
+import {ModalProps} from "@/app/interfaces/modal";
+import GuestBookPOST from "@/app/components/UI/form/guestBookPOST";
+import GuestBookPUT from "@/app/components/UI/form/guestBookPUT";
 
-import {ModalProps} from '@/app/interfaces/guestBook'
+export default function GuestBookModal( {toggleHandler, type, guestBook} : ModalProps,) {
 
-export default function GuestBookModal( {toggleHandler, guestBookData, type} : ModalProps,) {
 
 
     return (
         <>
             <Backdrop toggleHandler={toggleHandler}>
-                <GuestBookForm
-                    toggleHandler={toggleHandler} guestBookData={guestBookData} type={type}></GuestBookForm>
+                {type === 'POST'
+                    ? (
+                        <GuestBookPOST
+                            toggleHandler={toggleHandler}>
+                        </GuestBookPOST>
+                    )
+                    : (
+                        <GuestBookPUT
+                            toggleHandler={toggleHandler} guestBook={guestBook}>
+                        </GuestBookPUT>
+                    )
+
+                }
             </Backdrop>
         </>
 

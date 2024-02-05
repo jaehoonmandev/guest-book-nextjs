@@ -8,7 +8,7 @@ import "@fontsource/pacifico";
 import './styles/globals.css'
 
 import Header from "@/app/components/header/header";
-import {GuestBookProvider} from "@/app/store/guestBook-context";
+import {GuestBookProvider} from "@/app/store/guestBook-provider";
 
 const inter = Inter({subsets: ['latin']})
 

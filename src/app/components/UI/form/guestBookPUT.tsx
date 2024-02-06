@@ -1,18 +1,19 @@
-import {ChangeEvent, FormEvent, useEffect, useState} from "react";
-import styles from "@/app/components/UI/modal/guestBookModal.module.css";
-import {GET, POST, PUT} from "@/app/api/guest-book/route";
+import {FormEvent, useEffect, useState} from "react";
+import styles from './form.module.css';
+import {PUT} from "@/app/api/guest-book/route";
 import {ModalProps, PutFormData} from "@/app/interfaces/modal";
 import {useGuestBookContext} from "@/app/store/guestBook-context";
 
 
 
 export default function GuestBookPUT(
-    {toggleHandler, guestBook} : ModalProps,
+    {toggleHandler, guestBook, colors} : ModalProps,
     ){
 
     const {
         orderDirection,
         orderField,
+        searchWriter,
         fetchGuestBooks
     } = useGuestBookContext();
 
@@ -21,12 +22,14 @@ export default function GuestBookPUT(
             title: '',
             writer: '',
             contents: '',
+            color: '',
     }
 
     const resetFormData   = {
         title: '',
         writer: '',
         contents: '',
+        color: '',
     }
 
 
@@ -41,6 +44,7 @@ export default function GuestBookPUT(
                 title: guestBook.title || "",
                 writer: guestBook.writer || "",
                 contents: guestBook.contents || "",
+                color: guestBook.color || "",
             });
         }
     }, [guestBook]);
@@ -74,7 +78,7 @@ export default function GuestBookPUT(
             console.log('Form submitted successfully');
             // 폼 제출 후 폼 초기화
             toggleHandler();
-            fetchGuestBooks(orderDirection,orderField);
+            fetchGuestBooks(orderDirection,orderField,searchWriter);
         } catch (error) {
             console.error('Error submitting form:', error);
         }
@@ -86,7 +90,7 @@ export default function GuestBookPUT(
         <div
             /*toggleHandler이 form(자식) div에 전파 안되게 방지*/
             onClick={(e) => e.stopPropagation()}
-            className={styles.modalBox}>
+            className={styles.formBox}>
             <h2>방명록 작성하기</h2>
 
             <form onSubmit={handleSubmit}>
@@ -107,7 +111,25 @@ export default function GuestBookPUT(
                     내용:
                     <textarea name="contents" value={formData.contents} onChange={handleChange}/>
                 </label>
-                <br/>
+
+                <h4>색상</h4>
+                <div className={styles.colorPalette}>
+                    {colors.map((color, index) => (
+                        <input
+                            key={index}
+                            type="radio"
+                            name="color"
+                            value={color.value}
+                            id={color.color}
+
+                            /*수정 시 선택한 color 값에 해당하는 input check*/
+                            checked={formData.color === color.value}
+
+                            style={{background: `${color.value}`}}
+                            onChange={handleChange}
+                        />
+                    ))}
+                </div>
 
                 <br/>
                 <button onClick={handleReset}>초기화</button>

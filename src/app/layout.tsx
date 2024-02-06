@@ -26,16 +26,17 @@ export default function RootLayout(
 
 
         <main className={"container"}>
-        <GuestBookProvider>
+            <GuestBookProvider>
                 <header>
                     <Header/>
                 </header>
-            {children}
-        </GuestBookProvider>
-
-                {/*modal 띄울 위치*/}
-                <div id={"portal"}></div>
+                {children}
+            </GuestBookProvider>
         </main>
+
+        {/*modal 띄울 위치*/}
+        <div id={"portal"}></div>
+
         </body>
         </html>
     )

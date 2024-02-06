@@ -5,20 +5,26 @@ export interface PostFormData {
     title: string
     writer: string
     contents: string
-    permitCode: string,
+    permitCode: string
+    color:string
 }
 
 export interface PutFormData {
-    id?: string;
+    id?: string
     title: string
     writer: string
     contents: string
+    color:string
 }
 
 export type ModalProps = {
     toggleHandler: () => void;
     guestBook? : GuestBook;
     type? : string;
+    colors : {
+        color : string,
+        value: string
+    }[];
 }
 
 export interface ModalContextProps {
@@ -27,3 +33,4 @@ export interface ModalContextProps {
     toggleHandler: () => void;
     //guestBook : GuestBook;
 }
+

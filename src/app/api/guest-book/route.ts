@@ -1,103 +1,107 @@
-
 import type {GuestBook} from '@/app/interfaces/guestBook'
 import {NextRequest, NextResponse} from "next/server";
 import {PutFormData} from "@/app/interfaces/modal";
+
+
+//전역 변수 설정
+const host = `http://localhost:8080/guestbook`
 
 
 /**
  *  방명록 데이터 가져오기
  * @param direction : AES, DESC
  * @param field : 정렬 기준 field(date,title,writer)
- * @constructor
+ * @param writer : 작성자 검색 시 (필수 X, param에 넣지 않을 시 초기 값 "")
  */
-export async function GET(orderDirection:string, orderField : string) {
-    //let url = "http://localhost:8080/guestbook"
+export async function GET(orderDirection: string, orderField: string, writer: string) {
 
-    //정렬할 요소 RequestParam으로 넣어주기
-    /*let direction = "ASC";
-    let field = "title";*/
+    //writer 정보가 있다면 작성자 검색 로직을 탈 수 있게.
+    let url: string
+    writer === ""
+        ? (
+            url = `?orderDirection=${orderDirection}&orderField=${orderField}`
 
-    let url =
-        `http://localhost:8080/guestbook`
-        +`?orderDirection=${orderDirection}&orderField=${orderField}`;
+        )
+        : (
+            url = `/search?orderDirection=${orderDirection}&orderField=${orderField}&writer=${writer}`
+        )
 
-    return fetch(url)
+    return fetch(host + url)
         .then((response) => {
             if (!response.ok) {
-                throw new Error('데이터를 불러올 수 없습니다.');
+                throw new Error();
             }
             return response.json();
         })
         .then((data) => {
-            const transformCards = data.map((card: GuestBook) => ({
+            const transformCards : GuestBook[] = data.map((card: GuestBook) => ({
                 id: card.id,
                 title: card.title,
                 writer: card.writer,
                 contents: card.contents,
                 createdTime: card.createdTime,
+                color: card.color,
             }));
-
-            return NextResponse.json(transformCards, { status: 200 });
+            return NextResponse.json(transformCards, {status: 200});
         })
         .catch((error) => {
             return NextResponse.json(
-                { error: '서버에서 데이터를 불러올 수 없습니다.' },
-                { status: 500});
+                {error: '데이터를 불러올 수 없습니다.'},
+                {status: 500});
         });
 }
-
-//TODO : 작성자로 GET
 
 /*export async function POST(
     req: NextRequest){*/
 export async function POST(
     //formData : PostGuestBook
-formData : any
+    formData: any
 ) {
-    //const data = await formData.json()
 
-    try{
-        const response = await fetch('http://localhost:8080/guestbook', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(formData),
+    return fetch(host, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+    })
+        .then((response) => {
+            if (!response.ok) {
+                throw new Error();
+            }
+            return NextResponse.json({result: '등록되었습니다.'}, {status: 200});
+        })
+        .catch((error) => {
+            return NextResponse.json(
+                {error: '등록에 실패하였습니다.'},
+                {status: 500});
         });
-
-        if (!response.ok) {
-            throw new Error('Failed to submit form');
-        }
-
-    }catch(error){
-
-    }
-    return new NextResponse("Thank you")
 
 }
 
 export async function PUT(
-    formData : PutFormData){
-    const data = formData;
-    const id = data.id;
+    formData: PutFormData) {
 
-    try{
-        const response = await fetch(`http://localhost:8080/guestbook/${id}`, {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(data),
+    const id = formData.id;
+
+    return fetch(host + `/${id}`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+    })
+        .then((response) => {
+            if (!response.ok) {
+                throw new Error();
+            }
+            return NextResponse.json({result: '수정되었습니다.'}, {status: 200});
+        })
+        .catch((error) => {
+            return NextResponse.json(
+                {error: '수정에 실패하였습니다.'},
+                {status: 500});
         });
-
-        if (!response.ok) {
-            throw new Error('Failed to submit form');
-        }
-
-    }catch(error){
-
-    }
-    return new NextResponse("Thank you")
 
 }
 
@@ -107,18 +111,19 @@ export async function DELETE(
 ) {
     const id = await req.json()
 
-    try{
-        const response = await fetch( `http://localhost:8080/guestbook/${id}`, {
-            method: 'DELETE',
+
+    return fetch(host + `/${id}`, {
+        method: 'DELETE',
+    })
+        .then((response) => {
+            if (!response.ok) {
+                throw new Error();
+            }
+            return NextResponse.json({result: '삭제되었습니다..'}, {status: 200});
+        })
+        .catch((error) => {
+            return NextResponse.json(
+                {error: '삭제에 실패하였습니다.'},
+                {status: 500});
         });
-
-        if (!response.ok) {
-            throw new Error('Failed to submit form');
-        }
-
-    }catch(error){
-
-    }
-    return new NextResponse("Thank you")
-
 }

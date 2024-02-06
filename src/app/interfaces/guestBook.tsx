@@ -6,6 +6,8 @@ export interface GuestBook {
     title: string;
     writer: string;
     contents: string;
+    color : string;
+
     createdTime? : string;
 }
 
@@ -16,11 +18,16 @@ export type GuestBookProps = {
 
 export interface GuestBookContextProps {
     guestBooks: GuestBook[];
+    fetchGuestBooks: (orderDirection: string, orderField: string, writer?: string) => void;
+
     orderDirection: string;
     orderField: string;
-    isLoading: boolean;
-    error: string;
-    fetchGuestBooks: (orderDirection: string, orderField: string) => void;
     changeOrderDirection: () => void;
     changeOrderField: (field: string) => void;
+
+    searchWriter: string;
+    changeSearchWriter: (writer : string) => void;
+
+    isLoading: boolean;
+    error: string;
 }

@@ -8,8 +8,6 @@ import {ModalProvider} from "@/app/store/modal-provider";
 
 
 export default function GuestBook( {guestBooks}:GuestBookProps ) {
-
-
     return (
         <ModalProvider>
             <div className={styles.box}>

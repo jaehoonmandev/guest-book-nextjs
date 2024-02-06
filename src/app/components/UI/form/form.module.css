@@ -1,0 +1,36 @@
+
+
+.formBox {
+    padding: 1.5rem 3rem;
+    width: 28.125rem;
+    border-radius: 0.313rem;
+    display: flex;
+    flex-direction: column;
+    background-color: #ffffff;
+    z-index: 30;
+}
+
+.colorPalette {
+    display: table;
+}
+
+.colorPalette input[type="radio"] {
+    -webkit-appearance: none; /* Webkit 브라우저(Chrome, Safari 등)에서의 기본 스타일 제거 */
+    -moz-appearance: none; /* Firefox 브라우저에서의 기본 스타일 제거 */
+    appearance: none; /* 기본 스타일 제거 */
+    position: relative;
+    border: 1px solid #ddd;
+    float: left;
+    transition: border 0.2s;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    margin: 3px;
+}
+.colorPalette input[type="radio"]:hover{
+    border: 1px solid black;
+}
+
+.colorPalette input[type="radio"]:checked{
+    border: 2px solid black;
+}

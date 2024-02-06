@@ -27,7 +27,7 @@ export default function AddedGuestBook( {guestBooks}:GuestBookProps) {
         <>
             {
                 guestBooks.map(guestBook => (
-                <div key={guestBook.id} className={styles.addedGuestBook}>
+                <div key={guestBook.id} className={styles.addedGuestBook} style={{background: `${guestBook.color}`}}>
                     <div className={styles.title}>
                         <span>{guestBook.title}</span>
                     </div>

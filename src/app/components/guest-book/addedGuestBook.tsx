@@ -4,7 +4,7 @@ import React, {useCallback} from "react";
 import {GuestBookProps} from '@/app/interfaces/guestBook'
 import ModifyGuestBook from "@/app/components/guest-book/modifyGuestBook";
 
-export default function AddedGuestBook( {guestBooks}:GuestBookProps) {
+export default function AddedGuestBook({guestBooks}: GuestBookProps) {
 
 
     const handleDeleteButtonClick = useCallback((id: string | undefined) => {
@@ -14,12 +14,12 @@ export default function AddedGuestBook( {guestBooks}:GuestBookProps) {
                 method: 'DELETE',
                 body: JSON.stringify(id)
             },
-            )
-            /*.then((response) => response.json())
-            .then((data) => {
-                setGuestBooks(data)
-                setIsLoading(false);
-            })*/
+        )
+        /*.then((response) => response.json())
+        .then((data) => {
+            setGuestBooks(data)
+            setIsLoading(false);
+        })*/
     }, []);
 
 
@@ -27,22 +27,32 @@ export default function AddedGuestBook( {guestBooks}:GuestBookProps) {
         <>
             {
                 guestBooks.map(guestBook => (
-                <div key={guestBook.id} className={styles.addedGuestBook} style={{background: `${guestBook.color}`}}>
-                    <div className={styles.title}>
-                        <span>{guestBook.title}</span>
-                    </div>
-                    <div>
-                        <pre>{guestBook.contents}</pre>
-                    </div>
-                    <div className={styles.writeInfo}>
-                        <span>{guestBook.writer}</span>
+                    <div key={guestBook.id} className={styles.addedGuestBookContainer}
+                         style={{background: `${guestBook.color}`}}>
+                        <div className={styles.addedGuestBook}>
+                            <div className={styles.title}>
+                                <p>{guestBook.title}</p>
+                            </div>
+                            <div className={styles.contents}>
+                                <pre>{guestBook.contents}</pre>
+                            </div>
+                            <div className={styles.writeInfo}>
+                                <p>{guestBook.writer}</p>
 
-                        <span>{guestBook.createdTime}</span>
+                                <p>{guestBook.createdTime}</p>
+                            </div>
+                            {/* 수정 기능 */}
+                            <div className={styles.modifyButtonContainer}>
+                                <ModifyGuestBook {...guestBook}/>
+                            </div>
+                            {/* 삭제 기능 */}
+                            <div className={styles.deleteButtonContainer}>
+                                <button className={styles.deleteButton} onClick={() => handleDeleteButtonClick(guestBook.id)}></button>
+                            </div>
+                        </div>
+
                     </div>
-                    <button onClick={() => handleDeleteButtonClick(guestBook.id)}> 삭제</button>
-                    <ModifyGuestBook {...guestBook}/>
-                </div>
-            ))}
+                ))}
         </>
     );
 };

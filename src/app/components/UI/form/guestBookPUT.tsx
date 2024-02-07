@@ -1,8 +1,9 @@
 import {FormEvent, useEffect, useState} from "react";
 import styles from './form.module.css';
 import {PUT} from "@/app/api/guest-book/route";
-import {ModalProps, PutFormData} from "@/app/interfaces/modal";
+import {ModalProps} from "@/app/interfaces/modal";
 import {useGuestBookContext} from "@/app/store/guestBook-context";
+import {PutFormData} from "@/app/interfaces/form";
 
 
 

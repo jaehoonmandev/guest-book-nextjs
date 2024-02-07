@@ -1,27 +1,10 @@
 import {GuestBook} from "@/app/interfaces/guestBook";
 
-
-export interface PostFormData {
-    title: string
-    writer: string
-    contents: string
-    permitCode: string
-    color:string
-}
-
-export interface PutFormData {
-    id?: string
-    title: string
-    writer: string
-    contents: string
-    color:string
-}
-
-export type ModalProps = {
+export interface ModalProps {
     toggleHandler: () => void;
     guestBook? : GuestBook;
     type? : string;
-    colors : {
+    colors? : {
         color : string,
         value: string
     }[];

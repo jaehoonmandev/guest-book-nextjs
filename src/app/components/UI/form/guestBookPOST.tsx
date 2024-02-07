@@ -1,8 +1,9 @@
 import {FormEvent, useState} from "react";
 import styles from './form.module.css';
 import {POST} from "@/app/api/guest-book/route";
-import {ModalProps, PostFormData} from "@/app/interfaces/modal";
+import {ModalProps} from "@/app/interfaces/modal";
 import {useGuestBookContext} from "@/app/store/guestBook-context";
+import {PostFormData} from "@/app/interfaces/form";
 
 
 export default function GuestBookPOST({toggleHandler, colors}: ModalProps,) {

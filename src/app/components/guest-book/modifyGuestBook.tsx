@@ -2,6 +2,7 @@ import React, {useEffect, useState} from "react";
 import GuestBookModal from "@/app/components/UI/modal/guestBookModal";
 import {createPortal} from "react-dom";
 import {GuestBook} from "@/app/interfaces/guestBook";
+import styles from "@/app/components/guest-book/guestBook.module.css";
 
 
 export default function ModifyGuestBook(guestBook: GuestBook) {
@@ -19,9 +20,7 @@ export default function ModifyGuestBook(guestBook: GuestBook) {
 
     return (
         <>
-            <button
-                onClick={toggleHandler}>수정
-            </button>
+            <button className={styles.modifyButton} onClick={toggleHandler}> </button>
             {isModalOpen && portalElement
                 ?
                 createPortal(

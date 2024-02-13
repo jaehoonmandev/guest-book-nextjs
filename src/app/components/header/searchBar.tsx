@@ -25,6 +25,7 @@ export default function SearchBar(){
                 <input
                     role="search"
                     type="text"
+                    value={searchWriter}
                     onChange={handleChange}
                     placeholder="작성자로 검색"/>
                 <button

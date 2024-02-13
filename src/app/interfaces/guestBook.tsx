@@ -1,14 +1,14 @@
 
 export interface GuestBook {
-    id? : string;
+    id : string;
     permitCode? : string;
 
     title: string;
     writer: string;
     contents: string;
     color : string;
-
-    createdTime? : string;
+    //createdTime : String;
+    createdTime : Date;
 }
 
 export type GuestBookProps = {

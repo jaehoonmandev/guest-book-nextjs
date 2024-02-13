@@ -1,11 +1,10 @@
 import type {GuestBook} from '@/app/interfaces/guestBook'
 import {NextRequest, NextResponse} from "next/server";
-import {PutFormData} from "@/app/interfaces/modal";
-
+import {PutFormData} from "@/app/interfaces/form";
+import {dateConvert} from "@/app/components/utility/dateConvert";
 
 //전역 변수 설정
-const host = `http://localhost:8080/guestbook`
-
+const host = `http://localhost:8080/guestbook` //back-end 서버 주소
 
 /**
  *  방명록 데이터 가져오기
@@ -39,7 +38,8 @@ export async function GET(orderDirection: string, orderField: string, writer: st
                 title: card.title,
                 writer: card.writer,
                 contents: card.contents,
-                createdTime: card.createdTime,
+                //createdTime: card.createdTime,
+                createdTime: dateConvert(card.createdTime), //date 변경.
                 color: card.color,
             }));
             return NextResponse.json(transformCards, {status: 200});
@@ -107,10 +107,8 @@ export async function PUT(
 
 
 export async function DELETE(
-    req: NextRequest
+    id : string
 ) {
-    const id = await req.json()
-
 
     return fetch(host + `/${id}`, {
         method: 'DELETE',
@@ -119,7 +117,7 @@ export async function DELETE(
             if (!response.ok) {
                 throw new Error();
             }
-            return NextResponse.json({result: '삭제되었습니다..'}, {status: 200});
+            return NextResponse.json({result: '삭제되었습니다.'}, {status: 200});
         })
         .catch((error) => {
             return NextResponse.json(

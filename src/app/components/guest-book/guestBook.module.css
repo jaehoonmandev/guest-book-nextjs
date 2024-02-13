@@ -42,7 +42,7 @@
 
 .deleteButtonContainer{
     position: absolute;
-    top: 30%;
+    bottom: 30%;
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 1; /* 다른 요소 위로 나타나도록 설정 */
@@ -50,7 +50,7 @@
 
 .modifyButtonContainer {
     position: absolute;
-    bottom: 30%;
+    top: 30%;
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 1; /* 다른 요소 위로 나타나도록 설정 */

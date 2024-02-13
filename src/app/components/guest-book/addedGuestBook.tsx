@@ -1,20 +1,34 @@
 // AddedCard 컴포넌트
 import styles from "@/app/components/guest-book/guestBook.module.css";
-import React, {useCallback} from "react";
+import React, {useCallback, useState} from "react";
 import {GuestBookProps} from '@/app/interfaces/guestBook'
 import ModifyGuestBook from "@/app/components/guest-book/modifyGuestBook";
+import {DELETE} from "@/app/components/fetch/fetchGuestBook";
+import {useGuestBookContext} from "@/app/store/guestBook-context";
 
 export default function AddedGuestBook({guestBooks}: GuestBookProps) {
 
+    const {fetchGuestBooks} = useGuestBookContext();
+    const [error, setError] = useState("")
+    const handleDeleteButtonClick = useCallback(async (id: string) => {
 
-    const handleDeleteButtonClick = useCallback((id: string | undefined) => {
 
-        fetch(`/api/guest-book/`,
-            {
-                method: 'DELETE',
-                body: JSON.stringify(id)
-            },
-        )
+        try {
+            //지연 시간 추가
+            //await delay(1000);
+
+            const response = await DELETE(id);
+
+            if (!response.ok) {
+                const { error } = await response.json();
+                throw new Error(error);
+            }
+
+
+        } catch (error: any) {
+            setError(error.message);
+        }
+
         /*.then((response) => response.json())
         .then((data) => {
             setGuestBooks(data)
@@ -39,7 +53,7 @@ export default function AddedGuestBook({guestBooks}: GuestBookProps) {
                             <div className={styles.writeInfo}>
                                 <p>{guestBook.writer}</p>
 
-                                <p>{guestBook.createdTime}</p>
+                                <p>{guestBook.createdTime.toLocaleString()}</p>
                             </div>
                             {/* 수정 기능 */}
                             <div className={styles.modifyButtonContainer}>

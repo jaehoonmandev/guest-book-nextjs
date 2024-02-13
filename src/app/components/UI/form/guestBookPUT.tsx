@@ -1,15 +1,16 @@
 import {FormEvent, useEffect, useState} from "react";
 import styles from './form.module.css';
-import {PUT} from "@/app/api/guest-book/route";
 import {ModalProps} from "@/app/interfaces/modal";
 import {useGuestBookContext} from "@/app/store/guestBook-context";
 import {PutFormData} from "@/app/interfaces/form";
-
+import {PUT} from "@/app/components/fetch/fetchGuestBook";
+import {putValidInterface} from "@/app/interfaces/valid";
+import {isBlank} from "@/app/components/utility/formDataValid";
 
 
 export default function GuestBookPUT(
-    {toggleHandler, guestBook, colors} : ModalProps,
-    ){
+    {toggleHandler, guestBook, colors}: ModalProps,
+) {
 
     const {
         orderDirection,
@@ -18,15 +19,15 @@ export default function GuestBookPUT(
         fetchGuestBooks
     } = useGuestBookContext();
 
-    const PutGuestBookInitState : PutFormData  = {
-            id: '',
-            title: '',
-            writer: '',
-            contents: '',
-            color: '',
+    const PutGuestBookInitState: PutFormData = {
+        id: '',
+        title: '',
+        writer: '',
+        contents: '',
+        color: '',
     }
 
-    const resetFormData   = {
+    const resetFormData = {
         title: '',
         writer: '',
         contents: '',
@@ -51,40 +52,70 @@ export default function GuestBookPUT(
     }, [guestBook]);
 
     const handleChange = (e: FormEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-        const { name, value } = e.currentTarget;
-        setFormData((prevFormData) => ({ ...prevFormData, [name]: value }));
+        const {name, value} = e.currentTarget;
+        setFormData((prevFormData) => ({...prevFormData, [name]: value}));
     };
 
     const handleReset = () => {
         setFormData(resetFormData);
     }
 
-    /**
-     * TODO : [
-     *     1. FormValidation 작성.
-     * ]
-     * */
+    /*데이터 검증*/
+    const putInvalidObject: putValidInterface = {
+        title: true,
+        contents: true,
+        writer: true,
+        color: true,
+    }
+    const [valid, setValid] = useState(putInvalidObject)
 
+    //submit 시 최종적으로 사용자가 입력한 데이터를 검증한다.
+    const validation = () => {
 
-    async function handleSubmit(event: FormEvent<HTMLFormElement>){
-        event.preventDefault();
+        const enteredTitleValid = !isBlank(formData.title);
+        const enteredContentsValid = !isBlank(formData.contents);
+        const enteredWriterValid = !isBlank(formData.writer);
+        const enteredColorValid = !isBlank(formData.color);
 
-        try {
-            const response = await PUT(formData);
-
-            if (!response.ok) {
-                throw new Error('Failed to submit form');
+        setValid(
+            {
+                title: enteredTitleValid,
+                contents: enteredContentsValid,
+                writer: enteredWriterValid,
+                color: enteredColorValid,
             }
+        );
 
-            console.log('Form submitted successfully');
-            // 폼 제출 후 폼 초기화
-            toggleHandler();
-            fetchGuestBooks(orderDirection,orderField,searchWriter);
-        } catch (error) {
-            console.error('Error submitting form:', error);
-        }
+        return enteredTitleValid &&
+            enteredContentsValid &&
+            enteredWriterValid &&
+            enteredColorValid
+
+
     }
 
+
+    async function handleSubmit(event: FormEvent<HTMLFormElement>) {
+        event.preventDefault();
+
+        if (validation()) {
+            try {
+                const response = await PUT(formData);
+
+                if (!response.ok) {
+                    throw new Error('Failed to submit form');
+                }
+
+                console.log('Form submitted successfully');
+                // 폼 제출 후 폼 초기화
+                toggleHandler();
+                fetchGuestBooks(orderDirection, orderField, searchWriter);
+            } catch (error) {
+                console.error('Error submitting form:', error);
+            }
+        }
+
+    }
 
 
     return (
@@ -94,28 +125,32 @@ export default function GuestBookPUT(
             className={styles.formBox}>
             <h2>방명록 작성하기</h2>
 
-            <form onSubmit={handleSubmit}>
+            <form className={styles.form} onSubmit={handleSubmit}>
 
                 <input type={"hidden"} name={"id"} value={formData.id}/>
 
                 <label>
                     제목:
                     <input type="text" name="title" value={formData.title} onChange={handleChange}/>
+                    {!valid.title && <span>제목을 입력해주세요</span>}
                 </label>
-                <br/>
+
+                <label>
+                    내용:
+                    <textarea name="contents" maxLength={100} value={formData.contents} onChange={handleChange}/>
+                    <span className={styles.contentsSize}>{formData.contents.length}/100byte</span>
+                    {!valid.contents && <span>내용을 입력해주세요</span>}
+                </label>
+
                 <label>
                     작성자:
                     <input type="text" name="writer" value={formData.writer} onChange={handleChange}/>
-                </label>
-                <br/>
-                <label>
-                    내용:
-                    <textarea name="contents" value={formData.contents} onChange={handleChange}/>
+                    {!valid.writer && <span>제목을 입력해주세요</span>}
                 </label>
 
                 <h4>색상</h4>
                 <div className={styles.colorPalette}>
-                    {colors.map((color, index) => (
+                    {colors?.map((color, index) => (
                         <input
                             key={index}
                             type="radio"
@@ -130,12 +165,13 @@ export default function GuestBookPUT(
                             onChange={handleChange}
                         />
                     ))}
+                    {!valid.color && <span>색상을 선택해주세요</span>}
                 </div>
-
-                <br/>
-                <button onClick={handleReset}>초기화</button>
-                <button onClick={toggleHandler}>취소</button>
-                <button type="submit">수정</button>
+                <div>
+                    <button type={"button"} onClick={handleReset}>초기화</button>
+                    <button type={"button"} onClick={toggleHandler}>취소</button>
+                    <button type={"submit"}>변경</button>
+                </div>
             </form>
         </div>
     )

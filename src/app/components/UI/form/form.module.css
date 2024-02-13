@@ -2,7 +2,7 @@
 
 .formBox {
     padding: 1.5rem 3rem;
-    width: 28.125rem;
+    width: 20%;
     border-radius: 0.313rem;
     display: flex;
     flex-direction: column;
@@ -10,6 +10,31 @@
     z-index: 30;
 }
 
+.form input,
+.form textarea{
+    width: 100%;
+    margin: 0px 0px 10px 0px;
+}
+
+.form p {
+    margin: 0px;
+    font-weight: bold;
+}
+
+.form label{
+    gap: 1rem;
+}
+
+.form textarea{
+    resize: none;
+    min-height: 80px;
+}
+
+.contentsSize {
+    font-size: 0.8rem;
+    display: flow;
+    text-align: right;
+}
 .colorPalette {
     display: table;
 }

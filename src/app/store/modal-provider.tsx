@@ -8,7 +8,6 @@ export function ModalProvider({ children }: { children: React.ReactNode; }) {
     let [portalElement, setPortalElement] = useState<Element | null>(null);
     //const [guestBook, setGuestBookData] = useState<GuestBook | null>();
 
-
     useEffect(() => {
         setPortalElement(document.getElementById("portal"));
     }, [isModalOpen]);

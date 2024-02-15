@@ -6,14 +6,14 @@ import {GET} from "@/app/components/fetch/fetchGuestBook";
 
 
 //일부러 로딩시키기 위한 타이머설정
-//const delay = (ms) => new Promise(res => setTimeout(res, ms));
+//const delay = (ms: number | undefined) => new Promise(res => setTimeout(res, ms));
 
 export function GuestBookProvider({ children }: { children: React.ReactNode; }) {
 
     const [guestBooks, setGuestBooks] = useState<GuestBook[]>([]);
 
     // 데이터 fetch 핸들링 State
-    const [isLoading, setIsLoading] = useState(false);
+    const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState('');
 
     //정렬 및 검색 State

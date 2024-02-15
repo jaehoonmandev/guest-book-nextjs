@@ -6,6 +6,7 @@ import {useGuestBookContext} from "@/app/store/guestBook-context";
 import {PostFormData} from "@/app/interfaces/form";
 import {isBlank} from "@/app/components/utility/formDataValid";
 import {postValidInterface, putValidInterface} from "@/app/interfaces/valid";
+import FormButton from "@/app/components/UI/form/formButton";
 
 
 export default function GuestBookPOST({toggleHandler, colors}: ModalProps,) {
@@ -125,7 +126,7 @@ export default function GuestBookPOST({toggleHandler, colors}: ModalProps,) {
             /*toggleHandler가 form(자식) div에 전파 안되게 방지*/
             onClick={(e) => e.stopPropagation()}
             className={styles.formBox}>
-            <h2>방명록 등록</h2>
+            <h2>방명록 작성</h2>
 
             {error && <h2>{error}</h2> }
 
@@ -134,28 +135,26 @@ export default function GuestBookPOST({toggleHandler, colors}: ModalProps,) {
                 <label>
                     <p>제목</p>
                     <input type="text" name="title" maxLength={20}  value={formData.title} onChange={handleChange}/>
-                    {!valid.title && <span>제목을 입력해주세요</span>}
+                    {!valid.title && <span className={styles.invalid}>제목을 입력해주세요</span>}
                 </label>
 
                 <label>
                     <p>내용</p>
-
                     <textarea name="contents" maxLength={100} value={formData.contents} onChange={handleChange}/>
                     <span className={styles.contentsSize}>{formData.contents.length}/100byte</span>
-                    {!valid.contents && <span>내용을 입력해주세요</span>}
+                    {!valid.contents && <span className={styles.invalid}>내용을 입력해주세요</span>}
                 </label>
 
                 <label>
                     <p>작성자</p>
-
                     <input type="text" name="writer" maxLength={20} value={formData.writer} onChange={handleChange}/>
-                    {!valid.writer && <span>제목을 입력해주세요</span>}
+                    {!valid.writer && <span className={styles.invalid}>작성자를 입력해주세요</span>}
                 </label>
 
                 <label>
                     <p>인증코드</p>
                     <input type="password" name="permitCode"maxLength={20} value={formData.permitCode} onChange={handleChange}/>
-                    {!valid.permitCode && <span>인증코드를 입력해주세요</span>}
+                    {!valid.permitCode && <span className={styles.invalid}>인증코드를 입력해주세요</span>}
 
                 </label>
 
@@ -184,13 +183,13 @@ export default function GuestBookPOST({toggleHandler, colors}: ModalProps,) {
                             onChange={handleChange}
                         />
                     ))}
-                    {!valid.color && <span>색상을 선택해주세요</span>}
                 </div>
-                <div>
-                    <button type={"button"} onClick={handleReset}>초기화</button>
-                    <button type={"button"} onClick={toggleHandler}>취소</button>
-                    <button type={"submit"}>등록</button>
-                </div>
+                {!valid.color && <span className={styles.invalid}>색상을 선택해주세요</span>}
+
+                <FormButton
+                    handleReset={handleReset}
+                    toggleHandler={toggleHandler}
+                    action={"등록"}/>
             </form>
 
         </div>

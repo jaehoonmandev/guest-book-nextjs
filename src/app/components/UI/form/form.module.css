@@ -30,6 +30,11 @@
     min-height: 80px;
 }
 
+.form .invalid {
+    color: red;
+    font-size: 0.8rem;
+}
+
 .contentsSize {
     font-size: 0.8rem;
     display: flow;
@@ -58,4 +63,36 @@
 
 .colorPalette input[type="radio"]:checked{
     border: 2px solid black;
+}
+
+.buttonDiv {
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-between;
+}
+.buttonDiv button{
+    border-radius: 10%;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    font-size: 1rem;
+
+}
+
+.buttonDiv button:hover{
+    font-weight: bold;
+}
+
+.buttonDiv .resetBtn{
+    background: none;
+    font-size: 0.8rem;
+
+}
+.buttonDiv .cancleBtn{
+    background-color: red;;
+
+}
+.buttonDiv .submitBtn{
+    background-color: greenyellow;
+    margin-left: 10px;
 }

@@ -10,6 +10,5 @@ export interface postValidInterface{
 export interface putValidInterface{
     title : boolean,
     contents : boolean,
-    writer : boolean,
     color: boolean,
 }

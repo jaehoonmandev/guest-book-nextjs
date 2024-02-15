@@ -9,7 +9,13 @@ export interface PostFormData {
 export interface PutFormData {
     id?: string
     title: string
-    writer: string
+    writer?: string
     contents: string
     color:string
+}
+
+export interface ButtonProps{
+    handleReset : () => void
+    toggleHandler: () => void;
+    action : string;
 }

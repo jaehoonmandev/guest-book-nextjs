@@ -25,6 +25,7 @@ export default function Home() {
 
     //페이지 로드 시 바로 데이터를 가져온다.(Default 검색 조건 : DESC, createdTime)
     useEffect(() => {
+
         fetchGuestBooks(orderDirection,orderField,searchWriter);
     },
         //상단 검색 조건이 변결될 때마다 데이터를 가져온다.

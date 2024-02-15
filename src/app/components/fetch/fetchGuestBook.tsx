@@ -1,5 +1,5 @@
 import type {GuestBook} from '@/app/interfaces/guestBook'
-import {NextRequest, NextResponse} from "next/server";
+import {NextResponse} from "next/server";
 import {PutFormData} from "@/app/interfaces/form";
 import {dateConvert} from "@/app/components/utility/dateConvert";
 

@@ -5,7 +5,7 @@ import {HtmlContext} from "next/dist/shared/lib/html-context.shared-runtime";
 export default function SearchConditions(){
 
     //context에 등록한 검색조건 State를 변경하기 위해.
-    const { changeOrderDirection, changeOrderField} = useGuestBookContext();
+    const { orderField, changeOrderDirection, changeOrderField} = useGuestBookContext();
 
     return (
         <div className={styles.sortCondition}>
@@ -15,16 +15,34 @@ export default function SearchConditions(){
 
             <ul>
                 <li>
-                    <button onClick={() => changeOrderField('createdTime')}>날짜</button>
+                    [
                 </li>
                 <li>
-                    <button onClick={() => changeOrderField('title')}>제목</button>
+                    <button
+                        className={orderField === 'createdTime' ? styles.active : ''}
+                        onClick={() => changeOrderField('createdTime')}>날짜
+                    </button>
                 </li>
                 <li>
-                    <button onClick={() => changeOrderField('writer')}>작성자</button>
+                    <button
+                        className={orderField === 'title' ? styles.active : ''}
+                        onClick={() => changeOrderField('title')}>제목
+                    </button>
                 </li>
+                <li>
+                    <button
+                        className={orderField === 'writer' ? styles.active : ''}
+                        onClick={() => changeOrderField('writer')}>작성자
+                    </button>
+                </li>
+                <li>
+                    ]
+                </li>
+            </ul>
+
+            <ul>
                 <li className={styles.toggle}>
-                <label>
+                    <label>
                         내림차순
                         <input
                             role="switch"
@@ -32,9 +50,10 @@ export default function SearchConditions(){
                             onClick={changeOrderDirection}
                         />
                         오름차순
-                </label>
+                    </label>
                 </li>
             </ul>
+
         </div>
     )
 }

@@ -55,14 +55,19 @@ export default function AddedGuestBook({guestBooks}: GuestBookProps) {
 
                                 <p>{guestBook.createdTime.toLocaleString()}</p>
                             </div>
-                            {/* 수정 기능 */}
-                            <div className={styles.modifyButtonContainer}>
-                                <ModifyGuestBook {...guestBook}/>
-                            </div>
-                            {/* 삭제 기능 */}
-                            <div className={styles.deleteButtonContainer}>
-                                <button className={styles.deleteButton} onClick={() => handleDeleteButtonClick(guestBook.id)}></button>
-                            </div>
+                            {/*/!* 수정 기능 *!/*/}
+                            {/*<div className={styles.modifyButtonContainer}>*/}
+                            {/*    <ModifyGuestBook {...guestBook}/>*/}
+                            {/*</div>*/}
+                            {/*/!* 삭제 기능 *!/*/}
+                            {/*<div className={styles.deleteButtonContainer}>*/}
+                            {/*    <button className={styles.deleteButton} onClick={() => handleDeleteButtonClick(guestBook.id)}></button>*/}
+                            {/*</div>*/}
+                        </div>
+                        <div className={styles.addedGuestBookOverlay}>
+                            <ModifyGuestBook {...guestBook}/>
+                            <button className={styles.deleteButton}
+                                    onClick={() => handleDeleteButtonClick(guestBook.id)}></button>
                         </div>
 
                     </div>

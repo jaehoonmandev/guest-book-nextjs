@@ -18,7 +18,11 @@ export type GuestBookProps = {
 
 export interface GuestBookContextProps {
     guestBooks: GuestBook[];
-    fetchGuestBooks: (orderDirection: string, orderField: string, writer?: string) => void;
+    fetchGuestBooks: (
+        orderDirection: string,
+        orderField: string,
+        writer?: string,
+        page?: number) => void;
 
     orderDirection: string;
     orderField: string;
@@ -27,6 +31,9 @@ export interface GuestBookContextProps {
 
     searchWriter: string;
     changeSearchWriter: (writer : string) => void;
+
+    page: number;
+    changePage: (page: number) => void;
 
     isLoading: boolean;
     error: string;

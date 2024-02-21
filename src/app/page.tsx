@@ -2,7 +2,7 @@
 
 import styles from './styles/page.module.css'
 import GuestBook from "@/app/components/guest-book/guestBook";
-import React, {useEffect} from "react";
+import React, {useEffect, useRef, useState} from "react";
 
 import GuestBookConnectError from "@/app/components/error/guestBookConnectError";
 
@@ -23,15 +23,44 @@ export default function Home() {
         error,
         fetchGuestBooks } = useGuestBookContext();
 
+    const endOfPageRef = useRef<HTMLDivElement>(null);
+
+    const [page, setPage] = useState(0)
+    const [isEndOfData, setIsEndOfData] = useState(false);
+    useEffect(() => {
+        const handleIntersect: IntersectionObserverCallback = (entries) => {
+            entries.forEach((entry) => {
+                // 스크롤이 끝에 도달했을 때
+                if (entry.isIntersecting) {
+                    if(page > 0){
+                        setPage(prevState => prevState + 1)
+                    }
+
+                }
+            });
+        };
+
+        const observer = new IntersectionObserver(handleIntersect, {
+            threshold: 1 // 1로 설정하면 엘리먼트가 완전히 화면에 나타났을 때 콜백이 호출됩니다.
+        });
+
+        // 관찰할 대상을 등록
+        if (endOfPageRef.current) {
+            observer.observe(endOfPageRef.current);
+        }
+
+        // 컴포넌트가 언마운트될 때 관찰 해제
+        return () => {
+            observer.disconnect();
+        };
+    }, []);
+
     //페이지 로드 시 바로 데이터를 가져온다.(Default 검색 조건 : DESC, createdTime)
     useEffect(() => {
-
-        fetchGuestBooks(orderDirection,orderField,searchWriter);
-    },
+            fetchGuestBooks(orderDirection,orderField,searchWriter, page);
+        },
         //상단 검색 조건이 변결될 때마다 데이터를 가져온다.
-        [orderDirection, orderField]);
-
-    //TODO : 로딩 기능 수정하기.
+        [orderDirection, orderField, page]);
 
     return (
         <>
@@ -39,11 +68,15 @@ export default function Home() {
                 {isLoading && <Loading/>}
 
                 {!error && !isLoading ? (
-                    <GuestBook guestBooks={guestBooks} />
+                    <>
+                        <GuestBook guestBooks={guestBooks}/>
+
+                    </>
                 ) : (
-                    <GuestBookConnectError errorMessage={error} />
+                    <GuestBookConnectError errorMessage={error}/>
                 )}
             </section>
+            <div ref={endOfPageRef}/>
         </>
     );
 };

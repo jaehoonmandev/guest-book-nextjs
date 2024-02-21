@@ -1,10 +1,13 @@
 import type {GuestBook} from '@/app/interfaces/guestBook'
 import {NextResponse} from "next/server";
 import {PutFormData} from "@/app/interfaces/form";
-import {dateConvert} from "@/app/components/utility/dateConvert";
+import {dateConvert} from "@/app/utility/dateConvert";
 
 //전역 변수 설정
-const host = `http://localhost:8080/guestbook` //back-end 서버 주소
+import {host, pageSize} from "@/app/components/common/globalVar";
+
+
+
 
 /**
  *  방명록 데이터 가져오기
@@ -12,17 +15,17 @@ const host = `http://localhost:8080/guestbook` //back-end 서버 주소
  * @param field : 정렬 기준 field(date,title,writer)
  * @param writer : 작성자 검색 시 (필수 X, param에 넣지 않을 시 초기 값 "")
  */
-export async function GET(orderDirection: string, orderField: string, writer: string) {
+export async function GET(orderDirection: string, orderField: string, writer: string, page: number) {
 
     //writer 정보가 있다면 작성자 검색 로직을 탈 수 있게.
     let url: string
     writer === ""
         ? (
-            url = `?orderDirection=${orderDirection}&orderField=${orderField}`
+            url = `?orderDirection=${orderDirection}&orderField=${orderField}&page=${page}&pageSize=${pageSize}`
 
         )
         : (
-            url = `/search?orderDirection=${orderDirection}&orderField=${orderField}&writer=${writer}`
+            url = `/search?orderDirection=${orderDirection}&orderField=${orderField}&writer=${writer}&page=${page}&pageSize=${pageSize}`
         )
 
     return fetch(host + url)

@@ -2,7 +2,7 @@
 import React, { useState, useCallback } from 'react';
 import GuestBookContext  from './guestBook-context';
 import {GuestBook, GuestBookContextProps} from "@/app/interfaces/guestBook";
-import {GET} from "@/app/components/fetch/fetchGuestBook";
+import {GET} from "@/app/fetch/fetchGuestBook";
 
 
 //일부러 로딩시키기 위한 타이머설정
@@ -21,6 +21,8 @@ export function GuestBookProvider({ children }: { children: React.ReactNode; }) 
     const [orderField, setOrderField] = useState("createdTime");
     const [searchWriter, setSearchWriter] = useState("");
 
+    //paging state
+    const [page, setPage] = useState(0);
 
     /**
      * 방명록 데이터를 불러온다.
@@ -29,14 +31,15 @@ export function GuestBookProvider({ children }: { children: React.ReactNode; }) 
      * @param writer : 작성자로 검색 시(기본 값 "" / 필수 X)
      */
     const fetchGuestBooks = useCallback(
-        async (direction: string, field: string, writer : string = ""): Promise<void> => {
+        async (direction: string, field: string, writer : string = "", page : number = 0): Promise<void> => {
             setIsLoading(true);
 
             try {
                 //지연 시간 추가
                 //await delay(1000);
 
-                const response = await GET(direction, field, writer);
+                //const response = await GET(direction, field, writer);
+                const response = await GET(direction, field, writer, page);
 
                 if (!response.ok) {
                     const { error } = await response.json();
@@ -45,7 +48,13 @@ export function GuestBookProvider({ children }: { children: React.ReactNode; }) 
 
                 const data: GuestBook[] = await response.json();
 
-                setGuestBooks(data);
+                //이전 상태의 값에 새로 읽어온 배열을 붙인다.
+                if(page > 0){
+                    setGuestBooks((prevState)=> [...prevState, ...data]);
+                }else {
+                    setGuestBooks(data);
+                }
+
             } catch (error: any) {
                 setError(error.message);
             }
@@ -77,6 +86,11 @@ export function GuestBookProvider({ children }: { children: React.ReactNode; }) 
         setSearchWriter(writer);
     }
 
+    //기준 페이지 값 변경
+    const changePage = (page : number) => {
+        setPage(page);
+    }
+
     const contextValue: GuestBookContextProps = {
         guestBooks,
         fetchGuestBooks,
@@ -88,6 +102,9 @@ export function GuestBookProvider({ children }: { children: React.ReactNode; }) 
 
         searchWriter,
         changeSearchWriter,
+
+        page,
+        changePage,
 
         isLoading,
         error,

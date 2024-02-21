@@ -4,8 +4,10 @@ import Backdrop from "@/app/components/UI/modal/backdrop";
 import {ModalProps} from "@/app/interfaces/modal";
 import GuestBookPOST from "@/app/components/UI/form/guestBookPOST";
 import GuestBookPUT from "@/app/components/UI/form/guestBookPUT";
+import PermitCodeCheckModal from "@/app/components/UI/modal/permitCodeCheckModal";
 
-export default function GuestBookModal( {toggleHandler, type, guestBook} : ModalProps,) {
+export default function GuestBookModal(
+    {toggleHandler, type, guestBook, authorityConfirm} : ModalProps,) {
 
     //color 픽을 위한 배열
     const colors = [
@@ -32,24 +34,38 @@ export default function GuestBookModal( {toggleHandler, type, guestBook} : Modal
     ]
 
     return (
+
+
         <>
             <Backdrop toggleHandler={toggleHandler}>
-                {type === 'POST'
-                    ? (
-                        <GuestBookPOST
-                            toggleHandler={toggleHandler}
-                            colors={colors}>
-                        </GuestBookPOST>
-                    )
-                    : (
-                        <GuestBookPUT
-                            toggleHandler={toggleHandler}
-                            guestBook={guestBook}
-                            colors={colors}>
-                        </GuestBookPUT>
-                    )
 
-                }
+
+                {(() => {
+                    switch (type) {
+                        case "POST":
+                            return (
+                                <GuestBookPOST
+                                    toggleHandler={toggleHandler}
+                                    colors={colors}/>
+                            );
+                        case "PUT":
+                            return (
+                                <GuestBookPUT
+                                    toggleHandler={toggleHandler}
+                                    guestBook={guestBook}
+                                    colors={colors}/>
+                            );
+                        case "AUTH":
+                            return (
+                                <PermitCodeCheckModal
+                                    authorityConfirm={authorityConfirm}
+                                    toggleHandler={toggleHandler}/>
+                            );
+                        default:
+                            return null;
+                    }
+                })
+                ()}
             </Backdrop>
         </>
 

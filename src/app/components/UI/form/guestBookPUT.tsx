@@ -3,9 +3,9 @@ import styles from './form.module.css';
 import {ModalProps} from "@/app/interfaces/modal";
 import {useGuestBookContext} from "@/app/store/guestBook-context";
 import {PutFormData} from "@/app/interfaces/form";
-import {PUT} from "@/app/components/fetch/fetchGuestBook";
+import {PUT} from "@/app/fetch/fetchGuestBook";
 import {putValidInterface} from "@/app/interfaces/valid";
-import {isBlank} from "@/app/components/utility/formDataValid";
+import {isBlank} from "@/app/utility/formDataValid";
 import FormButton from "@/app/components/UI/form/formButton";
 
 
@@ -17,6 +17,7 @@ export default function GuestBookPUT(
         orderDirection,
         orderField,
         searchWriter,
+        page,
         fetchGuestBooks
     } = useGuestBookContext();
 
@@ -51,7 +52,7 @@ export default function GuestBookPUT(
 
     /**
      * id값과 작성자 값은 보존하고 싶고, useRef 없이 reset을 구현할 때
-     * A component is changing an uncontrolled input to be controlled...의 에러를 회피하기 위한 reset이다...
+     * A component is changing an uncontrolled input to be controlled...의 에러를 회피하기 위한
      */
     const handleReset = () => {
         setFormData(prevFormData => ({
@@ -104,7 +105,7 @@ export default function GuestBookPUT(
                 console.log('Form submitted successfully');
                 // 폼 제출 후 폼 초기화
                 toggleHandler();
-                fetchGuestBooks(orderDirection, orderField, searchWriter);
+                fetchGuestBooks(orderDirection, orderField, searchWriter, page);
             } catch (error) {
                 console.error('Error submitting form:', error);
             }

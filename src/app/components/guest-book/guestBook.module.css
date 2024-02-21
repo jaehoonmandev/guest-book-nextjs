@@ -4,7 +4,7 @@
     width: 100%;
     height: 70%;
     min-height: 350px;
-    border-radius: 10px;
+    border-radius: 3%;
     display: flex;
     justify-content: center;
 }

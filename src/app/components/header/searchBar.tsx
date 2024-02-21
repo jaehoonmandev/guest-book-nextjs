@@ -6,17 +6,16 @@ export default function SearchBar(){
     const {
         searchWriter,
         changeSearchWriter,
-        orderDirection,
-        orderField,
-        fetchGuestBooks } = useGuestBookContext();
+    } = useGuestBookContext();
 
+    const [searchValue , setSearchValue] = useState("")
     //입력 시 searchWriter State 값 변경.
     const handleChange = (event : ChangeEvent<HTMLInputElement>) => {
-        changeSearchWriter(event.currentTarget.value);
+        setSearchValue(event.currentTarget.value);
     }
 
     const handleClick = () => {
-       fetchGuestBooks(orderDirection, orderField, searchWriter);
+       changeSearchWriter(searchValue)
     }
 
     return (
@@ -25,7 +24,6 @@ export default function SearchBar(){
                 <input
                     role="search"
                     type="text"
-                    value={searchWriter}
                     onChange={handleChange}
                     placeholder="작성자로 검색"/>
                 <button

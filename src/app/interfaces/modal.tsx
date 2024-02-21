@@ -2,6 +2,9 @@ import {GuestBook} from "@/app/interfaces/guestBook";
 
 export interface ModalProps {
     toggleHandler: () => void;
+
+    authorityConfirm?: () => void;
+
     guestBook? : GuestBook;
     type? : string;
     colors? : {

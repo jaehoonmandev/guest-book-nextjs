@@ -5,6 +5,7 @@ export default function SearchBar(){
 
     const {
         changeSearchWriter,
+        isLoading,
     } = useGuestBookContext();
 
     const [searchValue , setSearchValue] = useState("")
@@ -21,11 +22,13 @@ export default function SearchBar(){
         <div className={styles.searchBar}>
             <label>
                 <input
+                    disabled={isLoading === true ? true : false}
                     role="search"
                     type="text"
                     onChange={handleChange}
                     placeholder="작성자로 검색"/>
                 <button
+                    disabled={isLoading === true ? true : false}
                     onClick={() => handleClick()}></button>
             </label>
         </div>

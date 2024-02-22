@@ -5,7 +5,11 @@ import {HtmlContext} from "next/dist/shared/lib/html-context.shared-runtime";
 export default function SearchConditions(){
 
     //context에 등록한 검색조건 State를 변경하기 위해.
-    const { orderField, changeOrderDirection, changeOrderField} = useGuestBookContext();
+    const { orderField,
+        changeOrderDirection,
+        changeOrderField,
+        isLoading,
+    } = useGuestBookContext();
 
     return (
         <div className={styles.sortCondition}>
@@ -19,18 +23,21 @@ export default function SearchConditions(){
                 </li>
                 <li>
                     <button
+                        disabled={isLoading === true ? true : false}
                         className={orderField === 'createdTime' ? styles.active : ''}
                         onClick={() => changeOrderField('createdTime')}>날짜
                     </button>
                 </li>
                 <li>
                     <button
+                        disabled={isLoading === true ? true : false}
                         className={orderField === 'title' ? styles.active : ''}
                         onClick={() => changeOrderField('title')}>제목
                     </button>
                 </li>
                 <li>
                     <button
+                        disabled={isLoading === true ? true : false}
                         className={orderField === 'writer' ? styles.active : ''}
                         onClick={() => changeOrderField('writer')}>작성자
                     </button>
@@ -45,6 +52,7 @@ export default function SearchConditions(){
                     <label>
                         내림차순
                         <input
+                            disabled={isLoading === true ? true : false}
                             role="switch"
                             type="checkbox"
                             onClick={changeOrderDirection}

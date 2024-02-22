@@ -24,7 +24,7 @@ export function GuestBookProvider({ children }: { children: React.ReactNode; }) 
     //paging state
     const [page, setPage] = useState(0);
 
-    const [fetchedLength, setFetchedLength] = useState(0);
+    const [fetchedLength, setFetchedLength] = useState(2);
 
     /**
      * 방명록 데이터를 불러온다.
@@ -37,10 +37,6 @@ export function GuestBookProvider({ children }: { children: React.ReactNode; }) 
             setIsLoading(true);
 
             try {
-                //지연 시간 추가
-
-
-                //const response = await GET(direction, field, writer);
                 const response = await GET(direction, field, writer, page);
 
                 if (!response.ok) {
@@ -53,7 +49,9 @@ export function GuestBookProvider({ children }: { children: React.ReactNode; }) 
                 setFetchedLength(data.length);
                 console.table([direction,field,writer,page])
 
-                await delay(1000);
+                //지연 시간 추가
+                await delay(2000);
+
                 //이전 상태의 값에 새로 읽어온 배열을 붙인다.
                 if(page > 0){
                     setGuestBooks((prevState)=> [...prevState, ...data]);
@@ -62,8 +60,11 @@ export function GuestBookProvider({ children }: { children: React.ReactNode; }) 
                 }
 
             } catch (error: any) {
+                //지연 시간 추가
+                await delay(2000);
                 setError(error.message);
             }
+
 
             setIsLoading(false);
         }, []);
@@ -98,6 +99,10 @@ export function GuestBookProvider({ children }: { children: React.ReactNode; }) 
         setPage(page);
     }
 
+    const clearGuestBooks = () => {
+        setGuestBooks([]);
+    }
+
     const contextValue: GuestBookContextProps = {
         guestBooks,
         fetchGuestBooks,
@@ -114,6 +119,7 @@ export function GuestBookProvider({ children }: { children: React.ReactNode; }) 
         changePage,
 
         fetchedLength,
+        clearGuestBooks,
 
         isLoading,
         error,

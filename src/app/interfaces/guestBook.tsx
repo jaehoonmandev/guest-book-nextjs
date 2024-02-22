@@ -38,6 +38,8 @@ export interface GuestBookContextProps {
     changePage: (page: number) => void;
     fetchedLength: number;
 
+    clearGuestBooks: () => void;
+
     isLoading: boolean;
     error: string;
 }

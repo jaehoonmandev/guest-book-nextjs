@@ -4,7 +4,6 @@ import {useGuestBookContext} from "@/app/store/guestBook-context";
 export default function SearchBar(){
 
     const {
-        searchWriter,
         changeSearchWriter,
     } = useGuestBookContext();
 

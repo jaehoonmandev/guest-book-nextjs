@@ -21,6 +21,7 @@ export default function Home() {
         searchWriter,
 
         fetchedLength,
+        clearGuestBooks,
 
         error,
         fetchGuestBooks } = useGuestBookContext();
@@ -71,19 +72,20 @@ export default function Home() {
             }
         },
         //상단 검색 조건이 변결될 때마다 데이터를 가져온다.
-        [orderDirection, orderField, page, isEndOfData]);
+        [orderDirection, orderField, searchWriter, page, isEndOfData]);
 
     useEffect(() => {
+        clearGuestBooks();
         setPage(0);
         setIsEndOfData(false);
-    }, [orderDirection, orderField])
+    }, [orderDirection, orderField, searchWriter])
 
     return (
         <>
             <section className={styles.cardSection}>
                 {/*{isLoading && <Loading/>}*/}
 
-                {!error ? (
+                {error === '' ? (
                     <>
                         <GuestBook fetchedLength={fetchedLength} isLoading={isLoading} guestBooks={guestBooks}/>
 

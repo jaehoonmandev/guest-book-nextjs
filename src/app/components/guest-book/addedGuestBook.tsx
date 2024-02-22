@@ -1,13 +1,10 @@
 // AddedCard 컴포넌트
 import styles from "@/app/components/guest-book/guestBook.module.css";
-import React, {useCallback, useState} from "react";
-import {GuestBook, GuestBookProps} from '@/app/interfaces/guestBook'
+import React from "react";
+import {GuestBookProps} from '@/app/interfaces/guestBook'
 import ModifyGuestBook from "@/app/components/guest-book/modifyGuestBook";
-import {DELETE} from "@/app/fetch/fetchGuestBook";
-import {useGuestBookContext} from "@/app/store/guestBook-context";
 
 export default function AddedGuestBook({guestBooks}: GuestBookProps) {
-
 
     return (
         <>
@@ -17,7 +14,7 @@ export default function AddedGuestBook({guestBooks}: GuestBookProps) {
                         key={guestBook.id}
                         className={styles.addedGuestBookContainer}
                         style={{background: `${guestBook.color}`}}>
-                        {/*style={{background: `radial-gradient(circle, ${guestBook.color}, #FFF)`}}>*/}
+                        {/*style={{background: `linear-gradient(150deg ,#fff 1%,${guestBook.color} 99%, #FFF)`}}>*/}
                         <div className={styles.addedGuestBook}>
                             <div className={styles.title}>
                                 <p>{guestBook.title}</p>

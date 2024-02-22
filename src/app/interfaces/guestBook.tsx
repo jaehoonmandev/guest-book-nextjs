@@ -13,6 +13,8 @@ export interface GuestBook {
 
 export type GuestBookProps = {
     guestBooks: GuestBook[];
+    isLoading? : boolean;
+    fetchedLength? : number;
     guestBook? : GuestBook;
 }
 
@@ -34,6 +36,7 @@ export interface GuestBookContextProps {
 
     page: number;
     changePage: (page: number) => void;
+    fetchedLength: number;
 
     isLoading: boolean;
     error: string;

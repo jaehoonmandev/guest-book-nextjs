@@ -6,7 +6,7 @@ import {GET} from "@/app/fetch/fetchGuestBook";
 
 
 //일부러 로딩시키기 위한 타이머설정
-//const delay = (ms: number | undefined) => new Promise(res => setTimeout(res, ms));
+const delay = (ms: number | undefined) => new Promise(res => setTimeout(res, ms));
 
 export function GuestBookProvider({ children }: { children: React.ReactNode; }) {
 
@@ -24,6 +24,8 @@ export function GuestBookProvider({ children }: { children: React.ReactNode; }) 
     //paging state
     const [page, setPage] = useState(0);
 
+    const [fetchedLength, setFetchedLength] = useState(0);
+
     /**
      * 방명록 데이터를 불러온다.
      * @param direction :  정렬 방향
@@ -36,7 +38,7 @@ export function GuestBookProvider({ children }: { children: React.ReactNode; }) 
 
             try {
                 //지연 시간 추가
-                //await delay(1000);
+
 
                 //const response = await GET(direction, field, writer);
                 const response = await GET(direction, field, writer, page);
@@ -48,6 +50,10 @@ export function GuestBookProvider({ children }: { children: React.ReactNode; }) 
 
                 const data: GuestBook[] = await response.json();
 
+                setFetchedLength(data.length);
+                console.table([direction,field,writer,page])
+
+                await delay(1000);
                 //이전 상태의 값에 새로 읽어온 배열을 붙인다.
                 if(page > 0){
                     setGuestBooks((prevState)=> [...prevState, ...data]);
@@ -58,6 +64,7 @@ export function GuestBookProvider({ children }: { children: React.ReactNode; }) 
             } catch (error: any) {
                 setError(error.message);
             }
+
             setIsLoading(false);
         }, []);
 
@@ -105,6 +112,8 @@ export function GuestBookProvider({ children }: { children: React.ReactNode; }) 
 
         page,
         changePage,
+
+        fetchedLength,
 
         isLoading,
         error,

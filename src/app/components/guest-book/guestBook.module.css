@@ -35,7 +35,7 @@
 
 .addedGuestBookContainer {
     composes: commonGuestBookStyle;
-    border: 2px solid black;
+    border: 1.5px solid black;
     flex-direction: row;
     position: relative;
 }
@@ -61,7 +61,7 @@
     content: '';
     position: absolute;
     width: 40%;
-    height: 2px;
+    height: 1.5px;
     background-color: #333; /* 선의 색상 설정 */
 
     bottom: 0;
@@ -87,7 +87,7 @@
     content: '';
     position: absolute;
     width: 40%;
-    height: 2px;
+    height: 1.5px;
     background-color: #333; /* 선의 색상 설정 */
 
     top: 0;

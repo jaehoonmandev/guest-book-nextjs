@@ -7,7 +7,7 @@ import React, {useEffect, useRef, useState} from "react";
 import GuestBookConnectError from "@/app/components/error/guestBookConnectError";
 
 import {useGuestBookContext} from "@/app/store/guestBook-context";
-import Loading from "@/app/components/UI/loading/loading";
+import {pageSize} from "@/app/components/common/globalVar";
 
 export default function Home() {
 
@@ -20,6 +20,8 @@ export default function Home() {
         orderField,
         searchWriter,
 
+        fetchedLength,
+
         error,
         fetchGuestBooks } = useGuestBookContext();
 
@@ -27,15 +29,22 @@ export default function Home() {
 
     const [page, setPage] = useState(0)
     const [isEndOfData, setIsEndOfData] = useState(false);
+
     useEffect(() => {
         const handleIntersect: IntersectionObserverCallback = (entries) => {
             entries.forEach((entry) => {
                 // 스크롤이 끝에 도달했을 때
                 if (entry.isIntersecting) {
-                    if(page > 0){
-                        setPage(prevState => prevState + 1)
-                    }
 
+                    if(!isLoading ){
+                        if((guestBooks.length >= (page + 1) * pageSize)){
+                            console.log("불러오기")
+                            setPage(prevState => prevState + 1)
+                        }else {
+                            console.log("그만 불러오기")
+                            setIsEndOfData(true);
+                        }
+                    }
                 }
             });
         };
@@ -45,7 +54,7 @@ export default function Home() {
         });
 
         // 관찰할 대상을 등록
-        if (endOfPageRef.current) {
+        if (endOfPageRef.current && !isEndOfData) {
             observer.observe(endOfPageRef.current);
         }
 
@@ -53,30 +62,38 @@ export default function Home() {
         return () => {
             observer.disconnect();
         };
-    }, []);
+    }, [guestBooks,isEndOfData, isLoading]);
 
     //페이지 로드 시 바로 데이터를 가져온다.(Default 검색 조건 : DESC, createdTime)
     useEffect(() => {
-            fetchGuestBooks(orderDirection,orderField,searchWriter, page);
+            if(!isEndOfData){
+                fetchGuestBooks(orderDirection,orderField,searchWriter, page);
+            }
         },
         //상단 검색 조건이 변결될 때마다 데이터를 가져온다.
-        [orderDirection, orderField, page]);
+        [orderDirection, orderField, page, isEndOfData]);
+
+    useEffect(() => {
+        setPage(0);
+        setIsEndOfData(false);
+    }, [orderDirection, orderField])
 
     return (
         <>
             <section className={styles.cardSection}>
-                {isLoading && <Loading/>}
+                {/*{isLoading && <Loading/>}*/}
 
-                {!error && !isLoading ? (
+                {!error ? (
                     <>
-                        <GuestBook guestBooks={guestBooks}/>
+                        <GuestBook fetchedLength={fetchedLength} isLoading={isLoading} guestBooks={guestBooks}/>
 
+                        <div ref={endOfPageRef}/>
                     </>
                 ) : (
                     <GuestBookConnectError errorMessage={error}/>
                 )}
             </section>
-            <div ref={endOfPageRef}/>
+
         </>
     );
 };

@@ -1,15 +1,15 @@
 import {FormEvent, useState} from "react";
 import styles from './form.module.css';
-import {POST} from "@/app/fetch/fetchGuestBook";
-import {ModalProps} from "@/app/interfaces/modal";
+import {POST} from "@/app/guestBookAPI/APIComponent";
+import {PostModalProps} from "@/app/interfaces/modal";
 import {useGuestBookContext} from "@/app/store/guestBook-context";
 import {PostFormData} from "@/app/interfaces/form";
 import {isBlank} from "@/app/utility/formDataValid";
-import {postValidInterface, putValidInterface} from "@/app/interfaces/valid";
+import {postValidInterface} from "@/app/interfaces/valid";
 import FormButton from "@/app/components/UI/form/formButton";
 
 
-export default function GuestBookPOST({toggleHandler, colors}: ModalProps,) {
+export default function GuestBookPOST({toggleHandler, colors}: PostModalProps,) {
 
 
     const [error, setError] = useState(false);
@@ -111,7 +111,7 @@ export default function GuestBookPOST({toggleHandler, colors}: ModalProps,) {
 
                 // TODO :  제출 후 새로운 데이터 호출 시 fetchGuestBooks 하면 화면 전체 렌더링 되는거 때문에 결과를 못 불러온다.
 
-                //toggleHandler(); // Modal 창을 비활성화한다.
+                toggleHandler(); // Modal 창을 비활성화한다.
                 fetchGuestBooks(orderDirection, orderField, searchWriter, page); // 수정된 데이터를 가져온다.
 
             } catch (error: any) {

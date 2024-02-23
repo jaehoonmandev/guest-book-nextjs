@@ -3,10 +3,13 @@ import {NextResponse} from "next/server";
 import {PutFormData} from "@/app/interfaces/form";
 import {dateConvert} from "@/app/utility/dateConvert";
 
-//전역 변수 설정
+//전역 변수 불러오기
 import {host, pageSize} from "@/app/components/common/globalVar";
 
 
+/**
+ * REST API의 컨셉에 맞춘 GET,POST,PUT,DELETE 서버 메소드 모듈화.
+ */
 
 
 /**
@@ -41,7 +44,6 @@ export async function GET(orderDirection: string, orderField: string, writer: st
                 title: card.title,
                 writer: card.writer,
                 contents: card.contents,
-                //createdTime: card.createdTime,
                 createdTime: dateConvert(card.createdTime), //date 변경.
                 color: card.color,
             }));
@@ -54,8 +56,14 @@ export async function GET(orderDirection: string, orderField: string, writer: st
         });
 }
 
+
 /*export async function POST(
     req: NextRequest){*/
+/**
+ * 방명록 등록하기
+ * @param formData
+ * @constructor
+ */
 export async function POST(
     //formData : PostGuestBook
     formData: any
@@ -82,6 +90,11 @@ export async function POST(
 
 }
 
+/**
+ * 방명록 수정하기
+ * @param formData
+ * @constructor
+ */
 export async function PUT(
     formData: PutFormData) {
 
@@ -108,7 +121,11 @@ export async function PUT(
 
 }
 
-
+/**
+ * 방명록 삭제하기
+ * @param id
+ * @constructor
+ */
 export async function DELETE(
     id : string
 ) {

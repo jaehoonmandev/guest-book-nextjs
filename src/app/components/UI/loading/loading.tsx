@@ -9,7 +9,9 @@ export default function Loading({fetchedLength}: LoadingProps) {
 
         for (let i = 0; i < length; i++) {
             loadingArr.push(
-                <div className={styles.loading}>
+                <div
+                    key={i}
+                    className={styles.loading}>
                 </div>
             )
         }

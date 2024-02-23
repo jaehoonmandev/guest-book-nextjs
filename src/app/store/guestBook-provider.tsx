@@ -2,7 +2,7 @@
 import React, { useState, useCallback } from 'react';
 import GuestBookContext  from './guestBook-context';
 import {GuestBook, GuestBookContextProps} from "@/app/interfaces/guestBook";
-import {GET} from "@/app/fetch/fetchGuestBook";
+import {GET} from "@/app/guestBookAPI/APIComponent";
 
 
 //일부러 로딩시키기 위한 타이머설정

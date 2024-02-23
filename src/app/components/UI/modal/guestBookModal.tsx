@@ -7,7 +7,7 @@ import GuestBookPUT from "@/app/components/UI/form/guestBookPUT";
 import PermitCodeCheckModal from "@/app/components/UI/modal/permitCodeCheckModal";
 
 export default function GuestBookModal(
-    {toggleHandler, type, guestBook, authorityConfirm} : ModalProps,) {
+    {toggleHandler, type, guestBook, authorityConfirm,guestBookId=""} : ModalProps,) {
 
     //color 픽을 위한 배열
     const colors = [
@@ -34,8 +34,6 @@ export default function GuestBookModal(
     ]
 
     return (
-
-
         <>
             <Backdrop toggleHandler={toggleHandler}>
 
@@ -58,6 +56,7 @@ export default function GuestBookModal(
                         case "AUTH":
                             return (
                                 <PermitCodeCheckModal
+                                    guestBookId={guestBookId}
                                     authorityConfirm={authorityConfirm}
                                     toggleHandler={toggleHandler}/>
                             );

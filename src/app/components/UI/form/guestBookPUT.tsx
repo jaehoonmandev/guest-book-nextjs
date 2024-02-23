@@ -1,16 +1,16 @@
 import {FormEvent, useEffect, useState} from "react";
 import styles from './form.module.css';
-import {ModalProps} from "@/app/interfaces/modal";
+import {PutModalProps} from "@/app/interfaces/modal";
 import {useGuestBookContext} from "@/app/store/guestBook-context";
 import {PutFormData} from "@/app/interfaces/form";
-import {PUT} from "@/app/fetch/fetchGuestBook";
+import {PUT} from "@/app/guestBookAPI/APIComponent";
 import {putValidInterface} from "@/app/interfaces/valid";
 import {isBlank} from "@/app/utility/formDataValid";
 import FormButton from "@/app/components/UI/form/formButton";
 
 
 export default function GuestBookPUT(
-    {toggleHandler, guestBook, colors}: ModalProps,
+    {toggleHandler, guestBook, colors}: PutModalProps,
 ) {
 
     const {

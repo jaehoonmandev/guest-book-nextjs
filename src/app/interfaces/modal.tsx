@@ -4,19 +4,34 @@ export interface ModalProps {
     toggleHandler: () => void;
 
     authorityConfirm?: () => void;
+    guestBookId?:string;
 
     guestBook? : GuestBook;
     type? : string;
-    colors? : {
+}
+
+export interface PostModalProps{
+    toggleHandler: () => void;
+    colors : {
         color : string,
         value: string
     }[];
 }
 
-export interface ModalContextProps {
-    isModalOpen? : boolean;
-    portalElement? : Element | null;
+export interface PutModalProps {
     toggleHandler: () => void;
-    //guestBook : GuestBook;
+    guestBook? : GuestBook;
+    colors : {
+        color : string,
+        value: string
+    }[];
+}
+
+export interface PermitCodeCheckProps {
+    guestBookId : string,
+    toggleHandler: () => void;
+
+    authorityConfirm?: () => void;
+
 }
 

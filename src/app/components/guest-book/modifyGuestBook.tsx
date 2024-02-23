@@ -3,7 +3,7 @@ import GuestBookModal from "@/app/components/UI/modal/guestBookModal";
 import {createPortal} from "react-dom";
 import {GuestBook} from "@/app/interfaces/guestBook";
 import styles from "@/app/components/guest-book/guestBook.module.css";
-import {DELETE} from "@/app/fetch/fetchGuestBook";
+import {DELETE} from "@/app/guestBookAPI/APIComponent";
 import {useGuestBookContext} from "@/app/store/guestBook-context";
 
 
@@ -79,6 +79,7 @@ export default function ModifyGuestBook(guestBook: GuestBook) {
                             <GuestBookModal
                                 toggleHandler={toggleHandler}
                                 authorityConfirm={authorityConfirm}
+                                guestBookId={guestBook.id}
                                 type={"AUTH"}                                />
                             , document.getElementById('portal')!
                         )

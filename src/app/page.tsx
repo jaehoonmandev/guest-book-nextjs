@@ -84,7 +84,7 @@ export default function Home() {
         <>
             <section className={styles.cardSection}>
                 {/*{isLoading && <Loading/>}*/}
-
+                {!isLoading && guestBooks.length <=0 && (<div><h2>데이터가 없어용</h2></div>)}
                 {error === '' ? (
                     <>
                         <GuestBook fetchedLength={fetchedLength} isLoading={isLoading} guestBooks={guestBooks}/>
@@ -94,6 +94,7 @@ export default function Home() {
                 ) : (
                     <GuestBookConnectError errorMessage={error}/>
                 )}
+
             </section>
 
         </>

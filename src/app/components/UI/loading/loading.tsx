@@ -19,10 +19,9 @@ export default function Loading({fetchedLength}: LoadingProps) {
     }
 
     return (
-        /*<div className={styles.loading}>
-            <div className={styles.spinner}></div>
-            <div className={styles.loadingText}>로딩 중</div>
-        </div>*/
+        <div
+            className={styles.loading}>
+        </div>
         /*<>
         <div className={styles.loadingContainer}>
             <div className={styles.loadingDiv1}>
@@ -39,9 +38,9 @@ export default function Loading({fetchedLength}: LoadingProps) {
             </div>
         </div>
         </>*/
-        <>
+        /*<>
             {makeLoading(fetchedLength)}
-        </>
+        </>*/
     )
         ;
 }

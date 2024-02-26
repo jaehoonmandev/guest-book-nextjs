@@ -3,10 +3,9 @@ import React, { useState, useCallback } from 'react';
 import GuestBookContext  from './guestBook-context';
 import {GuestBook, GuestBookContextProps} from "@/app/interfaces/guestBook";
 import {GET} from "@/app/guestBookAPI/APIComponent";
+import makeDelay from "@/app/utility/makeDelay";
 
 
-//일부러 로딩시키기 위한 타이머설정
-const delay = (ms: number | undefined) => new Promise(res => setTimeout(res, ms));
 
 export function GuestBookProvider({ children }: { children: React.ReactNode; }) {
 
@@ -23,8 +22,8 @@ export function GuestBookProvider({ children }: { children: React.ReactNode; }) 
 
     //paging state
     const [page, setPage] = useState(0);
-
-    const [fetchedLength, setFetchedLength] = useState(2);
+    //가져 오려는 데이터의 길이를 읽어와 로딩 스켈레톤의 갯수를 정한다(보통 이렇게 안할텐데 ㅎㅎ...)
+    const [fetchedLength, setFetchedLength] = useState(1);
 
     /**
      * 방명록 데이터를 불러온다.
@@ -36,6 +35,8 @@ export function GuestBookProvider({ children }: { children: React.ReactNode; }) 
         async (direction: string, field: string, writer : string = "", page : number = 0): Promise<void> => {
             setIsLoading(true);
 
+            //지연 시간 추가
+            await makeDelay();
             try {
                 const response = await GET(direction, field, writer, page);
 
@@ -46,11 +47,10 @@ export function GuestBookProvider({ children }: { children: React.ReactNode; }) 
 
                 const data: GuestBook[] = await response.json();
 
-                setFetchedLength(data.length);
-                console.table([direction,field,writer,page])
+                //setFetchedLength(data.length);
+                //console.table([direction,field,writer,page])
 
-                //지연 시간 추가
-                await delay(2000);
+
 
                 //이전 상태의 값에 새로 읽어온 배열을 붙인다.
                 if(page > 0){
@@ -61,7 +61,7 @@ export function GuestBookProvider({ children }: { children: React.ReactNode; }) 
 
             } catch (error: any) {
                 //지연 시간 추가
-                await delay(2000);
+                await makeDelay();
                 setError(error.message);
             }
 

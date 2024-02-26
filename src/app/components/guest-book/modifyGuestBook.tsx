@@ -31,6 +31,8 @@ export default function ModifyGuestBook(guestBook: GuestBook) {
         setAuthority(true);
     }
 
+
+    //데이터 삭제.
     const handleDeleteButtonClick = useCallback(async (id: string) => {
         try {
             //지연 시간 추가
@@ -59,7 +61,9 @@ export default function ModifyGuestBook(guestBook: GuestBook) {
             <button className={styles.modifyButton}
                     onClick={toggleHandler}></button>
             <button className={styles.deleteButton}
-                    onClick={authority === true ? () => handleDeleteButtonClick(guestBook.id) : toggleHandler}></button>
+                    onClick={authority === true
+                        ? () => handleDeleteButtonClick(guestBook.id)
+                        : toggleHandler}></button>
             {isModalOpen && portalElement
                 ?
                 authority === true

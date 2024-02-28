@@ -1,9 +1,9 @@
 import styles from './loading.module.css'
 import React from "react";
-import {LoadingProps} from "@/app/interfaces/loading";
 
-export default function Loading({fetchedLength}: LoadingProps) {
+export default function Loading() {
 
+    //fetched한 갯수만큼 가져오기...(안쓸듯?)
     const makeLoading = (length: number = 0) => {
         const loadingArr = [];
 
@@ -24,17 +24,7 @@ export default function Loading({fetchedLength}: LoadingProps) {
         </div>
         /*<>
         <div className={styles.loadingContainer}>
-            <div className={styles.loadingDiv1}>
-            </div>
-        </div>
-        <div className={styles.loadingContainer}>
-
-            <div className={styles.loadingDiv2}>
-            </div>
-
-        </div>
-        <div className={styles.loadingContainer}>
-            <div className={styles.loadingDiv3}>
+            <div className={styles.loading}>
             </div>
         </div>
         </>*/

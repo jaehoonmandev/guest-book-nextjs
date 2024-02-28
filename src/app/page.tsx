@@ -8,6 +8,7 @@ import GuestBookConnectError from "@/app/components/error/guestBookConnectError"
 
 import {useGuestBookContext} from "@/app/store/guestBook-context";
 import {pageSize} from "@/app/components/common/globalVar";
+import Loading from "@/app/components/UI/loading/loading";
 
 export default function Home() {
 
@@ -20,7 +21,7 @@ export default function Home() {
         orderField,
         searchWriter,
 
-        fetchedLength,
+        //fetchedLength,
         clearGuestBooks,
 
         error,
@@ -83,12 +84,10 @@ export default function Home() {
     return (
         <>
             <section className={styles.cardSection}>
-                {/*{isLoading && <Loading/>}*/}
-                {!isLoading && guestBooks.length <=0 && (<div><h2>데이터가 없어용</h2></div>)}
                 {error === '' ? (
                     <>
-                        <GuestBook fetchedLength={fetchedLength} isLoading={isLoading} guestBooks={guestBooks}/>
-
+                        {/*로딩은 화면 구성에 맞추기 위하여 GuestBook 안으로 넣었음(div 분리로도 가능은 함..)*/}
+                        <GuestBook isLoading={isLoading} guestBooks={guestBooks}/>
                         <div ref={endOfPageRef}/>
                     </>
                 ) : (

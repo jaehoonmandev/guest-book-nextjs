@@ -47,10 +47,9 @@ export function GuestBookProvider({ children }: { children: React.ReactNode; }) 
 
                 const data: GuestBook[] = await response.json();
 
+                //가져오는 데이터의 길이 state
                 //setFetchedLength(data.length);
                 //console.table([direction,field,writer,page])
-
-
 
                 //이전 상태의 값에 새로 읽어온 배열을 붙인다.
                 if(page > 0){
@@ -118,7 +117,7 @@ export function GuestBookProvider({ children }: { children: React.ReactNode; }) 
         page,
         changePage,
 
-        fetchedLength,
+        //fetchedLength,
         clearGuestBooks,
 
         isLoading,

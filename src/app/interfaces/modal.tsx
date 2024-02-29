@@ -12,19 +12,21 @@ export interface ModalProps {
 
 export interface PostModalProps{
     toggleHandler: () => void;
-    colors : {
+    /*colors : {
         color : string,
         value: string
-    }[];
+    }[];*/
+    colors:string[]
 }
 
 export interface PutModalProps {
     toggleHandler: () => void;
     guestBook? : GuestBook;
-    colors : {
+    /*colors : {
         color : string,
         value: string
-    }[];
+    }[];*/
+    colors:string[]
 }
 
 export interface PermitCodeCheckProps {

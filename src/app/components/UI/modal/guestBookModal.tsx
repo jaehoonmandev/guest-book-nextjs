@@ -10,7 +10,7 @@ export default function GuestBookModal(
     {toggleHandler, type, guestBook, authorityConfirm,guestBookId=""} : ModalProps,) {
 
     //color 픽을 위한 배열
-    const colors = [
+    /*const colors = [
         {
             color : "yellow",
             value : "#FDF1AA"
@@ -31,6 +31,10 @@ export default function GuestBookModal(
             color : "blue",
             value : "#98DBFA"
         },
+    ]*/
+
+    const colors = [
+        "palette1","palette2","palette3","palette4","palette5",
     ]
 
     return (

@@ -147,17 +147,28 @@ export default function GuestBookPUT(
                 <p>색상</p>
                 <div className={styles.colorPalette}>
                     {colors?.map((color, index) => (
-                        <input
+                        /*<input
                             key={index}
                             type="radio"
                             name="color"
                             value={color.value}
                             id={color.color}
-
-                            /*수정 시 선택한 color 값에 해당하는 input check*/
+                            /!*수정 시 선택한 color 값에 해당하는 input check*!/
                             checked={formData.color === color.value}
-
-                            style={{background: `${color.value}`}}
+                            // style={{background: `${color.value}`}}
+                            style={{background: `var(--maincolor)`}}
+                            onChange={handleChange}
+                        />*/
+                        <input
+                            key={index}
+                            type="radio"
+                            name="color"
+                            value={color}
+                            id={color}
+                            /*수정 시 선택한 color 값에 해당하는 input check*/
+                            checked={formData.color === color}
+                            // style={{background: `${color.value}`}}
+                            style={{background: `var(--${color})`}}
                             onChange={handleChange}
                         />
                     ))}

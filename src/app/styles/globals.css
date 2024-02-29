@@ -26,5 +26,13 @@ body{
 
 }
 
+:root {
+    /*방명록 배경 색상 팔레트*/
+    --palette1 : #FC7174;
+    --palette2 : #EB6859;
+    --palette3 : #FC8862;
+    --palette4 : #FDA26B;
+    --palette5 : #FDBB63;
+}
 
 

@@ -5,10 +5,10 @@
   "scripts": {
     "local" : "env-cmd -f .env.local next dev",
 
-    "build": "next build",
-    "build:dev": "env-cmd -f .env.dev next build",
+    "build": "env-cmd -f .env.prod next build",
+    "start": "env-cmd -f .env.prod next start",
 
-    "start": "next start",
+    "build:dev": "env-cmd -f .env.dev next build",
     "start:dev": "env-cmd -f .env.dev next start",
 
     "lint": "next lint"

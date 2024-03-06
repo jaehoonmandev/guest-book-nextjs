@@ -4,7 +4,7 @@ import {PutFormData} from "@/app/interfaces/form";
 import {dateConvert} from "@/app/utility/dateConvert";
 
 //전역 변수 불러오기
-import {host, pageSize} from "@/app/components/common/globalVar";
+import Config from "../../../config/config.export";
 
 
 /**
@@ -24,14 +24,14 @@ export async function GET(orderDirection: string, orderField: string, writer: st
     let url: string
     writer === ""
         ? (
-            url = `?orderDirection=${orderDirection}&orderField=${orderField}&page=${page}&pageSize=${pageSize}`
+            url = `?orderDirection=${orderDirection}&orderField=${orderField}&page=${page}&pageSize=${Config().pageSize}`
 
         )
         : (
-            url = `/search?orderDirection=${orderDirection}&orderField=${orderField}&writer=${writer}&page=${page}&pageSize=${pageSize}`
+            url = `/search?orderDirection=${orderDirection}&orderField=${orderField}&writer=${writer}&page=${page}&pageSize=${Config().pageSize}`
         )
 
-    return fetch(host + url)
+    return fetch(Config().APIHost + url)
         .then((response) => {
             if (!response.ok) {
                 throw new Error();
@@ -69,7 +69,7 @@ export async function POST(
     formData: any
 ) {
 
-    return fetch(host, {
+    return fetch(Config().APIHost, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -100,7 +100,7 @@ export async function PUT(
 
     const id = formData.id;
 
-    return fetch(host + `/${id}`, {
+    return fetch(Config().APIHost + `/${id}`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
@@ -130,7 +130,7 @@ export async function DELETE(
     id : string
 ) {
 
-    return fetch(host + `/${id}`, {
+    return fetch(Config().APIHost + `/${id}`, {
         method: 'DELETE',
     })
         .then((response) => {

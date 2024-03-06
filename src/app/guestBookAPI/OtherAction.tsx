@@ -1,7 +1,8 @@
 /**
  * REST API의 컨셉에 맞지 않지만 서버와 interact 해야하는 기능.
  */
-import {host} from "@/app/components/common/globalVar";
+
+import Config from "../../../config/config.export";
 import {NextResponse} from "next/server";
 
 
@@ -9,7 +10,7 @@ export async function CheckPermitCode(
         id: string,
         permitCode: string) {
 
-    return fetch(host + `/checkPermitCode/${id}`,{
+    return fetch(Config().APIHost + `/checkPermitCode/${id}`,{
             method:"POST",
             headers: {
                 'Content-Type': 'application/json',

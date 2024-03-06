@@ -3,13 +3,19 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "local" : "env-cmd -f .env.local next dev",
+
     "build": "next build",
+    "build:dev": "env-cmd -f .env.dev next build",
+
     "start": "next start",
+    "start:dev": "env-cmd -f .env.dev next start",
+
     "lint": "next lint"
   },
   "dependencies": {
     "@fontsource/pacifico": "^5.0.8",
+    "env-cmd": "^10.1.0",
     "moment-timezone": "^0.5.45",
     "next": "14.0.4",
     "react": "^18",

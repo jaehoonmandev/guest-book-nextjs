@@ -7,8 +7,8 @@ import React, {useEffect, useRef, useState} from "react";
 import GuestBookConnectError from "@/app/components/error/guestBookConnectError";
 
 import {useGuestBookContext} from "@/app/store/guestBook-context";
-import {pageSize} from "@/app/components/common/globalVar";
 import Loading from "@/app/components/UI/loading/loading";
+import Config from "../../config/config.export";
 
 export default function Home() {
 
@@ -39,7 +39,7 @@ export default function Home() {
                 if (entry.isIntersecting) {
 
                     if(!isLoading ){
-                        if((guestBooks.length >= (page + 1) * pageSize)){
+                        if((guestBooks.length >= (page + 1) * Config().pageSize)){
                             console.log("불러오기")
                             setPage(prevState => prevState + 1)
                         }else {

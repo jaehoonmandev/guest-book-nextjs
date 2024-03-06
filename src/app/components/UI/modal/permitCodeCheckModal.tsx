@@ -50,7 +50,7 @@ export default function PermitCodeCheckModal({toggleHandler, authorityConfirm, g
 
                 if (result.result) {
                     setResult(true)
-                    //authorityConfirm && authorityConfirm()
+                    authorityConfirm && authorityConfirm()
                     //toggleHandler()
                 } else {
                     setResult(false)

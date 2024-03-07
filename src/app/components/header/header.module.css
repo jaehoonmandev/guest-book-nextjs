@@ -7,14 +7,18 @@
     border-bottom: 2px solid #E46060;
     width: 50%; /* 요소의 가로폭을 조절 */
     margin: 0 auto; /* 가로 중앙 정렬을 위한 margin 설정 */
-    margin-bottom: 20px;
+    margin-bottom: 2em;
 
 }
 
-.title p {
+
+.title a {
+    margin-top: 1em;
     text-align: center;
     font-size: 3.5em;
     font-family: "Pacifico";
+    color: inherit; /* 링크의 색상을 부모 요소로부터 상속받음 */
+    text-decoration: none; /* 텍스트 밑줄 제거 */
     margin-bottom: 15px;
 }
 

@@ -2,9 +2,10 @@ import styles from "@/app/components/guest-book/guestBook.module.css";
 import React, {useEffect, useState} from "react";
 import GuestBookModal from "@/app/components/UI/modal/guestBookModal";
 import {createPortal} from "react-dom";
+import {AddGuestBookProps} from "@/app/interfaces/guestBook";
 
 
-export default function AddGuestBook() {
+export default function AddGuestBook({isLoading = true, guestBookLength = 0}:AddGuestBookProps) {
 
     const [isModalOpen, setIsModalOpen] = useState(false);
     let [portalElement, setPortalElement] = useState<Element | null>(null);
@@ -14,14 +15,17 @@ export default function AddGuestBook() {
     }, [isModalOpen]);
 
     const toggleHandler = () => {
-        setIsModalOpen((prevIsModalOpen) => !prevIsModalOpen);
+        if(!isLoading || guestBookLength > 0){
+            setIsModalOpen((prevIsModalOpen) => !prevIsModalOpen);
+        }
     }
 
     return (
         <>
             <div
                 className={styles.addGuestBook}
-                onClick={toggleHandler}>+
+                onClick={toggleHandler}
+                >+
             </div>
             {isModalOpen && portalElement
                 ?

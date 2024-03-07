@@ -3,7 +3,7 @@ import styles from './header.module.css'
 export default function MainTitle(){
     return (
         <div className={styles.title}>
-            <p>Guest Book</p>
+            <a href={""}>Guest Book</a>
         </div>
     )
 }

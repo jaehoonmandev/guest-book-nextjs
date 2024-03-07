@@ -17,6 +17,11 @@ export type GuestBookProps = {
     guestBook? : GuestBook;
 }
 
+export interface AddGuestBookProps{
+    isLoading? : boolean;
+    guestBookLength? : number
+}
+
 export interface GuestBookContextProps {
     guestBooks: GuestBook[];
     fetchGuestBooks: (

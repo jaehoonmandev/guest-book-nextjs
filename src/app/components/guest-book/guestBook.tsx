@@ -12,7 +12,7 @@ export default function GuestBook( {guestBooks,isLoading}:GuestBookProps ) {
     return (
             <div className={styles.box}>
 
-                <AddGuestBook />
+                <AddGuestBook guestBookLength={guestBooks.length} isLoading={isLoading}/>
                 <AddedGuestBook guestBooks={guestBooks} />
 
                 {isLoading && <Loading />}

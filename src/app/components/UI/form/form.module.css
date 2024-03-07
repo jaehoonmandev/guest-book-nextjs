@@ -1,15 +1,17 @@
 
-
 .formBox {
     padding: 1.5rem 3rem;
     width: 20%;
+    min-width: 200px;
+    min-height: 200px;
     border-radius: 0.313rem;
     display: flex;
     flex-direction: column;
     background-color: #ffffff;
     z-index: 30;
-
 }
+
+
 
 .form input,
 .form textarea{

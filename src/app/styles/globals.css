@@ -1,3 +1,6 @@
+@import "animation.css"; /*애니메이션 따로 관리*/
+
+
 html, body{
     height: 100%;
     margin: 0;
@@ -17,8 +20,6 @@ body{
     padding: 0;
     width: 100%;
 
-
-
     .container {
         width: 80%; /* 비율 설정 */
         margin: 0 auto; /* 가운데 정렬을 위해 auto */
@@ -33,6 +34,6 @@ body{
     --palette3 : #FC8862;
     --palette4 : #FDA26B;
     --palette5 : #FDBB63;
-}
 
+}
 

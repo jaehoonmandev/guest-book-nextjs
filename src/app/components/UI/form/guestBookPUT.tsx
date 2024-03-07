@@ -105,6 +105,7 @@ export default function GuestBookPUT(
                 console.log('Form submitted successfully');
                 // 폼 제출 후 폼 초기화
                 toggleHandler();
+                // TODO : - [ ] POST, PUT 시에는 fetch해서 새로운 데이터 가져오지 말고 그냥 배열에다가 추가 하자 - [ ] 수정 요청 시 데이터 하나 잘림
                 fetchGuestBooks(orderDirection, orderField, searchWriter, page);
             } catch (error) {
                 console.error('Error submitting form:', error);
@@ -118,7 +119,7 @@ export default function GuestBookPUT(
         <div
             /*toggleHandler이 form(자식) div에 전파 안되게 방지*/
             onClick={(e) => e.stopPropagation()}
-            className={styles.formBox}>
+            className={`${styles.formBox} fadeInAnimation` }>
             <h2>방명록 내용 변경</h2>
 
             <form className={styles.form} onSubmit={handleSubmit}>

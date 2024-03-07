@@ -126,7 +126,7 @@ export default function GuestBookPOST({toggleHandler, colors}: PostModalProps,) 
         <div
             /*toggleHandler가 form(자식) div에 전파 안되게 방지*/
             onClick={(e) => e.stopPropagation()}
-            className={styles.formBox}>
+            className={`${styles.formBox} fadeInAnimation` }>
             <h2>방명록 작성</h2>
 
             {error && <h2>{error}</h2> }

@@ -27,29 +27,11 @@
     cursor: pointer;
 }
 
-.addGuestBook:hover{
-    background: rgba(126,127,129, 0.5);;
-    font-size: 8em;
-}
-
-
-@keyframes fadeIn {
-    0% {
-        opacity: 0;
-        /*transform: translate3d(0, -100%, 0);*/
-    }
-    to {
-        opacity: 1;
-        /*transform: translateZ(0);*/
-    }
-}
-
 .addedGuestBookContainer {
     composes: commonGuestBookStyle;
     border: 1.5px solid black;
     flex-direction: row;
     position: relative;
-    animation: fadeIn 1.5s;
 }
 
 .addedGuestBook {
@@ -159,4 +141,5 @@
     left: 50%;
     background-image: url("/icon/modify.png");
 }
+
 

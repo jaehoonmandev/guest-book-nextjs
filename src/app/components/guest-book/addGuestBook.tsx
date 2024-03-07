@@ -23,7 +23,7 @@ export default function AddGuestBook({isLoading = true, guestBookLength = 0}:Add
     return (
         <>
             <div
-                className={styles.addGuestBook}
+                className={`${styles.addGuestBook} addGuestBookHover`}
                 onClick={toggleHandler}
                 >+
             </div>

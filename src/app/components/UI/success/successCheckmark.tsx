@@ -2,7 +2,7 @@ import React from "react";
 
 
 export default function SuccessCheckmark(){
-
+    // by https://codepen.io/cvan/pen/LYYXzWZ
     return (
         <div className="successCheckmark">
             <div className="checkIcon">

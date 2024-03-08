@@ -77,8 +77,8 @@ export default function Home() {
 
     useEffect(() => {
         clearGuestBooks();
-        setPage(0);
         setIsEndOfData(false);
+        setPage(0);
     }, [orderDirection, orderField, searchWriter])
 
     return (

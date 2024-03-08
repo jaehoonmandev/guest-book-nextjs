@@ -17,6 +17,10 @@ export default function PermitCodeCheckModal({toggleHandler, authorityConfirm, g
     });
     const [valid, setValid] = useState(true)
     const [isLoading, setIsLoading] = useState(false);
+    const [failCount, setFailCount] = useState(0)
+
+    const [error, setError] = useState("")
+
     const handleChange = (event: FormEvent<HTMLInputElement>) => {
         setPermitCode(event.currentTarget.value);
     }
@@ -108,9 +112,9 @@ export default function PermitCodeCheckModal({toggleHandler, authorityConfirm, g
                 )
                 : (
                     <>
-                        <h2>인증코드 검증</h2>
+                        <h2>권한 확인</h2>
 
-                        {isLoading && !permitResult.result && <span>검증중...</span>}
+                        {isLoading && !permitResult.result && <span>권한 확인중...</span>}
 
                         <form className={styles.form} onSubmit={checkPermitCode}>
                             <input type={"hidden"} name={"id"} value={guestBookId}/>
@@ -128,7 +132,7 @@ export default function PermitCodeCheckModal({toggleHandler, authorityConfirm, g
                                 <FormButton
                                     handleReset={handleReset}
                                     toggleHandler={toggleHandler}
-                                    action={"검증"}/>
+                                    action={"확인"}/>
                             </label>
                         </form>
 

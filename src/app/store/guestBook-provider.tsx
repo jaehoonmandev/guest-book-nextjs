@@ -1,13 +1,12 @@
 // guestBook-provider.tsx
-import React, { useState, useCallback } from 'react';
-import GuestBookContext  from './guestBook-context';
+import React, {useState, useCallback} from 'react';
+import GuestBookContext from './guestBook-context';
 import {GuestBook, GuestBookContextProps} from "@/app/interfaces/guestBook";
 import {GET} from "@/app/guestBookAPI/APIComponent";
 import makeDelay from "@/app/utility/makeDelay";
 
 
-
-export function GuestBookProvider({ children }: { children: React.ReactNode; }) {
+export function GuestBookProvider({children}: { children: React.ReactNode; }) {
 
     const [guestBooks, setGuestBooks] = useState<GuestBook[]>([]);
 
@@ -32,16 +31,17 @@ export function GuestBookProvider({ children }: { children: React.ReactNode; }) 
      * @param writer : 작성자로 검색 시(기본 값 "" / 필수 X)
      */
     const fetchGuestBooks = useCallback(
-        async (direction: string, field: string, writer : string = "", page : number = 0): Promise<void> => {
+        async (direction: string, field: string, writer: string = "", page: number = 0): Promise<void> => {
             setIsLoading(true);
 
             //지연 시간 추가
             await makeDelay();
             try {
+                //console.table([direction,field,writer,page])
                 const response = await GET(direction, field, writer, page);
 
                 if (!response.ok) {
-                    const { error } = await response.json();
+                    const {error} = await response.json();
                     throw new Error(error);
                 }
 
@@ -49,12 +49,12 @@ export function GuestBookProvider({ children }: { children: React.ReactNode; }) 
 
                 //가져오는 데이터의 길이 state
                 //setFetchedLength(data.length);
-                //console.table([direction,field,writer,page])
+
 
                 //이전 상태의 값에 새로 읽어온 배열을 붙인다.
-                if(page > 0){
-                    setGuestBooks((prevState)=> [...prevState, ...data]);
-                }else {
+                if (page > 0) {
+                    setGuestBooks((prevState) => [...prevState, ...data]);
+                } else {
                     setGuestBooks(data);
                 }
 
@@ -73,11 +73,14 @@ export function GuestBookProvider({ children }: { children: React.ReactNode; }) 
      * 방향은 Toggle 방식으로 작동 시키기 위해 argument 없이 호출된다.
      */
     const changeOrderDirection = () => {
-        if (orderDirection === "DESC") {
-            setOrderDirection("ASC")
-        } else {
-            setOrderDirection("DESC")
-        }
+        setOrderDirection((prevState) => {
+            if (prevState === "DESC") {
+                return "ASC";
+            } else {
+                return "ASC";
+            }
+        })
+
     }
 
     /**
@@ -94,7 +97,7 @@ export function GuestBookProvider({ children }: { children: React.ReactNode; }) 
     }
 
     //기준 페이지 값 변경
-    const changePage = (page : number) => {
+    const changePage = (page: number) => {
         setPage(page);
     }
 

@@ -7,7 +7,6 @@ import React, {useEffect, useRef, useState} from "react";
 import GuestBookConnectError from "@/app/components/error/guestBookConnectError";
 
 import {useGuestBookContext} from "@/app/store/guestBook-context";
-import Loading from "@/app/components/UI/loading/loading";
 import Config from "../../config/config.export";
 
 export default function Home() {
@@ -37,8 +36,9 @@ export default function Home() {
             entries.forEach((entry) => {
                 // 스크롤이 끝에 도달했을 때
                 if (entry.isIntersecting) {
-
-                    if(!isLoading ){
+                    //로딩중이 아니고
+                    if(!isLoading){
+                        // 방명록 데이터 크기가 현재 페이지
                         if((guestBooks.length >= (page + 1) * Config().pageSize)){
                             console.log("불러오기")
                             setPage(prevState => prevState + 1)
@@ -64,7 +64,7 @@ export default function Home() {
         return () => {
             observer.disconnect();
         };
-    }, [guestBooks,isEndOfData, isLoading]);
+    }, [guestBooks, isEndOfData, isLoading]);
 
     //페이지 로드 시 바로 데이터를 가져온다.(Default 검색 조건 : DESC, createdTime)
     useEffect(() => {

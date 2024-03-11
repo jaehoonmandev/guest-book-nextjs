@@ -13,7 +13,7 @@ export default function SearchConditions(){
 
 
     // 로딩중이 아니고, 에러가 없어서 정상 적으로 처리를 할 수 있을 때만 검색 조건을 활성화 시킨다.
-    const disabled = isLoading || error !== "" //
+    const disabled = isLoading || error !== ""
 
     return (
         <div className={styles.sortCondition}>
@@ -23,45 +23,46 @@ export default function SearchConditions(){
 
             <ul>
                 <li>
-                    [
+                    <span > [ </span>
                 </li>
                 <li>
                     <button
                         disabled={disabled ? true : false}
-                        className={orderField === 'createdTime' ? styles.disabled : ''}
+                        className={orderField === 'createdTime' ? styles.active : styles.disabled}
                         onClick={() => changeOrderField('createdTime')}>날짜
                     </button>
                 </li>
                 <li>
                     <button
                         disabled={disabled ? true : false}
-                        className={orderField === 'title' ? styles.disabled : ''}
+                        className={orderField === 'title' ? styles.active : styles.disabled}
                         onClick={() => changeOrderField('title')}>제목
                     </button>
                 </li>
                 <li>
                     <button
                         disabled={disabled ? true : false}
-                        className={orderField === 'writer' ? styles.disabled : ''}
+                        className={orderField === 'writer' ? styles.active : styles.disabled}
                         onClick={() => changeOrderField('writer')}>작성자
                     </button>
                 </li>
                 <li>
-                    ]
+                    <span> ] </span>
                 </li>
             </ul>
 
             <ul>
                 <li
                     className={`${styles.toggle} 
-                    ${disabled ? styles.toggleDisable: styles.toggleActive}`} >
+                    // /* 좀 더 세세하게 css 컨트롤 하려고 따로... */
+                    ${disabled ? styles.toggleDisable : styles.toggleActive}`}>
                     <label>
                         내림차순
                         <input
                             disabled={disabled ? true : false}
                             role="switch"
                             type="checkbox"
-                            onClick={changeOrderDirection}
+                            onClick={() => changeOrderDirection() }
                         />
                         오름차순
                     </label>

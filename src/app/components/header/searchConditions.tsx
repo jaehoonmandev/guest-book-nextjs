@@ -1,7 +1,6 @@
-import React, {ChangeEvent, useEffect, useState} from "react";
 import styles from './header.module.css'
 import {useGuestBookContext} from "@/app/store/guestBook-context";
-import {HtmlContext} from "next/dist/shared/lib/html-context.shared-runtime";
+
 export default function SearchConditions(){
 
     //context에 등록한 검색조건 State를 변경하기 위해.
@@ -9,7 +8,12 @@ export default function SearchConditions(){
         changeOrderDirection,
         changeOrderField,
         isLoading,
+        error
     } = useGuestBookContext();
+
+
+    // 로딩중이 아니고, 에러가 없어서 정상 적으로 처리를 할 수 있을 때만 검색 조건을 활성화 시킨다.
+    const disabled = isLoading || error !== "" //
 
     return (
         <div className={styles.sortCondition}>
@@ -23,22 +27,22 @@ export default function SearchConditions(){
                 </li>
                 <li>
                     <button
-                        disabled={isLoading === true ? true : false}
-                        className={orderField === 'createdTime' ? styles.active : ''}
+                        disabled={disabled ? true : false}
+                        className={orderField === 'createdTime' ? styles.disabled : ''}
                         onClick={() => changeOrderField('createdTime')}>날짜
                     </button>
                 </li>
                 <li>
                     <button
-                        disabled={isLoading === true ? true : false}
-                        className={orderField === 'title' ? styles.active : ''}
+                        disabled={disabled ? true : false}
+                        className={orderField === 'title' ? styles.disabled : ''}
                         onClick={() => changeOrderField('title')}>제목
                     </button>
                 </li>
                 <li>
                     <button
-                        disabled={isLoading === true ? true : false}
-                        className={orderField === 'writer' ? styles.active : ''}
+                        disabled={disabled ? true : false}
+                        className={orderField === 'writer' ? styles.disabled : ''}
                         onClick={() => changeOrderField('writer')}>작성자
                     </button>
                 </li>
@@ -48,11 +52,13 @@ export default function SearchConditions(){
             </ul>
 
             <ul>
-                <li className={styles.toggle}>
+                <li
+                    className={`${styles.toggle} 
+                    ${disabled ? styles.toggleDisable: styles.toggleActive}`} >
                     <label>
                         내림차순
                         <input
-                            disabled={isLoading === true ? true : false}
+                            disabled={disabled ? true : false}
                             role="switch"
                             type="checkbox"
                             onClick={changeOrderDirection}

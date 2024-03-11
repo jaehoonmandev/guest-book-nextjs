@@ -8,9 +8,6 @@
     "build": "env-cmd -f .env.prod next build",
     "start": "env-cmd -f .env.prod next start",
 
-    "build:dev": "env-cmd -f .env.dev next build",
-    "start:dev": "env-cmd -f .env.dev next start",
-
     "lint": "next lint"
   },
   "dependencies": {

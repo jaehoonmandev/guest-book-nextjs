@@ -88,23 +88,21 @@
 
 }
 /*토글 버튼*/
+
+
 .toggle label {
     display: inline-flex;
     align-items: center;
-
-    cursor: pointer;
     font-size: 0.8rem;
 }
 .toggle input[role=switch] {
-
     appearance: none; /*기본 스타일 제거*/
     position: relative;
-    border: max(2px, 0.1em) solid black;
     border-radius: 1.25em;
     width: 2.25em;
     height: 1.25em;
-
 }
+
 
 .toggle input[role=switch]::before {
     content: "";
@@ -114,7 +112,6 @@
     height: 1em;
     border-radius: 50%;
     transform: scale(0.7);
-    background-color: black;
     transition: left 250ms linear;
 }
 
@@ -122,9 +119,41 @@
     left: 1em;
 }
 
-.toggle input[role=switch]:hover {
-    box-shadow: 0 0 0 max(4px, 0.2em) darkgreen;
+
+-------
+
+.toggleActive label {
+    cursor: pointer;
 }
+.toggleActive input[role=switch] {
+    border: max(2px, 0.1em) solid black;
+}
+
+.toggleActive input[role=switch]::before {
+    background-color: black;
+}
+
+.toggleActive input[role=switch]:hover {
+    box-shadow: 0 0 0 max(4px, 0.2em) salmon;
+}
+
+
+
+/*토글 비활성화*/
+
+
+.toggleDisable label {
+    color: var(--disableSearchCondition);
+}
+.toggleDisable input[role=switch] {
+    border: max(2px, 0.1em) solid var(--disableSearchCondition);
+}
+
+.toggleDisable input[role=switch]::before {
+    background-color: var(--disableSearchCondition);
+}
+/*토글 비활성화*/
+
 
 .searchBar{
     display: flex; /* 좌우 정렬을 위해 flex 사용 */

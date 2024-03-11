@@ -1,4 +1,3 @@
-import configDev from "./config.dev";
 import configLocal from "./config.local";
 import configProd from "./config.prod";
 
@@ -6,7 +5,6 @@ import configProd from "./config.prod";
 const Config = () => {
     switch(process.env.NEXT_PUBLIC_RUN_MODE) {
         case 'local': return configLocal;
-        case 'development': return configDev;
         case 'production': return configProd;
         default: return configLocal;
     }

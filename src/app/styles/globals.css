@@ -35,5 +35,8 @@ body{
     --palette4 : #FDA26B;
     --palette5 : #FDBB63;
 
+
+    /*검색 조건 비활성화 색상*/
+    --disableSearchCondition : rgba(16, 16, 16, 0.3);
 }
 

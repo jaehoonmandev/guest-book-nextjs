@@ -17,7 +17,6 @@ export default function AddedGuestBook({guestBooks}: GuestBookProps) {
                     >
                         {/*style={{background: `linear-gradient(150deg ,#fff 1%,${guestBook.color} 99%, #FFF)`}}>*/}
                         <div className={styles.addedGuestBook}>
-                            {guestBook.id}
                             <div className={styles.title}>
                                 <p>{guestBook.title}</p>
                             </div>

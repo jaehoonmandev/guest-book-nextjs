@@ -38,12 +38,11 @@ export default function Home() {
                 if (entry.isIntersecting) {
                     //로딩중이 아니고
                     if(!isLoading){
-                        // 방명록 데이터 크기가 현재 페이지
+                        // 불러온 방명록 데이터 크기가 현재 있어야할 데이터의 크기와 비교
                         if((guestBooks.length >= (page + 1) * Config().pageSize)){
-                            console.log("불러오기")
                             setPage(prevState => prevState + 1)
                         }else {
-                            console.log("그만 불러오기")
+                            // 불러온 데이터가 현재 있어야할 데이터의 크기보다 작다면 모든 데이터를 불러온 것.
                             setIsEndOfData(true);
                         }
                     }

@@ -77,7 +77,7 @@ export function GuestBookProvider({children}: { children: React.ReactNode; }) {
             if (prevState === "DESC") {
                 return "ASC";
             } else {
-                return "ASC";
+                return "DESC";
             }
         })
 

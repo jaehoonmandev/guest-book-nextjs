@@ -141,8 +141,8 @@ export default function GuestBookPOST({toggleHandler, colors}: PostModalProps,) 
 
                 <label>
                     <p>내용</p>
-                    <textarea name="contents" maxLength={100} value={formData.contents} onChange={handleChange}/>
-                    <span className={styles.contentsSize}>{formData.contents.length}/100byte</span>
+                    <textarea name="contents" maxLength={300} value={formData.contents} onChange={handleChange}/>
+                    <span className={styles.contentsSize}>{formData.contents.length}/300byte</span>
                     {!valid.contents && <span className={styles.invalid}>내용을 입력해주세요</span>}
                 </label>
 

@@ -128,14 +128,14 @@ export default function GuestBookPUT(
 
                 <label>
                     <p>제목</p>
-                    <input type="text" name="title" value={formData.title} onChange={handleChange}/>
+                    <input type="text" name="title" maxLength={20} value={formData.title} onChange={handleChange}/>
                     {!valid.title && <span className={styles.invalid}>제목을 입력해주세요</span>}
                 </label>
 
                 <label>
                     <p>내용</p>
-                    <textarea name="contents" maxLength={100} value={formData.contents} onChange={handleChange}/>
-                    <span className={styles.contentsSize}>{formData.contents.length}/100byte</span>
+                    <textarea name="contents" maxLength={300} value={formData.contents} onChange={handleChange}/>
+                    <span className={styles.contentsSize}>{formData.contents.length}/300byte</span>
                     {!valid.contents && <span className={styles.invalid}>내용을 입력해주세요</span>}
                 </label>
 

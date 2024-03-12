@@ -27,6 +27,53 @@ body{
 
 }
 
+
+/* ------- 스크롤 바 커스텀 ------- */
+
+body::-webkit-scrollbar {
+    width: 8px;  /* 스크롤바의 너비 */
+}
+
+body::-webkit-scrollbar-thumb {
+    height: 30%; /* 스크롤바의 길이 */
+    background: #EB6859; /* 스크롤바의 색상 */
+}
+
+body::-webkit-scrollbar-track {
+    background: rgba(33, 122, 244, .1);  /*스크롤바 뒷 배경 색상*/
+}
+
+body::-webkit-scrollbar-track,
+body::-webkit-scrollbar-thumb{
+    border-radius: 10px;
+}
+
+body::-webkit-scrollbar-thumb:hover {
+    background-color: #FC8862;
+
+}
+
+/* --- */
+
+pre::-webkit-scrollbar {
+    width: 5px;  /* 스크롤바의 너비 */
+}
+
+pre::-webkit-scrollbar-thumb {
+    height: 50%; /* 스크롤바의 길이 */
+    background: rgba(122, 122, 122, 0.85); /* 스크롤바의 색상 */
+    border-radius: 2.5px;
+}
+
+pre::-webkit-scrollbar-track {
+    background: none;  /*스크롤바 뒷 배경 색상*/
+    /*border-radius: 2px;*/
+}
+
+
+/* ------- 스크롤 바 커스텀 ------- */
+
+
 :root {
     /*방명록 배경 색상 팔레트*/
     --palette1 : #FC7174;

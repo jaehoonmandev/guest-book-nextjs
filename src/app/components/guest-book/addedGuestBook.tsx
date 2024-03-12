@@ -15,19 +15,22 @@ export default function AddedGuestBook({guestBooks}: GuestBookProps) {
                         className={`${styles.addedGuestBookContainer} fadeInAnimation`  }
                         style={{background: `var(--${guestBook.color})`}}
                     >
-                        {/*style={{background: `linear-gradient(150deg ,#fff 1%,${guestBook.color} 99%, #FFF)`}}>*/}
                         <div className={styles.addedGuestBook}>
+
                             <div className={styles.title}>
                                 <p>{guestBook.title}</p>
                             </div>
+
                             <div className={styles.contents}>
                                 <pre>{guestBook.contents}</pre>
                             </div>
+
                             <div className={styles.writeInfo}>
                                 <p>{guestBook.writer}</p>
 
                                 <p>{guestBook.createdTime.toLocaleString()}</p>
                             </div>
+
                         </div>
                         <div className={styles.addedGuestBookOverlay}>
                             <ModifyGuestBook {...guestBook}/>

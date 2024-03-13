@@ -8,9 +8,12 @@ import Loading from "@/app/components/UI/loading/loading";
 import React from "react";
 
 
-export default function GuestBook( {guestBooks,isLoading}:GuestBookProps ) {
+export default function GuestBook( {guestBooks,isLoading,isMobile}:GuestBookProps ) {
     return (
-            <div className={styles.box}>
+
+
+
+            <div className={isMobile ? styles.boxMobile : styles.box}>
 
                 <AddGuestBook guestBookLength={guestBooks.length} isLoading={isLoading}/>
                 <AddedGuestBook guestBooks={guestBooks} />

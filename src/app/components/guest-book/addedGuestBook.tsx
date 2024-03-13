@@ -1,10 +1,10 @@
 // AddedCard 컴포넌트
 import styles from "@/app/components/guest-book/guestBook.module.css";
 import React from "react";
-import {GuestBookProps} from '@/app/interfaces/guestBook'
+import {AddedGuestBookProps, GuestBookProps} from '@/app/interfaces/guestBook'
 import ModifyGuestBook from "@/app/components/guest-book/modifyGuestBook";
 
-export default function AddedGuestBook({guestBooks}: GuestBookProps) {
+export default function AddedGuestBook({guestBooks}: AddedGuestBookProps) {
 
     return (
         <>

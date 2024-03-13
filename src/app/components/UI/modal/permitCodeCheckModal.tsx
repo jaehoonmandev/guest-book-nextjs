@@ -5,7 +5,8 @@ import {CheckPermitCode} from "@/app/guestBookAPI/OtherAction";
 import {isBlank} from "@/app/utility/formDataValid";
 import FormButton from "@/app/components/UI/form/formButton";
 import MakeDelay from "@/app/utility/makeDelay";
-import SuccessEffect from "@/app/components/UI/success/successCheckmark";
+import SuccessEffect from "@/app/components/UI/requesting/successCheckmark";
+import RequestLoading from "@/app/components/UI/requesting/requestLoading";
 
 export default function PermitCodeCheckModal({toggleHandler, authorityConfirm, guestBookId}: PermitCodeCheckProps) {
 
@@ -13,7 +14,7 @@ export default function PermitCodeCheckModal({toggleHandler, authorityConfirm, g
 
     const [permitResult, setPermitResult] = useState({
         message: "",
-        result:false
+        result: false
     });
     const [valid, setValid] = useState(true)
     const [isLoading, setIsLoading] = useState(false);
@@ -25,7 +26,7 @@ export default function PermitCodeCheckModal({toggleHandler, authorityConfirm, g
         setPermitCode(event.currentTarget.value);
     }
 
-    const handleReset = () =>{
+    const handleReset = () => {
         setPermitCode("");
     }
 
@@ -82,7 +83,6 @@ export default function PermitCodeCheckModal({toggleHandler, authorityConfirm, g
                 }
 
 
-
             } catch (error: any) {
 
                 // setError(error.message);
@@ -98,47 +98,47 @@ export default function PermitCodeCheckModal({toggleHandler, authorityConfirm, g
         <div
             /*toggleHandler가 form(자식) div에 전파 안되게 방지*/
             onClick={(e) => e.stopPropagation()}
-            className={`${styles.formBox} fadeInAnimation` }>
+            className={`${styles.formBox} fadeInAnimation`}>
 
 
             {permitResult.result
                 ? (
 
 
-                     // <span>{permitResult.message}</span>
+                    // <span>{permitResult.message}</span>
                     <SuccessEffect/>
 
 
                 )
                 : (
-                    <>
-                        <h2>권한 확인</h2>
+                    isLoading
+                        ? (<RequestLoading/>)
+                        : (
+                            <>
 
-                        {isLoading && !permitResult.result && <span>권한 확인중...</span>}
+                                <h2>권한 확인</h2>
 
-                        <form className={styles.form} onSubmit={checkPermitCode}>
-                            <input type={"hidden"} name={"id"} value={guestBookId}/>
-                            <label>
-                                <p>인증코드</p>
-                                <input type="password"
-                                       name="permitCode"
-                                       value={permitCode}
-                                       maxLength={20}
-                                       onChange={handleChange}
-                                />
-                                {!valid && <span className={styles.invalid}>인증코드를 입력해주세요.</span>}
-                                {permitResult.message.length > 0 &&
-                                    <span className={styles.invalid}> {permitResult.message}</span>}
-                                <FormButton
-                                    handleReset={handleReset}
-                                    toggleHandler={toggleHandler}
-                                    action={"확인"}/>
-                            </label>
-                        </form>
-
-
-                    </>
-
+                                <form className={styles.form} onSubmit={checkPermitCode}>
+                                    <input type={"hidden"} name={"id"} value={guestBookId}/>
+                                    <label>
+                                        <p>인증코드</p>
+                                        <input type="password"
+                                               name="permitCode"
+                                               value={permitCode}
+                                               maxLength={20}
+                                               onChange={handleChange}
+                                        />
+                                        {!valid && <span className={styles.invalid}>인증코드를 입력해주세요.</span>}
+                                        {permitResult.message.length > 0 &&
+                                            <span className={styles.invalid}> {permitResult.message}</span>}
+                                        <FormButton
+                                            handleReset={handleReset}
+                                            toggleHandler={toggleHandler}
+                                            action={"확인"}/>
+                                    </label>
+                                </form>
+                            </>
+                        )
                 )
             }
 

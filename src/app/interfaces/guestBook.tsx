@@ -15,7 +15,7 @@ export type GuestBookProps = {
     guestBooks: GuestBook[];
     isLoading?: boolean;
     guestBook? : GuestBook;
-    isMobile : boolean;
+
 }
 
 export interface AddGuestBookProps{
@@ -51,4 +51,6 @@ export interface GuestBookContextProps {
 
     isLoading: boolean;
     error: string;
+
+    isMobile : boolean;
 }

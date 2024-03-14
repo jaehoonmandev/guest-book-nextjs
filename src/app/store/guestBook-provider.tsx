@@ -1,9 +1,10 @@
 // guestBook-provider.tsx
-import React, {useState, useCallback} from 'react';
+import React, {useState, useCallback, useEffect} from 'react';
 import GuestBookContext from './guestBook-context';
 import {GuestBook, GuestBookContextProps} from "@/app/interfaces/guestBook";
 import {GET} from "@/app/guestBookAPI/APIComponent";
 import makeDelay from "@/app/utility/makeDelay";
+import {useMediaQuery} from "react-responsive";
 
 
 export function GuestBookProvider({children}: { children: React.ReactNode; }) {
@@ -21,8 +22,11 @@ export function GuestBookProvider({children}: { children: React.ReactNode; }) {
 
     //paging state
     const [page, setPage] = useState(0);
+
     //가져 오려는 데이터의 길이를 읽어와 로딩 스켈레톤의 갯수를 정한다(보통 이렇게 안할텐데 ㅎㅎ...)
-    const [fetchedLength, setFetchedLength] = useState(1);
+    //const [fetchedLength, setFetchedLength] = useState(1);
+
+    const [isMobile, setIsMobile] = useState(false);
 
     /**
      * 방명록 데이터를 불러온다.
@@ -37,7 +41,7 @@ export function GuestBookProvider({children}: { children: React.ReactNode; }) {
             //지연 시간 추가
             await makeDelay();
             try {
-                //console.table([direction,field,writer,page])
+
                 const response = await GET(direction, field, writer, page);
 
                 if (!response.ok) {
@@ -50,8 +54,7 @@ export function GuestBookProvider({children}: { children: React.ReactNode; }) {
                 //가져오는 데이터의 길이 state
                 //setFetchedLength(data.length);
 
-
-                //이전 상태의 값에 새로 읽어온 배열을 붙인다.
+                // 초가 데이터 로드가 완료 되었다면 이전 상태의 값에 새로 읽어온 배열을 붙인다.
                 if (page > 0) {
                     setGuestBooks((prevState) => [...prevState, ...data]);
                 } else {
@@ -64,8 +67,8 @@ export function GuestBookProvider({children}: { children: React.ReactNode; }) {
                 setError(error.message);
             }
 
-
             setIsLoading(false);
+
         }, []);
 
     /**
@@ -105,6 +108,15 @@ export function GuestBookProvider({children}: { children: React.ReactNode; }) {
         setGuestBooks([]);
     }
 
+
+    // 모바일 상태 관리 어디서나 쓸 수 있게 provider... custom hook을 써도 되지만...
+    const mobile = useMediaQuery({query: "(max-width: 767px)"});
+
+    // useMediaQuery로 변동 되는 상태를 확인하여 해당 값을 기준으로 State를 유동적으로 변경한다.
+    useEffect(() => {
+        setIsMobile(mobile)
+    }, [mobile])
+
     const contextValue: GuestBookContextProps = {
         guestBooks,
         fetchGuestBooks,
@@ -125,6 +137,8 @@ export function GuestBookProvider({children}: { children: React.ReactNode; }) {
 
         isLoading,
         error,
+
+        isMobile,
     };
 
     return (

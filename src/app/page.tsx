@@ -24,6 +24,7 @@ export default function Home() {
         //fetchedLength,
         clearGuestBooks,
 
+        isMobile,
         error,
         fetchGuestBooks } = useGuestBookContext();
 
@@ -85,29 +86,17 @@ export default function Home() {
     }, [orderDirection, orderField, searchWriter])
 
 
-    // useMediaQuery 훅을 통해 현재 브라우저의 뷰포트가 최대 1024px인지 확인하는 불리언 형태의 변수를 생성한다.
-    const mobile = useMediaQuery({
-        query: "(max-width: 767px)"
-    })
 
-    // 이후 useState 훅을 통해 해당 컴포넌트에서 desktop 뷰포트인지 식별할 수 있도록 상태를 선언한다.
-    const [isMobile, setIsMobile] = useState(false);
-
-    // useEffect 훅을 통해 useMediaQuery로 선언한 불리언 형태의 변수가 변경되면 해당 컴포넌트의 상태가 변화되게 설정한다.
-    useEffect(() => {
-        setIsMobile(mobile)
-    }, [mobile])
 
     return (
         <>
 
-            <section className={styles.cardSection}>
+            <section className={isMobile? styles.mobileCardSection : styles.cardSection}>
 
                 {error === '' ? (
                     <>
-                        {isMobile && <span>모바일 버전</span>}
                         {/*로딩은 화면 구성에 맞추기 위하여 GuestBook 안으로 넣었음(div 분리로도 가능은 함..)*/}
-                        <GuestBook isMobile={isMobile} isLoading={isLoading} guestBooks={guestBooks}/>
+                        <GuestBook isLoading={isLoading} guestBooks={guestBooks}/>
                         <div ref={endOfPageRef}/>
                     </>
                 ) : (

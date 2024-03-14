@@ -5,13 +5,15 @@ html, body{
     height: 100%;
     margin: 0;
     padding: 0;
-    overflow-y: auto; /* 수직 스크롤 활성화 */
+
+
 }
 
 
 html{
     /*그라디언트 설정*/
     background: linear-gradient(170deg ,rgba(236,160,160,1) 0%, rgba(255,255,255,1) 100%);
+
 }
 
 body{
@@ -19,6 +21,8 @@ body{
     margin: 0;
     padding: 0;
     width: 100%;
+
+
 
     .container {
         width: 80%; /* 비율 설정 */

@@ -124,7 +124,7 @@ export default function GuestBook({isMobile} : props) {
                 {error === '' ? (
                     <>
                         {/*로딩은 화면 구성에 맞추기 위하여 GuestBook 안으로 넣었음(div 분리로도 가능은 함..)*/}
-                        <div className={isMobile ? styles.mobileBox : styles.box}>
+                        <div className={styles.box}>
 
                             <AddGuestBook guestBookLength={guestBooks.length} isLoading={isLoading}/>
                             <AddedGuestBook guestBooks={guestBooks}/>

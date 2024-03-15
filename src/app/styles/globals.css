@@ -22,10 +22,13 @@ body{
     padding: 0;
     width: 100%;
 
-
+    min-width: 100%;
 
     .container {
-        width: 80%; /* 비율 설정 */
+        min-width: 300px;
+        max-width: 1280px;
+        padding : 20px;
+        /*width: 80%; !* 비율 설정 *!*/
         margin: 0 auto; /* 가운데 정렬을 위해 auto */
     }
 

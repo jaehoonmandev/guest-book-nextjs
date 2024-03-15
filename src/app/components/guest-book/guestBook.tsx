@@ -118,6 +118,7 @@ export default function GuestBook({isMobile} : props) {
                 </div>
                 )}
             </header>
+
             <section className={isMobile ? styles.mobileCardSection : styles.cardSection}>
 
                 {error === '' ? (

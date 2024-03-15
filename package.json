@@ -15,7 +15,8 @@
     "next": "14.0.4",
     "react": "^18",
     "react-dom": "^18",
-    "react-responsive": "^9.0.2"
+    "react-responsive": "^9.0.2",
+    "ua-parser-js": "^1.0.37"
   },
   "devDependencies": {
     "@types/node": "^20",

@@ -3,20 +3,28 @@ import React from "react";
 import "@fontsource/pacifico";
 
 import './styles/globals.css'
+import Head from "next/head";
+import {Metadata, Viewport} from "next";
 
 const inter = Inter({subsets: ['latin']})
 
-/*export const metadata: Metadata = {
-    title: 'Guest Book',
-    description: '게스트북 토이프로젝트',
-}*/
+export const metadata: Metadata = {
+    title: '재훈맨 방명록',
+    description: '방명록 프로젝트',
+}
+
+// 모바일 환경 사용 시 input focus zoom-in 되지 않게 설정
+export const viewport: Viewport = {
+    width: "device-width",
+    initialScale: 1.0,
+    maximumScale: 1.0,
+    userScalable: false,
+}
 
 export default function RootLayout({children,}: { children: React.ReactNode }) {
 
     return (
         <html lang="kr">
-
-        <meta name="viewport" content="initial-scale=1.0,user-scalable=no,maximum-scale=1,width=device-width"/>
 
         <body className={inter.className}>
 
@@ -24,10 +32,10 @@ export default function RootLayout({children,}: { children: React.ReactNode }) {
             {children}
         </main>
 
-        {/*modal 띄울 위치*/}
-        <div id={"portal"}></div>
+                {/*modal 띄울 위치*/}
+                <div id={"portal"}></div>
 
-        </body>
+            </body>
         </html>
     )
 }

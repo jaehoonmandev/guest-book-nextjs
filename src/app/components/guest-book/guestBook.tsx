@@ -100,23 +100,23 @@ export default function GuestBook({isMobile} : props) {
         <>
             <header>
                 {isMobile
-                ? (
-                <MobileHeader/>
-                )
-                : (
-                <div>
-                    <MainTitle></MainTitle>
+                    ? (
+                        <MobileHeader/>
+                    )
+                    : (
+                        <div>
+                            <MainTitle></MainTitle>
 
 
-                    {/*Header의 Search condition에 따른 GET 요청이 가능하도록 */}
+                            {/*Header의 Search condition에 따른 GET 요청이 가능하도록 */}
 
-                    <SearchArea>
-                        <SearchConditions></SearchConditions>
-                        <SearchBar></SearchBar>
-                    </SearchArea>
+                            <SearchArea>
+                                <SearchConditions></SearchConditions>
+                                <SearchBar></SearchBar>
+                            </SearchArea>
 
-                </div>
-                )}
+                        </div>
+                    )}
             </header>
 
             <section className={isMobile ? styles.mobileCardSection : styles.cardSection}>

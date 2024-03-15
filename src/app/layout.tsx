@@ -1,15 +1,8 @@
-"use client"
-
-import type {Metadata} from 'next'
 import {Inter} from 'next/font/google'
-import React, {useEffect, useState} from "react";
+import React from "react";
 import "@fontsource/pacifico";
 
 import './styles/globals.css'
-
-import Header from "@/app/components/header/header";
-import {GuestBookProvider} from "@/app/store/guestBook-provider";
-import {useMediaQuery} from "react-responsive";
 
 const inter = Inter({subsets: ['latin']})
 
@@ -24,14 +17,8 @@ export default function RootLayout({children,}: { children: React.ReactNode }) {
         <html lang="kr">
             <body className={inter.className}>
 
-
                 <main className={"container"}>
-                    <GuestBookProvider>
-                        <header>
-                            <Header/>
-                        </header>
                         {children}
-                    </GuestBookProvider>
                 </main>
 
                 {/*modal 띄울 위치*/}

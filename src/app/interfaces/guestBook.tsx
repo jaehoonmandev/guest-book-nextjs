@@ -51,6 +51,4 @@ export interface GuestBookContextProps {
 
     isLoading: boolean;
     error: string;
-
-    isMobile : boolean;
 }

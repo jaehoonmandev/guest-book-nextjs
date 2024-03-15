@@ -26,8 +26,6 @@ export function GuestBookProvider({children}: { children: React.ReactNode; }) {
     //가져 오려는 데이터의 길이를 읽어와 로딩 스켈레톤의 갯수를 정한다(보통 이렇게 안할텐데 ㅎㅎ...)
     //const [fetchedLength, setFetchedLength] = useState(1);
 
-    const [isMobile, setIsMobile] = useState(false);
-
     /**
      * 방명록 데이터를 불러온다.
      * @param direction :  정렬 방향
@@ -108,15 +106,6 @@ export function GuestBookProvider({children}: { children: React.ReactNode; }) {
         setGuestBooks([]);
     }
 
-
-    // 모바일 상태 관리 어디서나 쓸 수 있게 provider... custom hook을 써도 되지만...
-    const mobile = useMediaQuery({query: "(max-width: 767px)"});
-
-    // useMediaQuery로 변동 되는 상태를 확인하여 해당 값을 기준으로 State를 유동적으로 변경한다.
-    useEffect(() => {
-        setIsMobile(mobile)
-    }, [mobile])
-
     const contextValue: GuestBookContextProps = {
         guestBooks,
         fetchGuestBooks,
@@ -137,8 +126,6 @@ export function GuestBookProvider({children}: { children: React.ReactNode; }) {
 
         isLoading,
         error,
-
-        isMobile,
     };
 
     return (

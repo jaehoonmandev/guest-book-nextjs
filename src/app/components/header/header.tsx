@@ -8,30 +8,11 @@ import MobileHeader from "@/app/components/header/mobile/mobileHeader";
 
 export default function Header() {
 
-
-    const {isMobile} =useGuestBookContext();
-
     return (
 
-        isMobile
-            ? (
-                <MobileHeader/>
-            )
-            : (
-                <div>
-                    <MainTitle></MainTitle>
+        <div>
 
-
-                    {/*Header의 Search condition에 따른 GET 요청이 가능하도록 */}
-
-                    <SearchArea>
-                        <SearchConditions></SearchConditions>
-                        <SearchBar></SearchBar>
-                    </SearchArea>
-
-                </div>
-            )
-
+        </div>
 
 
 

@@ -21,6 +21,7 @@
     grid-template-columns: repeat(auto-fill, minmax(50%, 1fr));
     grid-auto-rows: minmax(auto, 30%); /* pre 컨텐츠 over 시 사이즈 이슈 때문에 간격 고정하기 */
     gap: 15px;
+    padding-top : 60px
 }
 
 

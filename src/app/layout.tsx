@@ -15,16 +15,19 @@ export default function RootLayout({children,}: { children: React.ReactNode }) {
 
     return (
         <html lang="kr">
-            <body className={inter.className}>
 
-                <main className={"container"}>
-                        {children}
-                </main>
+        <meta name="viewport" content="initial-scale=1.0,user-scalable=no,maximum-scale=1,width=device-width"/>
 
-                {/*modal 띄울 위치*/}
-                <div id={"portal"}></div>
+        <body className={inter.className}>
 
-            </body>
+        <main className={"container"}>
+            {children}
+        </main>
+
+        {/*modal 띄울 위치*/}
+        <div id={"portal"}></div>
+
+        </body>
         </html>
     )
 }

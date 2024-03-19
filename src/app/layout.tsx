@@ -3,8 +3,8 @@ import React from "react";
 import "@fontsource/pacifico";
 
 import './styles/globals.css'
-import Head from "next/head";
 import {Metadata, Viewport} from "next";
+import {isMobileDevice} from "@/lib/isMobileDevice";
 
 const inter = Inter({subsets: ['latin']})
 
@@ -23,12 +23,17 @@ export const viewport: Viewport = {
 
 export default function RootLayout({children,}: { children: React.ReactNode }) {
 
+    const isMobile = isMobileDevice();
+
+
     return (
         <html lang="kr">
 
         <body className={inter.className}>
 
-        <main className={"container"}>
+        <main className={"container"}
+               style={isMobile ? {minWidth: 240} : {minWidth: 550}}
+        >
             {children}
         </main>
 

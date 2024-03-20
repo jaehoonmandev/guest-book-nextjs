@@ -33,12 +33,14 @@ export default function GuestBook({isMobile} : props) {
         //fetchedLength,
         clearGuestBooks,
 
+        page,
+        changePage,
+
         error,
         fetchGuestBooks } = useGuestBookContext();
 
     const endOfPageRef = useRef<HTMLDivElement>(null);
 
-    const [page, setPage] = useState(0)
     const [isEndOfData, setIsEndOfData] = useState(false);
 
 
@@ -52,7 +54,7 @@ export default function GuestBook({isMobile} : props) {
                     if(!isLoading){
                         // 불러온 방명록 데이터 크기가 현재 있어야할 데이터의 크기와 비교
                         if((guestBooks.length >= (page + 1) * Config().pageSize)){
-                            setPage(prevState => prevState + 1)
+                            changePage(page + 1)
                         }else {
                             // 불러온 데이터가 현재 있어야할 데이터의 크기보다 작다면 모든 데이터를 불러온 것.
                             setIsEndOfData(true);
@@ -90,7 +92,7 @@ export default function GuestBook({isMobile} : props) {
     useEffect(() => {
         clearGuestBooks();
         setIsEndOfData(false);
-        setPage(0);
+        changePage(0)
     }, [orderDirection, orderField, searchWriter])
 
 

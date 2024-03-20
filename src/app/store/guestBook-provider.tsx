@@ -23,6 +23,7 @@ export function GuestBookProvider({children}: { children: React.ReactNode; }) {
     //paging state
     const [page, setPage] = useState(0);
 
+
     //가져 오려는 데이터의 길이를 읽어와 로딩 스켈레톤의 갯수를 정한다(보통 이렇게 안할텐데 ㅎㅎ...)
     //const [fetchedLength, setFetchedLength] = useState(1);
 
@@ -32,7 +33,7 @@ export function GuestBookProvider({children}: { children: React.ReactNode; }) {
      * @param field : 정렬 기준 필드
      * @param writer : 작성자로 검색 시(기본 값 "" / 필수 X)
      */
-    const fetchGuestBooks = useCallback(
+    /*const fetchGuestBooks = useCallback(
         async (direction: string, field: string, writer: string = "", page: number = 0): Promise<void> => {
             setIsLoading(true);
 
@@ -67,7 +68,44 @@ export function GuestBookProvider({children}: { children: React.ReactNode; }) {
 
             setIsLoading(false);
 
-        }, []);
+        }, []);*/
+
+    const fetchGuestBooks = useCallback(
+        async (): Promise<void> => {
+            setIsLoading(true);
+
+            //지연 시간 추가
+            await makeDelay();
+            try {
+                // console.table([{orderDirection, orderField, searchWriter, page}]);
+                const response = await GET(orderDirection, orderField, searchWriter, page);
+
+                if (!response.ok) {
+                    const {error} = await response.json();
+                    throw new Error(error);
+                }
+
+                const data: GuestBook[] = await response.json();
+
+                //가져오는 데이터의 길이 state
+                //setFetchedLength(data.length);
+
+                // 초가 데이터 로드가 완료 되었다면 이전 상태의 값에 새로 읽어온 배열을 붙인다.
+                if (page > 0) {
+                    setGuestBooks((prevState) => [...prevState, ...data]);
+                } else {
+                    setGuestBooks(data);
+                }
+
+            } catch (error: any) {
+                //지연 시간 추가
+                await makeDelay();
+                setError(error.message);
+            }
+
+            setIsLoading(false);
+        // 검색 조건과 page가 변경 될 때 마다 함수를 재생성한다(효율적일라나...)
+        }, [orderDirection, orderField, searchWriter, page]);
 
     /**
      * 방명록 데이터 정렬 방향을 바꾼다.

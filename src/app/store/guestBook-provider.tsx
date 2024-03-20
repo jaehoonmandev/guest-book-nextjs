@@ -23,6 +23,7 @@ export function GuestBookProvider({children}: { children: React.ReactNode; }) {
     //paging state
     const [page, setPage] = useState(0);
 
+    const [isEndOfData, setIsEndOfData] = useState(false);
 
     //가져 오려는 데이터의 길이를 읽어와 로딩 스켈레톤의 갯수를 정한다(보통 이렇게 안할텐데 ㅎㅎ...)
     //const [fetchedLength, setFetchedLength] = useState(1);
@@ -77,7 +78,7 @@ export function GuestBookProvider({children}: { children: React.ReactNode; }) {
             //지연 시간 추가
             await makeDelay();
             try {
-                // console.table([{orderDirection, orderField, searchWriter, page}]);
+                console.table([{orderDirection, orderField, searchWriter, page}]);
                 const response = await GET(orderDirection, orderField, searchWriter, page);
 
                 if (!response.ok) {
@@ -91,7 +92,8 @@ export function GuestBookProvider({children}: { children: React.ReactNode; }) {
                 //setFetchedLength(data.length);
 
                 // 초가 데이터 로드가 완료 되었다면 이전 상태의 값에 새로 읽어온 배열을 붙인다.
-                if (page > 0) {
+                // if (page > 0) {
+                if (!isEndOfData && page > 0) {
                     setGuestBooks((prevState) => [...prevState, ...data]);
                 } else {
                     setGuestBooks(data);
@@ -140,6 +142,11 @@ export function GuestBookProvider({children}: { children: React.ReactNode; }) {
         setPage(page);
     }
 
+    //읽어오는 데이터가 더 없는지 끝인지 확인.
+    const changeIsEndOfData = (flag : boolean) => {
+        setIsEndOfData(flag);
+    }
+
     const clearGuestBooks = () => {
         setGuestBooks([]);
     }
@@ -158,6 +165,9 @@ export function GuestBookProvider({children}: { children: React.ReactNode; }) {
 
         page,
         changePage,
+
+        isEndOfData,
+        changeIsEndOfData,
 
         //fetchedLength,
         clearGuestBooks,

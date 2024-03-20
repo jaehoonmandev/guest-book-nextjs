@@ -47,6 +47,10 @@ export interface GuestBookContextProps {
     changePage: (page: number) => void;
     //fetchedLength: number;
 
+    isEndOfData : boolean;
+    changeIsEndOfData: (flag : boolean) => void;
+
+
     clearGuestBooks: () => void;
 
     isLoading: boolean;

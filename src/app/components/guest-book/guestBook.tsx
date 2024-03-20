@@ -36,12 +36,13 @@ export default function GuestBook({isMobile} : props) {
         page,
         changePage,
 
+        isEndOfData,
+        changeIsEndOfData,
+
         error,
         fetchGuestBooks } = useGuestBookContext();
 
     const endOfPageRef = useRef<HTMLDivElement>(null);
-
-    const [isEndOfData, setIsEndOfData] = useState(false);
 
 
     // 무한 스크롤 감지 이벤트
@@ -57,7 +58,7 @@ export default function GuestBook({isMobile} : props) {
                             changePage(page + 1)
                         }else {
                             // 불러온 데이터가 현재 있어야할 데이터의 크기보다 작다면 모든 데이터를 불러온 것.
-                            setIsEndOfData(true);
+                            changeIsEndOfData(true);
                         }
                     }
                 }
@@ -91,7 +92,7 @@ export default function GuestBook({isMobile} : props) {
     // 검색 조건이 변경되면 방명록 데이터 관련 상태를 초기화한다.
     useEffect(() => {
         clearGuestBooks();
-        setIsEndOfData(false);
+        changeIsEndOfData(false);
         changePage(0)
     }, [orderDirection, orderField, searchWriter])
 

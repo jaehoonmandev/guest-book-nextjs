@@ -10,7 +10,8 @@ const inter = Inter({subsets: ['latin']})
 
 export const metadata: Metadata = {
     title: '재훈맨 방명록',
-    description: '방명록 프로젝트',
+    description: '재훈맨의 방명록 사이트',
+
 }
 
 // 모바일 환경 사용 시 input focus zoom-in 되지 않게 설정
@@ -19,6 +20,7 @@ export const viewport: Viewport = {
     initialScale: 1.0,
     maximumScale: 1.0,
     userScalable: false,
+
 }
 
 export default function RootLayout({children,}: { children: React.ReactNode }) {

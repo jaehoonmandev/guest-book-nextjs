@@ -115,6 +115,10 @@
     text-align: right; /* 텍스트를 오른쪽으로 정렬합니다. */
 }
 
+
+
+/* 방명록 데이터 수정 및 삭제 관련*/
+
 .addedGuestBookOverlay{
     visibility: hidden; /* 처음에는 요소를 숨김 */
     opacity: 0; /* 처음에는 완전히 투명하게 설정 */

@@ -34,3 +34,10 @@ export interface PermitCodeCheckProps {
     changeRequestResult: (flag : boolean) => void;
 }
 
+export interface DeleteModalProps {
+    guestBookId : string,
+    toggleHandler: () => void;
+    changeLoadingState: (flag : boolean) => void;
+    changeRequestResult: (flag : boolean) => void;
+}
+

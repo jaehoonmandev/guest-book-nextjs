@@ -47,6 +47,8 @@
     display: table;
 }
 
+
+
 .colorPalette input[type="radio"] {
     -webkit-appearance: none; /* Webkit 브라우저(Chrome, Safari 등)에서의 기본 스타일 제거 */
     -moz-appearance: none; /* Firefox 브라우저에서의 기본 스타일 제거 */
@@ -68,12 +70,26 @@
     border: 2px solid black;
 }
 
+
+
+/* 삭제 Form */
+.deleteConfirm  {
+    margin: 0 auto;
+}
+
+.deleteButtonDiv {
+    text-align: center;
+}
+
+
+/* 버튼 Elements */
 .buttonDiv {
     margin-top: 10px;
     display: flex;
     justify-content: space-between;
 }
-.buttonDiv button{
+.buttonDiv button,
+.deleteConfirm button{
     border-radius: 10%;
     border: none;
     padding: 5px 10px;
@@ -82,20 +98,22 @@
 
 }
 
-.buttonDiv button:hover{
+.buttonDiv button:hover,
+.deleteConfirm button:hover{
     font-weight: bold;
 }
 
-.buttonDiv .resetBtn{
+.resetBtn{
     background: none;
     font-size: 0.8rem;
 
 }
-.buttonDiv .cancleBtn{
+.cancleBtn{
     background-color: red;;
 
 }
-.buttonDiv .submitBtn{
+.submitBtn{
     background-color: greenyellow;
     margin-left: 10px;
 }
+

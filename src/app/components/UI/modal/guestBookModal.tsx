@@ -8,6 +8,7 @@ import RequestLoading from "@/app/components/UI/requesting/requestLoading";
 import styles from "@/app/components/UI/form/form.module.css";
 import React, {useState} from "react";
 import SuccessEffect from "@/app/components/UI/requesting/successCheckmark";
+import ConfirmDeleteForm from "@/app/components/UI/form/confirmDeleteForm";
 
 export default function GuestBookModal(
     {toggleHandler, type, guestBook, authorityConfirm, guestBookId = ""}: ModalProps,) {
@@ -42,6 +43,8 @@ export default function GuestBookModal(
                     /*toggleHandler가 form(자식) div에 전파 안되게 방지*/
                     onClick={(e) => e.stopPropagation()}
                     className={`${styles.formBox} fadeInAnimation`}>
+
+                    {/*중첩 if문 아름답다.*/}
                     {requestResult
                         ? (<SuccessEffect/>)
                         : (
@@ -71,6 +74,16 @@ export default function GuestBookModal(
                                                             changeRequestResult={changeRequestResult}
                                                         />
                                                     );
+                                                case "DELETE":
+                                                    return (
+                                                        <ConfirmDeleteForm
+                                                            guestBookId={guestBookId}
+                                                            toggleHandler={toggleHandler}
+                                                            changeLoadingState={changeLoadingState}
+                                                            changeRequestResult={changeRequestResult}
+                                                        />
+                                                    );
+
                                                 case "AUTH":
                                                     return (
                                                         <PermitCodeCheckForm
@@ -81,6 +94,7 @@ export default function GuestBookModal(
                                                             changeRequestResult={changeRequestResult}
                                                         />
                                                     );
+
                                                 default:
                                                     return null;
                                             }

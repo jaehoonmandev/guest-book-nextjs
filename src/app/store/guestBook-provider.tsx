@@ -25,7 +25,7 @@ export function GuestBookProvider({children}: { children: React.ReactNode; }) {
     // 서버에서 모든 데이터를 가져왔는지 체크.
     const [isEndOfData, setIsEndOfData] = useState(false);
 
-    //수정 및 추가 시 최신 데이터를 불러오기
+    //수정 및 추가 시 최신 데이터를 불러오기 위해 사용하는 단순 상태 변환 감지를 위한 State
     const [addOrModFlicker, setAddOrModFlicker] = useState(false)
 
     //가져 오려는 데이터의 길이를 읽어와 로딩 스켈레톤의 갯수를 정한다(보통 이렇게 안할텐데 ㅎㅎ...)

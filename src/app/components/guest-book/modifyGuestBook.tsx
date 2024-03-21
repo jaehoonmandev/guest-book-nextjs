@@ -4,7 +4,6 @@ import {createPortal} from "react-dom";
 import {GuestBook} from "@/app/interfaces/guestBook";
 import styles from "@/app/components/guest-book/guestBook.module.css";
 import {DELETE} from "@/app/guestBookAPI/APIComponent";
-import {useGuestBookContext} from "@/app/store/guestBook-context";
 
 
 export default function ModifyGuestBook(guestBook: GuestBook) {
@@ -15,12 +14,19 @@ export default function ModifyGuestBook(guestBook: GuestBook) {
     //인증을 위한 상태값 설정.
     const [authority, setAuthority] = useState(false)
 
-    const {fetchGuestBooks} = useGuestBookContext();
+
+    const [type, setType] = useState("");
+
     const [error, setError] = useState("");
 
     useEffect(() => {
         setPortalElement(document.getElementById("portal"));
     }, [isModalOpen]);
+
+
+    const changeType = (type : string) =>{
+        setType(type)
+    }
 
     const toggleHandler = () => {
         setIsModalOpen((prevIsModalOpen) => !prevIsModalOpen);
@@ -35,8 +41,6 @@ export default function ModifyGuestBook(guestBook: GuestBook) {
     //데이터 삭제.
     const handleDeleteButtonClick = useCallback(async (id: string) => {
         try {
-            //지연 시간 추가
-            //await delay(1000);
 
             const response = await DELETE(id);
 
@@ -58,12 +62,25 @@ export default function ModifyGuestBook(guestBook: GuestBook) {
     }, []);
     return (
         <>
+            {/*수정 버튼*/}
             <button className={styles.modifyButton}
-                    onClick={toggleHandler}></button>
+                    onClick={
+                        () => {
+                            changeType("PUT");
+                            toggleHandler();
+                        }
+                    }
+            ></button>
+
+            {/*삭제 버튼*/}
             <button className={styles.deleteButton}
-                    onClick={authority
-                        ? () => handleDeleteButtonClick(guestBook.id)
-                        : toggleHandler}></button>
+                    onClick={
+                        () => {
+                            changeType("DELETE");
+                            toggleHandler();
+                        }
+                    }
+            ></button>
             {/*Modal을 Open 시켰으며, Modal이 띄워질 위치가 확인되면*/}
             {isModalOpen && portalElement
                 ?
@@ -71,13 +88,36 @@ export default function ModifyGuestBook(guestBook: GuestBook) {
                 authority
                     ?
                     (
-                        createPortal(
-                            <GuestBookModal
-                                toggleHandler={toggleHandler}
-                                type={"PUT"}
-                                guestBook={guestBook}/>
-                            , document.getElementById('portal')!
-                        )
+                        <>
+                            {(() => {
+                                switch (type) {
+                                    case "PUT":
+                                        return (
+                                            createPortal(
+                                                <GuestBookModal
+                                                    toggleHandler={toggleHandler}
+                                                    type={"PUT"}
+                                                    guestBook={guestBook}/>
+                                                , document.getElementById('portal')!
+                                            )
+                                        );
+                                    case "DELETE":
+                                        return (
+                                            createPortal(
+                                                <GuestBookModal
+                                                    toggleHandler={toggleHandler}
+                                                    type={"DELETE"}
+                                                    guestBookId={guestBook.id}/>
+                                                , document.getElementById('portal')!
+                                            )
+                                        );
+                                    default:
+                                        return null;
+                                }
+
+                            })()}
+                        </>
+
                     )
                     :
                     (

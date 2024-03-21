@@ -61,12 +61,14 @@ export default function ModifyGuestBook(guestBook: GuestBook) {
             <button className={styles.modifyButton}
                     onClick={toggleHandler}></button>
             <button className={styles.deleteButton}
-                    onClick={authority === true
+                    onClick={authority
                         ? () => handleDeleteButtonClick(guestBook.id)
                         : toggleHandler}></button>
+            {/*Modal을 Open 시켰으며, Modal이 띄워질 위치가 확인되면*/}
             {isModalOpen && portalElement
                 ?
-                authority === true
+                // 인증 과정을 거치고 상태에 따라 인증창과 변경창이 뜬다
+                authority
                     ?
                     (
                         createPortal(

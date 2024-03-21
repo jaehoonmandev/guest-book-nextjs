@@ -50,6 +50,8 @@ export interface GuestBookContextProps {
     isEndOfData : boolean;
     changeIsEndOfData: (flag : boolean) => void;
 
+    addOrModFlicker : boolean;
+    changeAddOrModFlicker: () => void;
 
     clearGuestBooks: () => void;
 

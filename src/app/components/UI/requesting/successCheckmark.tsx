@@ -11,7 +11,7 @@ export default function SuccessCheckmark(){
             </div>
 
             <div >
-                <span>인증 되었습니다.</span>
+                <span>성공하였습니다.</span>
             </div>
         </div>
     )

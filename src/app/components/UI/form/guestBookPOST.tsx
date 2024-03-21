@@ -7,20 +7,17 @@ import {PostFormData} from "@/app/interfaces/form";
 import {isBlank} from "@/app/utility/formDataValid";
 import {postValidInterface} from "@/app/interfaces/valid";
 import FormButton from "@/app/components/UI/form/formButton";
+import MakeDelay from "@/app/utility/makeDelay";
 
 
-export default function GuestBookPOST({toggleHandler, colors}: PostModalProps,) {
+export default function GuestBookPOST({toggleHandler, colors,changeLoadingState, changeRequestResult}: PostModalProps,) {
 
 
     const [error, setError] = useState(false);
 
     //Context 항목
     const {
-        orderDirection,
-        orderField,
-        searchWriter,
-        page,
-        fetchGuestBooks
+        changeAddOrModFlicker,
     } = useGuestBookContext();
 
     //초기화 상태
@@ -31,7 +28,6 @@ export default function GuestBookPOST({toggleHandler, colors}: PostModalProps,) 
         permitCode: '',
         color : ''
     }
-
 
     const [formData, setFormData] = useState(PostGuestBookInitState);
 
@@ -100,6 +96,8 @@ export default function GuestBookPOST({toggleHandler, colors}: PostModalProps,) 
         if(validation()){
             setError(false);
 
+            changeLoadingState(true);
+
             try {
                 const response = await POST(formData);
 
@@ -107,26 +105,38 @@ export default function GuestBookPOST({toggleHandler, colors}: PostModalProps,) 
                     const {error} = await response.json();
                     throw new Error(error);
                 }
-                //const {result} = await response.json();
 
-                // TODO :  제출 후 새로운 데이터 호출 시 fetchGuestBooks 하면 화면 전체 렌더링 되는거 때문에 결과를 못 불러온다.
+                const result = await response.json();
 
-                toggleHandler(); // Modal 창을 비활성화한다.
-                fetchGuestBooks(orderDirection, orderField, searchWriter, page); // 수정된 데이터를 가져온다.
+                await MakeDelay();
+
+                if (result.result) {
+                    changeRequestResult(true);
+
+                    //딜레이
+                    await MakeDelay();
+
+                    // 성공적으로 폼 제출 후 모달 닫기
+                    toggleHandler();
+
+                    changeAddOrModFlicker();
+                }else{
+
+                }
+
 
             } catch (error: any) {
                 setError(true);
             }
         }
+        changeRequestResult(false); //인증 코드 검증은 authority 상태 값에 따라 렌더링이 달라지기에 초기화 값으로 되돌리기.
+        changeLoadingState(false);
 
     }
 
 
     return (
-        <div
-            /*toggleHandler가 form(자식) div에 전파 안되게 방지*/
-            onClick={(e) => e.stopPropagation()}
-            className={`${styles.formBox} fadeInAnimation` }>
+        <>
             <h2>방명록 작성</h2>
 
             {error && <h2>{error}</h2> }
@@ -162,28 +172,6 @@ export default function GuestBookPOST({toggleHandler, colors}: PostModalProps,) 
                 <p>색상</p>
                 <div className={styles.colorPalette}>
                     {colors?.map((color, index) => (
-                        /*<div key={index} style={{background:`${color.value}`}}>
-                            <input
-                                type="radio"
-                                name="color"
-                                value={color.value}
-                                id={color.color}
-                                onChange={handleChange}
-                            />
-                            {/!*<label htmlFor={color.color} className={styles[color]}></label>*!/}
-                        </div>*/
-                        /*<input
-                            key={index}
-                            type="radio"
-                            name="color"
-                            value={color.value}
-                            id={color.color}
-                            /!*수정 시 선택한 color 값에 해당하는 input check*!/
-                            checked={formData.color === color.value}
-                            // style={{background: `${color.value}`}}
-                            style={{background: `var(--maincolor)`}}
-                            onChange={handleChange}
-                        />*/
                         <input
                             key={index}
                             type="radio"
@@ -205,8 +193,7 @@ export default function GuestBookPOST({toggleHandler, colors}: PostModalProps,) 
                     toggleHandler={toggleHandler}
                     action={"등록"}/>
             </form>
-
-        </div>
+        </>
     )
 
 }

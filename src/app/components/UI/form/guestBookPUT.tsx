@@ -7,18 +7,14 @@ import {PUT} from "@/app/guestBookAPI/APIComponent";
 import {putValidInterface} from "@/app/interfaces/valid";
 import {isBlank} from "@/app/utility/formDataValid";
 import FormButton from "@/app/components/UI/form/formButton";
+import MakeDelay from "@/app/utility/makeDelay";
 
 
-export default function GuestBookPUT(
-    {toggleHandler, guestBook, colors}: PutModalProps,
+export default function GuestBookPUT({toggleHandler, guestBook, colors, changeLoadingState,changeRequestResult}: PutModalProps,
 ) {
 
     const {
-        orderDirection,
-        orderField,
-        searchWriter,
-        page,
-        fetchGuestBooks
+        changeAddOrModFlicker,
     } = useGuestBookContext();
 
     const PutGuestBookInitState: PutFormData = {
@@ -95,31 +91,52 @@ export default function GuestBookPUT(
         event.preventDefault();
 
         if (validation()) {
+
+            changeLoadingState(true);
+
             try {
                 const response = await PUT(formData);
 
                 if (!response.ok) {
-                    throw new Error('Failed to submit form');
+                    const {error} = await response.json();
+                    throw new Error(error);
                 }
 
-                console.log('Form submitted successfully');
-                // 폼 제출 후 폼 초기화
-                toggleHandler();
-                // TODO : - [ ] POST, PUT 시에는 fetch해서 새로운 데이터 가져오지 말고 그냥 배열에다가 추가 하자 - [ ] 수정 요청 시 데이터 하나 잘림
-                fetchGuestBooks(orderDirection, orderField, searchWriter, page);
+                const result = await response.json();
+
+                await MakeDelay();
+
+                if (result.result) {
+
+                    changeRequestResult(true)
+
+                    //딜레이
+                    await MakeDelay();
+
+                    // 성공적으로 폼 제출 후 모달 닫기
+                    toggleHandler();
+                    //POST, PUT 시에는 fetch해서 새로운 데이터 가져오지 말고 그냥 배열에다가 추가 할 수 있지만 최신 데이터 가져오기
+                    changeAddOrModFlicker();
+                } else {
+                    // setPermitResult({
+                    //     message: "다시 시도하세요",
+                    //     result: false
+                    // });
+
+                }
             } catch (error) {
                 console.error('Error submitting form:', error);
             }
         }
 
+        changeRequestResult(false); //인증 코드 검증은 authority 상태 값에 따라 렌더링이 달라지기에 초기화 값으로 되돌리기.
+        changeLoadingState(false);
+
     }
 
 
     return (
-        <div
-            /*toggleHandler이 form(자식) div에 전파 안되게 방지*/
-            onClick={(e) => e.stopPropagation()}
-            className={`${styles.formBox} fadeInAnimation` }>
+        <>
             <h2>방명록 내용 변경</h2>
 
             <form className={styles.form} onSubmit={handleSubmit}>
@@ -148,18 +165,6 @@ export default function GuestBookPUT(
                 <p>색상</p>
                 <div className={styles.colorPalette}>
                     {colors?.map((color, index) => (
-                        /*<input
-                            key={index}
-                            type="radio"
-                            name="color"
-                            value={color.value}
-                            id={color.color}
-                            /!*수정 시 선택한 color 값에 해당하는 input check*!/
-                            checked={formData.color === color.value}
-                            // style={{background: `${color.value}`}}
-                            style={{background: `var(--maincolor)`}}
-                            onChange={handleChange}
-                        />*/
                         <input
                             key={index}
                             type="radio"
@@ -181,7 +186,7 @@ export default function GuestBookPUT(
                     toggleHandler={toggleHandler}
                     action={"변경"}/>
             </form>
-        </div>
+        </>
     )
 
 }

@@ -1,10 +1,9 @@
 // guestBook-provider.tsx
-import React, {useState, useCallback, useEffect} from 'react';
+import React, {useCallback, useState} from 'react';
 import GuestBookContext from './guestBook-context';
 import {GuestBook, GuestBookContextProps} from "@/app/interfaces/guestBook";
 import {GET} from "@/app/guestBookAPI/APIComponent";
 import makeDelay from "@/app/utility/makeDelay";
-import {useMediaQuery} from "react-responsive";
 
 
 export function GuestBookProvider({children}: { children: React.ReactNode; }) {
@@ -23,7 +22,11 @@ export function GuestBookProvider({children}: { children: React.ReactNode; }) {
     //paging state
     const [page, setPage] = useState(0);
 
+    // 서버에서 모든 데이터를 가져왔는지 체크.
     const [isEndOfData, setIsEndOfData] = useState(false);
+
+    //수정 및 추가 시 최신 데이터를 불러오기
+    const [addOrModFlicker, setAddOrModFlicker] = useState(false)
 
     //가져 오려는 데이터의 길이를 읽어와 로딩 스켈레톤의 갯수를 정한다(보통 이렇게 안할텐데 ㅎㅎ...)
     //const [fetchedLength, setFetchedLength] = useState(1);
@@ -34,42 +37,6 @@ export function GuestBookProvider({children}: { children: React.ReactNode; }) {
      * @param field : 정렬 기준 필드
      * @param writer : 작성자로 검색 시(기본 값 "" / 필수 X)
      */
-    /*const fetchGuestBooks = useCallback(
-        async (direction: string, field: string, writer: string = "", page: number = 0): Promise<void> => {
-            setIsLoading(true);
-
-            //지연 시간 추가
-            await makeDelay();
-            try {
-
-                const response = await GET(direction, field, writer, page);
-
-                if (!response.ok) {
-                    const {error} = await response.json();
-                    throw new Error(error);
-                }
-
-                const data: GuestBook[] = await response.json();
-
-                //가져오는 데이터의 길이 state
-                //setFetchedLength(data.length);
-
-                // 초가 데이터 로드가 완료 되었다면 이전 상태의 값에 새로 읽어온 배열을 붙인다.
-                if (page > 0) {
-                    setGuestBooks((prevState) => [...prevState, ...data]);
-                } else {
-                    setGuestBooks(data);
-                }
-
-            } catch (error: any) {
-                //지연 시간 추가
-                await makeDelay();
-                setError(error.message);
-            }
-
-            setIsLoading(false);
-
-        }, []);*/
 
     const fetchGuestBooks = useCallback(
         async (): Promise<void> => {
@@ -78,7 +45,8 @@ export function GuestBookProvider({children}: { children: React.ReactNode; }) {
             //지연 시간 추가
             await makeDelay();
             try {
-                console.table([{orderDirection, orderField, searchWriter, page}]);
+                // console.table([{orderDirection, orderField, searchWriter, page}]);
+                //state 값으로 호출
                 const response = await GET(orderDirection, orderField, searchWriter, page);
 
                 if (!response.ok) {
@@ -147,6 +115,12 @@ export function GuestBookProvider({children}: { children: React.ReactNode; }) {
         setIsEndOfData(flag);
     }
 
+    //수정 및 추가 시 최신 데이터를 불러오기 위한 상태 값을 변경한다.
+    const changeAddOrModFlicker = () => {
+        setAddOrModFlicker((prevState) => !prevState);
+    }
+
+    //검색 조건 변경 시 기존 데이터는 제거한다.
     const clearGuestBooks = () => {
         setGuestBooks([]);
     }
@@ -168,6 +142,9 @@ export function GuestBookProvider({children}: { children: React.ReactNode; }) {
 
         isEndOfData,
         changeIsEndOfData,
+
+        addOrModFlicker,
+        changeAddOrModFlicker,
 
         //fetchedLength,
         clearGuestBooks,

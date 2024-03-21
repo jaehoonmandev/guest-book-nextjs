@@ -1,74 +1,101 @@
-
 import Backdrop from "@/app/components/UI/modal/backdrop";
 
 import {ModalProps} from "@/app/interfaces/modal";
 import GuestBookPOST from "@/app/components/UI/form/guestBookPOST";
 import GuestBookPUT from "@/app/components/UI/form/guestBookPUT";
-import PermitCodeCheckModal from "@/app/components/UI/modal/permitCodeCheckModal";
+import PermitCodeCheckForm from "@/app/components/UI/form/checkPermitCodeForm";
+import RequestLoading from "@/app/components/UI/requesting/requestLoading";
+import styles from "@/app/components/UI/form/form.module.css";
+import React, {useState} from "react";
+import SuccessEffect from "@/app/components/UI/requesting/successCheckmark";
 
 export default function GuestBookModal(
-    {toggleHandler, type, guestBook, authorityConfirm,guestBookId=""} : ModalProps,) {
+    {toggleHandler, type, guestBook, authorityConfirm, guestBookId = ""}: ModalProps,) {
 
-    //color 픽을 위한 배열
-    /*const colors = [
-        {
-            color : "yellow",
-            value : "#FDF1AA"
-        },
-        {
-            color : "green",
-            value : "#D3F3B0"
-        },
-        {
-            color : "red",
-            value : "#FE9292"
-        },
-        {
-            color : "pink",
-            value : "#FEC3F9"
-        },
-        {
-            color : "blue",
-            value : "#98DBFA"
-        },
-    ]*/
+    /**
+     * 색상 Modal 요소에 넘겨주기.
+     * 해당 이름들은 Global에 :root로 CSS 변수화 되어있다.
+     */
 
     const colors = [
-        "palette1","palette2","palette3","palette4","palette5",
+        "palette1", "palette2", "palette3", "palette4", "palette5",
     ]
+
+    const [isModalLoading, setIsModalLoading] = useState(false);
+    const [requestResult, setRequestResult] = useState(false)
+
+    const changeLoadingState = (flag : boolean) => {
+        // setIsModalLoading((prevState) => !prevState);
+        setIsModalLoading(flag);
+    }
+
+    const changeRequestResult = (flag : boolean) => {
+        // setRequestResult((prevState) => !prevState);
+        setRequestResult(flag);
+    }
 
     return (
         <>
             <Backdrop toggleHandler={toggleHandler}>
 
+                <div
+                    /*toggleHandler가 form(자식) div에 전파 안되게 방지*/
+                    onClick={(e) => e.stopPropagation()}
+                    className={`${styles.formBox} fadeInAnimation`}>
+                    {requestResult
+                        ? (<SuccessEffect/>)
+                        : (
+                            isModalLoading
+                                ? (<RequestLoading/>)
+                                : (
+                                    <>
+                                        {(() => {
 
-                {(() => {
-                    switch (type) {
-                        case "POST":
-                            return (
-                                <GuestBookPOST
-                                    toggleHandler={toggleHandler}
-                                    colors={colors}/>
-                            );
-                        case "PUT":
-                            return (
-                                <GuestBookPUT
-                                    toggleHandler={toggleHandler}
-                                    guestBook={guestBook}
-                                    colors={colors}/>
-                            );
-                        case "AUTH":
-                            return (
-                                <PermitCodeCheckModal
-                                    guestBookId={guestBookId}
-                                    authorityConfirm={authorityConfirm}
-                                    toggleHandler={toggleHandler}/>
-                            );
-                        default:
-                            return null;
+                                            switch (type) {
+                                                case "POST":
+                                                    return (
+                                                        <GuestBookPOST
+                                                            toggleHandler={toggleHandler}
+                                                            colors={colors}
+                                                            changeLoadingState={changeLoadingState}
+                                                            changeRequestResult={changeRequestResult}
+                                                        />
+                                                    );
+                                                case "PUT":
+                                                    return (
+                                                        <GuestBookPUT
+                                                            toggleHandler={toggleHandler}
+                                                            guestBook={guestBook}
+                                                            colors={colors}
+                                                            changeLoadingState={changeLoadingState}
+                                                            changeRequestResult={changeRequestResult}
+                                                        />
+                                                    );
+                                                case "AUTH":
+                                                    return (
+                                                        <PermitCodeCheckForm
+                                                            guestBookId={guestBookId}
+                                                            toggleHandler={toggleHandler}
+                                                            authorityConfirm={authorityConfirm}
+                                                            changeLoadingState={changeLoadingState}
+                                                            changeRequestResult={changeRequestResult}
+                                                        />
+                                                    );
+                                                default:
+                                                    return null;
+                                            }
+
+                                        })()}
+                                    </>
+                                )
+
+
+                        )
                     }
-                })
-                ()}
+
+
+                </div>
+
             </Backdrop>
         </>
 

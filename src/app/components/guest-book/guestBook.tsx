@@ -3,9 +3,8 @@
 import AddGuestBook from "@/app/components/guest-book/addGuestBook";
 import styles from './guestBook.module.css';
 import AddedGuestBook from "@/app/components/guest-book/addedGuestBook";
-import {GuestBookProps} from '@/app/interfaces/guestBook'
 import Loading from "@/app/components/UI/loading/loading";
-import React, {useEffect, useRef, useState} from "react";
+import React, {useEffect, useRef} from "react";
 import {useGuestBookContext} from "@/app/store/guestBook-context";
 import Config from "../../../../config/config.export";
 import GuestBookConnectError from "@/app/components/error/guestBookConnectError";
@@ -39,6 +38,8 @@ export default function GuestBook({isMobile} : props) {
         isEndOfData,
         changeIsEndOfData,
 
+        addOrModFlicker,
+
         error,
         fetchGuestBooks } = useGuestBookContext();
 
@@ -54,7 +55,7 @@ export default function GuestBook({isMobile} : props) {
                     //로딩중이 아니고
                     if(!isLoading){
                         // 불러온 방명록 데이터 크기가 현재 있어야할 데이터의 크기와 비교
-                        if((guestBooks.length >= (page + 1) * Config().pageSize)){
+                        if(guestBooks.length >= ((page + 1) * Config().pageSize)){
                             changePage(page + 1)
                         }else {
                             // 불러온 데이터가 현재 있어야할 데이터의 크기보다 작다면 모든 데이터를 불러온 것.
@@ -87,14 +88,14 @@ export default function GuestBook({isMobile} : props) {
             }
         },
         //상단 검색 조건이 변결될 때마다 데이터를 가져온다.
-        [orderDirection, orderField, searchWriter, page, isEndOfData]);
+        [orderDirection, orderField, searchWriter, page, isEndOfData, addOrModFlicker]);
 
     // 검색 조건이 변경되면 방명록 데이터 관련 상태를 초기화한다.
     useEffect(() => {
         clearGuestBooks();
         changeIsEndOfData(false);
         changePage(0)
-    }, [orderDirection, orderField, searchWriter])
+    }, [orderDirection, orderField, searchWriter, addOrModFlicker])
 
 
 

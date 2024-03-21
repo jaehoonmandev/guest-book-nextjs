@@ -81,6 +81,11 @@ export async function POST(
                 throw new Error();
             }
             return NextResponse.json({result: '등록되었습니다.'}, {status: 200});
+        }).then((result)=> {
+            return NextResponse.json({
+                    result: result,
+                },
+                {status: 200});
         })
         .catch((error) => {
             return NextResponse.json(
@@ -111,11 +116,22 @@ export async function PUT(
             if (!response.ok) {
                 throw new Error();
             }
-            return NextResponse.json({result: '수정되었습니다.'}, {status: 200});
+        //     return NextResponse.json({result: '수정되었습니다.'}, {status: 200});
+        // })
+            return response.json();
+        })
+        .then((result) => {
+            return NextResponse.json({
+                result: result,
+            },
+                {status: 200});
         })
         .catch((error) => {
             return NextResponse.json(
-                {error: '수정에 실패하였습니다.'},
+                {
+                    result:false,
+                    msg: '수정에 실패하였습니다.'
+                },
                 {status: 500});
         });
 
@@ -138,6 +154,12 @@ export async function DELETE(
                 throw new Error();
             }
             return NextResponse.json({result: '삭제되었습니다.'}, {status: 200});
+        })
+        .then((result) => {
+            return NextResponse.json({
+                    result: result,
+                },
+                {status: 200});
         })
         .catch((error) => {
             return NextResponse.json(

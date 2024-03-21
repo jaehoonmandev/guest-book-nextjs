@@ -12,28 +12,25 @@ export interface ModalProps {
 
 export interface PostModalProps{
     toggleHandler: () => void;
-    /*colors : {
-        color : string,
-        value: string
-    }[];*/
-    colors:string[]
+    colors:string[];
+    changeLoadingState: (flag : boolean) => void;
+    changeRequestResult: (flag : boolean) => void;
+    // changeRequestResult: (flag : { message: string; result: boolean; }) => void;
 }
 
 export interface PutModalProps {
     toggleHandler: () => void;
     guestBook? : GuestBook;
-    /*colors : {
-        color : string,
-        value: string
-    }[];*/
     colors:string[]
+    changeLoadingState: (flag : boolean) => void;
+    changeRequestResult: (flag : boolean) => void;
 }
 
 export interface PermitCodeCheckProps {
     guestBookId : string,
     toggleHandler: () => void;
-
     authorityConfirm?: () => void;
-
+    changeLoadingState: (flag : boolean) => void;
+    changeRequestResult: (flag : boolean) => void;
 }
 

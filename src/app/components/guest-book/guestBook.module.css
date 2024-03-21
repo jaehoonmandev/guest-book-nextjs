@@ -20,7 +20,7 @@
 
 .box {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
     grid-auto-rows: minmax(auto, 30%); /* pre 컨텐츠 over 시 사이즈 이슈 때문에 간격 고정하기 */
     gap: 15px;
 }
@@ -119,9 +119,9 @@
 
 /* 방명록 데이터 수정 및 삭제 관련*/
 
-.addedGuestBookOverlay{
-    visibility: hidden; /* 처음에는 요소를 숨김 */
-    opacity: 0; /* 처음에는 완전히 투명하게 설정 */
+/*.addedGuestBookOverlay{
+    visibility: hidden; !* 처음에는 요소를 숨김 *!
+    opacity: 0; !* 처음에는 완전히 투명하게 설정 *!
 
     position: absolute;
     background: rgba(126,127,129, 0.5);
@@ -133,16 +133,16 @@
 }
 
 .addedGuestBookContainer:hover .addedGuestBookOverlay {
-    visibility: visible; /* 호버 시 요소를 보이게 함 */
-    opacity: 1; /* 호버 시 투명도를 1로 변경하여 서서히 나타나게 함 */
-    transition-delay: 0s; /* 호버 시 딜레이 없이 즉시 트랜지션 시작 */
+    visibility: visible; !* 호버 시 요소를 보이게 함 *!
+    opacity: 1; !* 호버 시 투명도를 1로 변경하여 서서히 나타나게 함 *!
+    transition-delay: 0s; !* 호버 시 딜레이 없이 즉시 트랜지션 시작 *!
 }
 
 .addedGuestBookContainer .modifyButton,
 .addedGuestBookContainer .deleteButton{
     position: absolute;
     transform: translate(-50%);
-    z-index: 1; /* 다른 요소 위로 나타나도록 설정 */
+    z-index: 1; !* 다른 요소 위로 나타나도록 설정 *!
     border: none;
     background: none center center;
     width: 60px;
@@ -152,7 +152,7 @@
 }
 
 .modifyButton:hover, .deleteButton:hover{
-    transform: translate(-50%) scale(1.3); /* 호버 시 크기 증가 */
+    transform: translate(-50%) scale(1.3); !* 호버 시 크기 증가 *!
 }
 
 .addedGuestBookContainer .deleteButton{
@@ -165,6 +165,52 @@
     top: 20%;
     left: 50%;
     background-image: url("/icon/modify.png");
+}*/
+
+
+
+/*.addedGuestBookOverlay{*/
+
+/*    position: absolute;*/
+/*    background: rgba(126,127,129, 0.5);*/
+/*    width: 100%;*/
+/*    height: 100%;*/
+/*    top: 0;*/
+/*    left: 0;*/
+/*    transition: opacity 1s, visibility 0s linear 1s;*/
+/*}*/
+
+/*.addedGuestBookContainer:hover .addedGuestBookOverlay {*/
+/*    visibility: visible; !* 호버 시 요소를 보이게 함 *!*/
+/*    opacity: 1; !* 호버 시 투명도를 1로 변경하여 서서히 나타나게 함 *!*/
+/*    transition-delay: 0s; !* 호버 시 딜레이 없이 즉시 트랜지션 시작 *!*/
+/*}*/
+
+.addedGuestBookContainer .modifyButton,
+.addedGuestBookContainer .deleteButton{
+    position: absolute;
+
+    z-index: 1; /* 다른 요소 위로 나타나도록 설정 */
+    border: none;
+    background: none;
+    width: 35px;
+    height: 35px;
+    background-size: cover;
+    transition: transform 0.3s;
+
+    bottom: 10px;
 }
 
+.modifyButton:hover, .deleteButton:hover{
+    transform: scale(1.3); /* 호버 시 크기 증가 */
+}
 
+.addedGuestBookContainer .deleteButton{
+    background-image: url("/icon/delete.png");
+    left: 50px;
+}
+
+.addedGuestBookContainer .modifyButton{
+    left: 10px;
+    background-image: url("/icon/modify.png");
+}

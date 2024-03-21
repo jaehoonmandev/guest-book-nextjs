@@ -1,9 +1,8 @@
-import React, {useCallback, useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import GuestBookModal from "@/app/components/UI/modal/guestBookModal";
 import {createPortal} from "react-dom";
 import {GuestBook} from "@/app/interfaces/guestBook";
 import styles from "@/app/components/guest-book/guestBook.module.css";
-import {DELETE} from "@/app/guestBookAPI/APIComponent";
 
 
 export default function ModifyGuestBook(guestBook: GuestBook) {
@@ -14,7 +13,7 @@ export default function ModifyGuestBook(guestBook: GuestBook) {
     //인증을 위한 상태값 설정.
     const [authority, setAuthority] = useState(false)
 
-
+    // 누른 버튼에 따라 액션을 변경 시킨다.
     const [type, setType] = useState("");
 
     const [error, setError] = useState("");
@@ -32,34 +31,11 @@ export default function ModifyGuestBook(guestBook: GuestBook) {
         setIsModalOpen((prevIsModalOpen) => !prevIsModalOpen);
     }
 
-    //permit code를 체크하여
+    //인증이 완료 시 authority 상태 값을 변경하여 수정과 삭제 modal을 노출시킨다.
     const authorityConfirm = () => {
         setAuthority(true);
     }
 
-
-    //데이터 삭제.
-    const handleDeleteButtonClick = useCallback(async (id: string) => {
-        try {
-
-            const response = await DELETE(id);
-
-            if (!response.ok) {
-                const {error} = await response.json();
-                throw new Error(error);
-            }
-
-
-        } catch (error: any) {
-            /*setError(error.message);*/
-        }
-
-        /*.then((response) => response.json())
-        .then((data) => {
-            setGuestBooks(data)
-            setIsLoading(false);
-        })*/
-    }, []);
     return (
         <>
             {/*수정 버튼*/}

@@ -1,9 +1,9 @@
 
 .formBox {
     padding: 1.5rem 3rem;
-    width: 20%;
+    /*width: 20%;*/
     max-width: 300px;
-    min-width: 200px;
+    min-width: 180px;
     min-height: 200px;
     border-radius: 0.313rem;
     display: flex;

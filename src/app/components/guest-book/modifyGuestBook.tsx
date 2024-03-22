@@ -27,8 +27,20 @@ export default function ModifyGuestBook(guestBook: GuestBook) {
         setType(type)
     }
 
+
     const toggleHandler = () => {
-        setIsModalOpen((prevIsModalOpen) => !prevIsModalOpen);
+
+        setIsModalOpen((prevIsModalOpen) => {
+            //이전 상태가 확장 상태가 아니라면 즉, 현재 사이드바를 확장하는 중이라면
+            if(prevIsModalOpen === false){
+                // body 스크롤을 방지한다
+                document.body.style.overflow = 'hidden';
+            }else {
+                //사이드를 닫는다면 스크롤을 다시 솰성 시킨다.
+                document.body.style.removeProperty('overflow');
+            }
+            return !prevIsModalOpen
+        });
     }
 
     //인증이 완료 시 authority 상태 값을 변경하여 수정과 삭제 modal을 노출시킨다.

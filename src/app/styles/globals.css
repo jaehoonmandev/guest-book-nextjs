@@ -1,37 +1,54 @@
 @import "animation.css"; /*애니메이션 따로 관리*/
 
 
+
+@import url(//fonts.googleapis.com/earlyaccess/nanumbrushscript.css);
+@import url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10-21@1.0/KOTRA_SONGEULSSI.woff');
+
 html, body{
     min-height: 100%;
+
     margin: 0;
     padding: 0;
 
 
+
 }
+
+
 
 
 html{
     /*그라디언트 설정*/
     background: linear-gradient(170deg ,rgba(236,160,160,1) 0%, rgba(255,255,255,1) 100%);
 
+
 }
 
 body{
     /*화면 전체*/
-    margin: 0;
-    padding: 0;
-    width: 100%;
+    margin: 0 auto;
+    padding: 30px;
+    max-width: 1280px;
 
-    min-width: 100%;
 
     .container {
-        /*min-width: 610px;*/
-        max-width: 1280px;
-        padding : 20px;
-        /*width: 80%; !* 비율 설정 *!*/
-        margin: 0 auto; /* 가운데 정렬을 위해 auto */
+
+        /*font-family: 'KOTRA_SONGEULSSI';*/
+        font-family: 'Nanum Brush Script', cursive !important;
+
+
     }
 
+}
+
+
+
+@font-face {
+    font-family: 'KOTRA_SONGEULSSI';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10-21@1.0/KOTRA_SONGEULSSI.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
 }
 
 

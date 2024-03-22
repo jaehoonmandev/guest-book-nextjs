@@ -11,6 +11,9 @@ const inter = Inter({subsets: ['latin']})
 export const metadata: Metadata = {
     title: '재훈맨 방명록',
     description: '재훈맨의 방명록 사이트',
+    icons: {
+        icon: "public/icon/favicon.ico",
+    },
 
 }
 
@@ -34,7 +37,7 @@ export default function RootLayout({children,}: { children: React.ReactNode }) {
         <body className={inter.className}>
 
         <main className={"container"}
-               style={isMobile ? {minWidth: 240} : {minWidth: 610}}
+              style={isMobile ? {minWidth: 220} : {minWidth: 610}}
         >
             {children}
         </main>

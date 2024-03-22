@@ -14,11 +14,16 @@ import Config from "../../../config/config.export";
 
 /**
  *  방명록 데이터 가져오기
- * @param direction : AES, DESC
- * @param field : 정렬 기준 field(date,title,writer)
+ * @param orderDirection : 정렬 방향
+ * @param orderField : 정렬 기준 필드.
  * @param writer : 작성자 검색 시 (필수 X, param에 넣지 않을 시 초기 값 "")
+ * @param page : 나눠서 데이터 가져올 때 몇 번째 인지.
  */
-export async function GET(orderDirection: string, orderField: string, writer: string, page: number) {
+export async function GET(
+    orderDirection: string,
+    orderField: string,
+    writer: string,
+    page: number) {
 
     //writer 정보가 있다면 작성자 검색 로직을 탈 수 있게.
     let url: string

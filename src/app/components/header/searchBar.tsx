@@ -1,4 +1,11 @@
-import React, {ChangeEvent, useContext, useState} from "react";
+import React, {
+    ChangeEvent,
+    DetailedHTMLProps,
+    InputHTMLAttributes,
+    KeyboardEventHandler,
+    useContext,
+    useState
+} from "react";
 import styles from './header.module.css'
 import {useGuestBookContext} from "@/app/store/guestBook-context";
 export default function SearchBar(){
@@ -18,21 +25,28 @@ export default function SearchBar(){
         setSearchValue(event.currentTarget.value);
     }
 
+    //클릭 했을 때
     const handleClick = () => {
        changeSearchWriter(searchValue)
     }
+
+    //엔터 했을 때
+    const handleKeyDown = (e: DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement> ) => {
+        if(e.key === `Enter`) changeSearchWriter(searchValue)
+    };
 
     return (
         <div className={styles.searchBar}>
             <label>
                 <input
-                    disabled={disabled ? true : false}
+                    disabled={disabled}
                     role="search"
                     type="text"
                     onChange={handleChange}
+                    onKeyDown={handleKeyDown}
                     placeholder="작성자로 검색"/>
                 <button
-                    disabled={disabled ? true : false}
+                    disabled={disabled}
                     onClick={() => handleClick()}></button>
             </label>
         </div>

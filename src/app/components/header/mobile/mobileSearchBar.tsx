@@ -1,7 +1,7 @@
 import React, {ChangeEvent, useContext, useState} from "react";
 import styles from './header.module.css'
 import {useGuestBookContext} from "@/app/store/guestBook-context";
-export default function SearchBar(){
+export default function MobileSearchBar(){
 
     const {
         changeSearchWriter,

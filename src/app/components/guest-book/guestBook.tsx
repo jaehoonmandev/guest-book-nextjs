@@ -9,10 +9,7 @@ import {useGuestBookContext} from "@/app/store/guestBook-context";
 import Config from "../../../../config/config.export";
 import GuestBookConnectError from "@/app/components/error/guestBookConnectError";
 import MobileHeader from "@/app/components/header/mobile/mobileHeader";
-import MainTitle from "@/app/components/header/mainTitle";
-import SearchArea from "@/app/components/header/searchArea";
-import SearchConditions from "@/app/components/header/searchConditions";
-import SearchBar from "@/app/components/header/searchBar";
+import Header from "@/app/components/header/header";
 
 interface props {
     isMobile : boolean,
@@ -102,24 +99,14 @@ export default function GuestBook({isMobile} : props) {
 
     return (
         <>
+            {/*layout에서 호출하던 header 통합*/}
             <header>
                 {isMobile
                     ? (
                         <MobileHeader/>
                     )
                     : (
-                        <div>
-                            <MainTitle></MainTitle>
-
-
-                            {/*Header의 Search condition에 따른 GET 요청이 가능하도록 */}
-
-                            <SearchArea>
-                                <SearchConditions></SearchConditions>
-                                <SearchBar></SearchBar>
-                            </SearchArea>
-
-                        </div>
+                        <Header/>
                     )}
             </header>
 

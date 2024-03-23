@@ -32,15 +32,26 @@ body{
     max-width: 1280px;
 
 
+
     .container {
 
         /*font-family: 'KOTRA_SONGEULSSI';*/
-        font-family: 'Nanum Brush Script', cursive !important;
 
+        font-family: 'Nanum Brush Script', cursive;
 
     }
 
 }
+
+button {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+
+    font-family: 'Nanum Brush Script', cursive;;
+    text-decoration: none;;
+}
+
 
 
 

@@ -1,10 +1,12 @@
-import styles from './header.module.css'
+import styles from './mobileHeader.module.css'
 import {useGuestBookContext} from "@/app/store/guestBook-context";
+import React from "react";
 
-export default function SearchConditions(){
+export default function MobileSearchConditions(){
 
     //context에 등록한 검색조건 State를 변경하기 위해.
-    const { orderField,
+    const {
+        orderField,
         changeOrderDirection,
         changeOrderField,
         isLoading,
@@ -23,7 +25,7 @@ export default function SearchConditions(){
 
             <ul>
                 <li>
-                    <span > [ </span>
+                    <span> [ </span>
                 </li>
                 <li>
                     <button
@@ -62,7 +64,7 @@ export default function SearchConditions(){
                             disabled={disabled ? true : false}
                             role="switch"
                             type="checkbox"
-                            onClick={() => changeOrderDirection() }
+                            onClick={() => changeOrderDirection()}
                         />
                         오름차순
                     </label>
@@ -70,5 +72,6 @@ export default function SearchConditions(){
             </ul>
 
         </div>
+
     )
 }

@@ -56,7 +56,7 @@ export async function GET(
         })
         .catch((error) => {
             return NextResponse.json(
-                {error: '데이터를 불러올 수 없습니다.'},
+                {error: '서버 에러로 데이터를 불러올 수 없습니다.'},
                 {status: 500});
         });
 }
@@ -94,7 +94,7 @@ export async function POST(
         })
         .catch((error) => {
             return NextResponse.json(
-                {error: '등록에 실패하였습니다.'},
+                {error: '서버 에러로 등록에 실패하였습니다.'},
                 {status: 500});
         });
 
@@ -110,7 +110,10 @@ export async function PUT(
 
     const id = formData.id;
 
-    return fetch(Config().APIHost + `/${id}`, {
+    return fetch(
+        "www"
+        // Config().APIHost
+        + `/${id}`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
@@ -134,8 +137,9 @@ export async function PUT(
         .catch((error) => {
             return NextResponse.json(
                 {
-                    result:false,
-                    msg: '수정에 실패하였습니다.'
+                    // result:false,
+                    // msg: '서버 에러로 수정에 실패하였습니다.'
+                    error: '서버 에러로 수정에 실패하였습니다.'
                 },
                 {status: 500});
         });
@@ -151,7 +155,7 @@ export async function DELETE(
     id : string
 ) {
 
-    return fetch(Config().APIHost + `/${id}`, {
+    return fetch(Config().APIHost+ `/${id}`, {
         method: 'DELETE',
     })
         .then((response) => {
@@ -168,7 +172,9 @@ export async function DELETE(
         })
         .catch((error) => {
             return NextResponse.json(
-                {error: '삭제에 실패하였습니다.'},
+                {
+                    error: '서버 에러로 삭제에 실패하였습니다.'
+                },
                 {status: 500});
         });
 }

@@ -9,26 +9,21 @@ import {DELETE} from "@/app/guestBookAPI/APIComponent";
 import {useGuestBookContext} from "@/app/store/guestBook-context";
 
 export default function ConfirmDeleteForm({
-                                                guestBookId,
-                                                toggleHandler,
+                                              guestBookId,
+                                              toggleHandler,
                                               changeLoadingState,
-                                              changeRequestResult
+                                              changeRequestResult,
+                                              changeErrorMsg
                                             }: DeleteModalProps) {
 
-    const [permitResult, setPermitResult] = useState({
-        message: "",
-        result: false
-    });
+
 
     const {changeAddOrModFlicker} =useGuestBookContext()
-
-    const [error, setError] = useState(false)
-
 
     //데이터 삭제.
     const handleDeleteButtonClick = useCallback(async () => {
 
-        setError(false);
+        changeErrorMsg("");
 
         changeLoadingState(true);
 
@@ -60,7 +55,7 @@ export default function ConfirmDeleteForm({
             }
 
         } catch (error: any) {
-            /*setError(error.message);*/
+            changeErrorMsg(error.message);
         }
 
         changeRequestResult(false); //인증 코드 검증은 authority 상태 값에 따라 렌더링이 달라지기에 초기화 값으로 되돌리기.

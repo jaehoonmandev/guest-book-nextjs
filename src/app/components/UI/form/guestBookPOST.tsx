@@ -10,10 +10,9 @@ import FormButton from "@/app/components/UI/form/formButton";
 import MakeDelay from "@/app/utility/makeDelay";
 
 
-export default function GuestBookPOST({toggleHandler, colors,changeLoadingState, changeRequestResult}: PostModalProps,) {
+export default function GuestBookPOST({toggleHandler, colors,changeLoadingState, changeRequestResult, changeErrorMsg}: PostModalProps,) {
 
 
-    const [error, setError] = useState(false);
 
     //Context 항목
     const {
@@ -68,6 +67,7 @@ export default function GuestBookPOST({toggleHandler, colors,changeLoadingState,
         const enteredPermitCodeValid = !isBlank(formData.permitCode);
         const enteredColorValid = !isBlank(formData.color);
 
+
         setValid(
             {
                 title: enteredTitleValid,
@@ -92,9 +92,11 @@ export default function GuestBookPOST({toggleHandler, colors,changeLoadingState,
         //form submit 시 페이지 이동을 방지한다.
         event.preventDefault();
 
+        changeErrorMsg("");
+
         // 상태를 & 로 하여 모든 항목이 true 일 때만 데이터를 fetch한다.
         if(validation()){
-            setError(false);
+
 
             changeLoadingState(true);
 
@@ -121,12 +123,12 @@ export default function GuestBookPOST({toggleHandler, colors,changeLoadingState,
 
                     changeAddOrModFlicker();
                 }else{
-
+                    const {error} = await response.json();
+                    throw new Error(error);
                 }
 
-
             } catch (error: any) {
-                setError(true);
+                changeErrorMsg(error.message);
             }
         }
         changeRequestResult(false); //인증 코드 검증은 authority 상태 값에 따라 렌더링이 달라지기에 초기화 값으로 되돌리기.
@@ -138,8 +140,6 @@ export default function GuestBookPOST({toggleHandler, colors,changeLoadingState,
     return (
         <>
             <h2>방명록 작성</h2>
-
-            {error && <h2>{error}</h2> }
 
             <form className={styles.form} onSubmit={handleSubmit}>
 

@@ -30,7 +30,7 @@ export async function CheckPermitCode(
         })
         .catch((error) => {
             return NextResponse.json(
-                {error: '인증 서버와 문제가 있...'},
+                {error: '서버 에러로 인증에 실패하였습니다.'},
                 {status: 500});
         });
 }

@@ -10,7 +10,7 @@ import FormButton from "@/app/components/UI/form/formButton";
 import MakeDelay from "@/app/utility/makeDelay";
 
 
-export default function GuestBookPUT({toggleHandler, guestBook, colors, changeLoadingState,changeRequestResult}: PutModalProps,
+export default function GuestBookPUT({toggleHandler, guestBook, colors, changeLoadingState,changeRequestResult,changeErrorMsg}: PutModalProps,
 ) {
 
     const {
@@ -90,6 +90,7 @@ export default function GuestBookPUT({toggleHandler, guestBook, colors, changeLo
     async function handleSubmit(event: FormEvent<HTMLFormElement>) {
         event.preventDefault();
 
+        changeErrorMsg("");
         if (validation()) {
 
             changeLoadingState(true);
@@ -124,8 +125,8 @@ export default function GuestBookPUT({toggleHandler, guestBook, colors, changeLo
                     // });
 
                 }
-            } catch (error) {
-                console.error('Error submitting form:', error);
+            } catch (error : any) {
+                changeErrorMsg(error.message);
             }
         }
 

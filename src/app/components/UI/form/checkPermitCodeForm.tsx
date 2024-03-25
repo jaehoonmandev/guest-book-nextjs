@@ -11,7 +11,8 @@ export default function CheckPermitCodeForm({
                                                 toggleHandler,
                                                 authorityConfirm,
                                                 changeLoadingState,
-                                                changeRequestResult
+                                                changeRequestResult,
+                                                changeErrorMsg
                                             }: PermitCodeCheckProps) {
 
     const [permitCode, setPermitCode] = useState("")
@@ -24,7 +25,6 @@ export default function CheckPermitCodeForm({
 
     const [failCount, setFailCount] = useState(0)
 
-    const [error, setError] = useState("")
 
     const handleChange = (event: FormEvent<HTMLInputElement>) => {
         setPermitCode(event.currentTarget.value);
@@ -47,6 +47,8 @@ export default function CheckPermitCodeForm({
             message: "",
             result: false
         });
+
+        changeErrorMsg("");
 
         //입력한 데이터 검증
         if (validation()) {
@@ -85,17 +87,13 @@ export default function CheckPermitCodeForm({
                     authorityConfirm && authorityConfirm()
                     //toggleHandler()
                 } else {
-                    // setPermitResult({
-                    //     message: "다시 시도하세요",
-                    //     result: false
-                    // });
-
+                    setPermitResult({
+                        message: "다시 시도하세요",
+                        result: false
+                    });
                 }
-
-
             } catch (error: any) {
-
-                // setError(error.message);
+                changeErrorMsg(error.message);
             }
         } else {
             setValid(false)

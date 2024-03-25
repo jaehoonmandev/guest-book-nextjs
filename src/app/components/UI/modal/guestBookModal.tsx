@@ -23,7 +23,8 @@ export default function GuestBookModal(
     ]
 
     const [isModalLoading, setIsModalLoading] = useState(false);
-    const [requestResult, setRequestResult] = useState(false)
+    const [requestResult, setRequestResult] = useState(false);
+    const [errorMsg, setErrorMsg] = useState("");
 
     const changeLoadingState = (flag : boolean) => {
         // setIsModalLoading((prevState) => !prevState);
@@ -35,6 +36,10 @@ export default function GuestBookModal(
         setRequestResult(flag);
     }
 
+    const changeErrorMsg = (msg : string) => {
+        setErrorMsg(msg);
+    }
+
     return (
         <>
             <Backdrop toggleHandler={toggleHandler}>
@@ -43,6 +48,8 @@ export default function GuestBookModal(
                     /*toggleHandler가 form(자식) div에 전파 안되게 방지*/
                     onClick={(e) => e.stopPropagation()}
                     className={`${styles.formBox} fadeInAnimation`}>
+
+                    {errorMsg && <span> {errorMsg} </span>}
 
                     {/*중첩 if문 아름답다.*/}
                     {requestResult
@@ -62,6 +69,7 @@ export default function GuestBookModal(
                                                             colors={colors}
                                                             changeLoadingState={changeLoadingState}
                                                             changeRequestResult={changeRequestResult}
+                                                            changeErrorMsg={changeErrorMsg}
                                                         />
                                                     );
                                                 case "PUT":
@@ -72,6 +80,7 @@ export default function GuestBookModal(
                                                             colors={colors}
                                                             changeLoadingState={changeLoadingState}
                                                             changeRequestResult={changeRequestResult}
+                                                            changeErrorMsg={changeErrorMsg}
                                                         />
                                                     );
                                                 case "DELETE":
@@ -81,6 +90,7 @@ export default function GuestBookModal(
                                                             toggleHandler={toggleHandler}
                                                             changeLoadingState={changeLoadingState}
                                                             changeRequestResult={changeRequestResult}
+                                                            changeErrorMsg={changeErrorMsg}
                                                         />
                                                     );
 
@@ -92,6 +102,7 @@ export default function GuestBookModal(
                                                             authorityConfirm={authorityConfirm}
                                                             changeLoadingState={changeLoadingState}
                                                             changeRequestResult={changeRequestResult}
+                                                            changeErrorMsg={changeErrorMsg}
                                                         />
                                                     );
 

@@ -15,7 +15,7 @@ export default function MobileHeader() {
         setIsExpansion((prevState) => {
 
             //이전 상태가 확장 상태가 아니라면 즉, 현재 사이드바를 확장하는 중이라면
-            if(prevState === false){
+            if(!prevState){
                 // body 스크롤을 방지한다
                 document.body.style.overflow = 'hidden';
             }else {

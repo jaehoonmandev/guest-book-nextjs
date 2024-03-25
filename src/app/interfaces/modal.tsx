@@ -15,23 +15,28 @@ export interface PostModalProps{
     colors:string[];
     changeLoadingState: (flag : boolean) => void;
     changeRequestResult: (flag : boolean) => void;
+    changeErrorMsg: (msg : string) => void;
     // changeRequestResult: (flag : { message: string; result: boolean; }) => void;
 }
 
 export interface PutModalProps {
-    toggleHandler: () => void;
     guestBook? : GuestBook;
+
+    toggleHandler: () => void;
     colors:string[]
     changeLoadingState: (flag : boolean) => void;
     changeRequestResult: (flag : boolean) => void;
+    changeErrorMsg: (msg : string) => void;
 }
 
 export interface PermitCodeCheckProps {
+    authorityConfirm?: () => void;
+
     guestBookId : string,
     toggleHandler: () => void;
-    authorityConfirm?: () => void;
     changeLoadingState: (flag : boolean) => void;
     changeRequestResult: (flag : boolean) => void;
+    changeErrorMsg: (msg : string) => void;
 }
 
 export interface DeleteModalProps {
@@ -39,5 +44,6 @@ export interface DeleteModalProps {
     toggleHandler: () => void;
     changeLoadingState: (flag : boolean) => void;
     changeRequestResult: (flag : boolean) => void;
+    changeErrorMsg: (msg : string) => void;
 }
 

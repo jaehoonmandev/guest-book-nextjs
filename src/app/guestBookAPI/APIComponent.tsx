@@ -110,10 +110,7 @@ export async function PUT(
 
     const id = formData.id;
 
-    return fetch(
-        "www"
-        // Config().APIHost
-        + `/${id}`, {
+    return fetch(Config().APIHost + `/${id}`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',

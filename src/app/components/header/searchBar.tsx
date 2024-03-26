@@ -1,13 +1,7 @@
-import React, {
-    ChangeEvent,
-    DetailedHTMLProps,
-    InputHTMLAttributes,
-    KeyboardEventHandler,
-    useContext,
-    useState
-} from "react";
+import React, {ChangeEvent, DetailedHTMLProps, InputHTMLAttributes, useState} from "react";
 import styles from './header.module.css'
 import {useGuestBookContext} from "@/app/store/guestBook-context";
+
 export default function SearchBar(){
 
     const {

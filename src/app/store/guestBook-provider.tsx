@@ -120,9 +120,35 @@ export function GuestBookProvider({children}: { children: React.ReactNode; }) {
         setAddOrModFlicker((prevState) => !prevState);
     }
 
-    //검색 조건 변경 시 기존 데이터는 제거한다.
-    const clearGuestBooks = () => {
-        setGuestBooks([]);
+    // 검색 조건 및 방명록 데이터 변경 시 스크롤 최상단 이동 + 기존 데이터는 제거한다.(비동기)
+    const clearGuestBooks = async () => {
+
+        //스크롤이 내려 있을 시 스크롤을 위로 올려준 뒤 방명록 데이터들을 비워준다.
+        await new Promise<void>((resolve) => {
+            //현재 스크롤 위치가 최상단이 아니라면 올려주고.
+            if (window.scrollY !== 0) {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth',
+                });
+
+                //스크롤을 최상단으로 이동하였다면 promise를 해제하며 스크롤 이벤트를 제거한다
+                const onScrollEnd = () => {
+                    if (window.scrollY === 0) {
+                        resolve();
+                        window.removeEventListener('scroll', onScrollEnd);
+                    }
+                };
+
+                //스크롤이 최상단에 있는지 확인하는 이벤트 리스너를 등록한다.
+                window.addEventListener('scroll', onScrollEnd);
+            } else {
+                // 최상단이라면 promise를 해제한다.
+                resolve();
+            }
+        })
+            .then(() => setGuestBooks([])); // 스크롤 promise가 완료 되었다면 값 비우기.
+
     }
 
     const contextValue: GuestBookContextProps = {

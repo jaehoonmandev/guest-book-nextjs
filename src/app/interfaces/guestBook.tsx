@@ -19,9 +19,11 @@ export type GuestBookProps = {
 }
 
 export interface AddGuestBookProps{
-    isLoading? : boolean;
-    guestBookLength? : number
+    toggleHandler: () => void;
+    isModalOpen:boolean;
 }
+
+
 
 export interface AddedGuestBookProps{
     guestBooks: GuestBook[];

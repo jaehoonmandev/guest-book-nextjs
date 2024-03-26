@@ -4,12 +4,13 @@ import AddGuestBook from "@/app/components/guest-book/addGuestBook";
 import styles from './guestBook.module.css';
 import AddedGuestBook from "@/app/components/guest-book/addedGuestBook";
 import Loading from "@/app/components/UI/loading/loading";
-import React, {useEffect, useRef} from "react";
+import React, {useEffect, useRef, useState} from "react";
 import {useGuestBookContext} from "@/app/store/guestBook-context";
 import Config from "../../../../config/config.export";
 import GuestBookConnectError from "@/app/components/error/guestBookConnectError";
 import MobileHeader from "@/app/components/header/mobile/mobileHeader";
 import Header from "@/app/components/header/header";
+import SideFunctions from "@/app/components/UI/sideFunctions/sideFunctions";
 
 interface props {
     isMobile : boolean,
@@ -97,6 +98,26 @@ export default function GuestBook({isMobile} : props) {
 
 
 
+
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
+    const toggleHandler = () => {
+        if(!isLoading || guestBooks.length > 0){
+
+            setIsModalOpen((prevIsModalOpen) => {
+                //이전 상태가 확장 상태가 아니라면 즉, 현재 사이드바를 확장하는 중이라면
+                if(!prevIsModalOpen){
+                    // body 스크롤을 방지한다
+                    document.body.style.overflow = 'hidden';
+                }else {
+                    //사이드를 닫는다면 스크롤을 다시 솰성 시킨다.
+                    document.body.style.removeProperty('overflow');
+                }
+                return !prevIsModalOpen
+            });
+        }
+    }
+
     return (
         <>
             {/*layout에서 호출하던 header 통합*/}
@@ -117,17 +138,22 @@ export default function GuestBook({isMobile} : props) {
                         {/*로딩은 화면 구성에 맞추기 위하여 GuestBook 안으로 넣었음(div 분리로도 가능은 함..)*/}
                         <div className={styles.box}>
 
-                            <AddGuestBook guestBookLength={guestBooks.length} isLoading={isLoading}/>
+                            <AddGuestBook isModalOpen={isModalOpen} toggleHandler={toggleHandler}/>
                             <AddedGuestBook guestBooks={guestBooks}/>
 
                             {isLoading && <Loading/>}
-
                         </div>
+
                         <div ref={endOfPageRef}/>
+
+                        <SideFunctions toggleHandler={toggleHandler}/>
+
                     </>
                 ) : (
                     <GuestBookConnectError errorMessage={error}/>
                 )}
+
+
 
 
             </section>

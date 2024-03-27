@@ -90,7 +90,12 @@ export default function GuestBook({isMobile} : props) {
 
     // 검색 조건이 변경되면 방명록 데이터 관련 상태를 초기화한다.
     useEffect(() => {
-        clearGuestBooks();
+        // 스크롤 위로 올리기
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth',
+        });
+        // clearGuestBooks();
         changeIsEndOfData(false);
         changePage(0)
     }, [orderDirection, orderField, searchWriter, addOrModFlicker])
@@ -138,10 +143,12 @@ export default function GuestBook({isMobile} : props) {
                         {/*로딩은 화면 구성에 맞추기 위하여 GuestBook 안으로 넣었음(div 분리로도 가능은 함..)*/}
                         <div className={styles.box}>
 
+
                             <AddGuestBook isModalOpen={isModalOpen} toggleHandler={toggleHandler}/>
                             <AddedGuestBook guestBooks={guestBooks}/>
 
                             {isLoading && <Loading/>}
+
                         </div>
 
                         <div ref={endOfPageRef}/>

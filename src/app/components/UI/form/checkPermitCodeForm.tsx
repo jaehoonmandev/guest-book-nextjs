@@ -103,6 +103,7 @@ export default function CheckPermitCodeForm({
         // setIsLoading(false)
     }
 
+    const maxLength = 15
     return (
 
         <>
@@ -116,7 +117,7 @@ export default function CheckPermitCodeForm({
                     <input type="password"
                            name="permitCode"
                            value={permitCode}
-                           maxLength={20}
+                           maxLength={maxLength}
                            onChange={handleChange}
                     />
                     {!valid && <span className={styles.invalid}>인증코드를 입력해주세요.</span>}

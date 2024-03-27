@@ -18,19 +18,26 @@ export default function Loading() {
         return loadingArr;
     }
 
+    // return (
+    //     // <div
+    //     //     className={styles.loading}>
+    //     // </div>
+    //     // <>
+    //     // <div className={styles.loadingContainer}>
+    //     //     <div className={styles.loading}>
+    //     //     </div>
+    //     // </div>
+    //     // </>
+    //     /*<>
+    //         {makeLoading(fetchedLength)}
+    //     </>*/
+    // )
+
     return (
-        <div
-            className={styles.loading}>
+        <div className={styles.loading}>
+            <div className={styles.spinner}></div>
+            <div className={styles.loadingText}>로딩 중</div>
         </div>
-        /*<>
-        <div className={styles.loadingContainer}>
-            <div className={styles.loading}>
-            </div>
-        </div>
-        </>*/
-        /*<>
-            {makeLoading(fetchedLength)}
-        </>*/
-    )
+    );
         ;
 }

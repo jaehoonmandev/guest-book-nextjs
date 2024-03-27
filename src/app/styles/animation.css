@@ -26,6 +26,16 @@
 
 .fadeInLeft {
     animation: fadeInLeft 0.5s ease-in-out forwards;
+    /*-moz-animation: fadein 3s; !* Firefox *!*/
+    /*-webkit-animation: fadein 3s; !* Safari and Chrome *!*/
+    /*-o-animation: fadein 3s; !* Opera *!*/
+}
+
+.fadeOutRight {
+    animation: fadeOutRight 0.5s ease-in-out forwards;
+    /*-moz-animation: fadein 3s; !* Firefox *!*/
+    /*-webkit-animation: fadein 3s; !* Safari and Chrome *!*/
+    /*-o-animation: fadein 3s; !* Opera *!*/
 }
 
 @keyframes fadeInLeft {
@@ -36,6 +46,17 @@
     to {
         opacity: 1;
         transform: translateX(0);
+    }
+}
+
+@keyframes fadeOutRight {
+    from {
+        opacity: 1;
+
+    }
+    to {
+        opacity: 0;
+        transform: translateX(100%);
     }
 }
 

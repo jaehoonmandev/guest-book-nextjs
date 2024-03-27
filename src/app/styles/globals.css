@@ -29,7 +29,7 @@ body{
 
         /*font-family: 'KOTRA_SONGEULSSI';*/
 
-        font-family: 'Nanum Brush Script', cursive;
+        /*font-family: 'Nanum Brush Script', cursive;*/
 
     }
 
@@ -40,7 +40,7 @@ button {
     -moz-appearance: none;
     appearance: none;
 
-    font-family: 'Nanum Brush Script', cursive;;
+    /*font-family: 'Nanum Brush Script', cursive;;*/
     text-decoration: none;;
 }
 

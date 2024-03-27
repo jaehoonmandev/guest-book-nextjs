@@ -1,4 +1,4 @@
-import React, {ChangeEvent, useState} from "react";
+import React, {ChangeEvent, DetailedHTMLProps, InputHTMLAttributes, useState} from "react";
 import styles from './mobileHeader.module.css'
 import {useGuestBookContext} from "@/app/store/guestBook-context";
 
@@ -22,19 +22,26 @@ export default function MobileSearchBar(){
     const handleClick = () => {
        changeSearchWriter(searchValue)
     }
+    const handleKeyDown = (e: DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement> ) => {
+        if(e.key === `Enter`) changeSearchWriter(searchValue)
+    };
 
     return (
         <div className={styles.searchBar}>
             <label>
+
                 <input
                     disabled={disabled}
                     role="search"
                     type="text"
                     onChange={handleChange}
+                    onKeyDown={handleKeyDown}
                     placeholder="작성자로 검색"/>
+
                 <button
                     disabled={disabled}
-                    onClick={() => handleClick()}></button>
+                    onClick={() => handleClick()}
+                />
             </label>
         </div>
     )

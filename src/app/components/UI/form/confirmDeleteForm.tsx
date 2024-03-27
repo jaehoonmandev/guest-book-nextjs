@@ -70,10 +70,10 @@ export default function ConfirmDeleteForm({
 
             <div className={styles.deleteConfirm}>
 
-                <h3> 진짜로 삭제하냐?</h3>
+                <h3>삭제하시겠습니까?</h3>
 
                 <div className={styles.deleteButtonDiv}>
-                        <button className={styles.cancleBtn} onClick={toggleHandler}>취소</button>
+                        <button className={styles.cancelBtn} onClick={toggleHandler}>취소</button>
                         <button className={styles.submitBtn} onClick={handleDeleteButtonClick}>삭제</button>
                 </div>
             </div>

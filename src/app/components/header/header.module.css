@@ -196,14 +196,11 @@
     outline: none;
     background: none;
     border-bottom: 2px solid black;
+    text-align: center;
 }
 
 .searchBar input[role=search]:disabled {
     border-bottom: 2px solid var(--disableSearchCondition);
-}
-
-.searchBar input[role=search]::placeholder{
-    text-align: center;
 }
 
 .searchBar input[role=search]:focus {

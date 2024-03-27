@@ -32,12 +32,14 @@ export default function RootLayout({children,}: { children: React.ReactNode }) {
 
 
     return (
-        <html lang="kr">
+        <html
+            style={isMobile ? {minWidth: 220} : {minWidth: 630}}
+            lang="kr">
 
         <body className={inter.className}>
 
         <main className={"container"}
-              style={isMobile ? {minWidth: 220} : {minWidth: 610}}
+
         >
             {children}
         </main>

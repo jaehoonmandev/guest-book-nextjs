@@ -17,7 +17,9 @@
 .form input,
 .form textarea{
     width: 100%;
-    margin: 0px 0px 10px 0px;
+    box-sizing: border-box;
+    -webkit-box-sizing:border-box;
+    -moz-box-sizing: border-box;
 }
 
 .form p {
@@ -40,7 +42,7 @@
 }
 
 .contentsSize {
-    font-size: 0.8rem;
+    font-size: 0.5rem;
     display: flow;
     text-align: right;
 }
@@ -96,6 +98,7 @@
     padding: 5px 10px;
     cursor: pointer;
     font-size: 1rem;
+    color: black;
 
 }
 
@@ -109,9 +112,8 @@
     font-size: 0.8rem;
 
 }
-.cancleBtn{
+.cancelBtn{
     background-color: red;;
-
 }
 .submitBtn{
     background-color: greenyellow;

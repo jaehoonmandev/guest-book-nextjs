@@ -18,7 +18,7 @@ export default function AddGuestBook({toggleHandler,isModalOpen}:AddGuestBookPro
             <div
                 className={`${styles.addGuestBook} addGuestBookHover`}
                 onClick={toggleHandler}
-                >+
+                >
             </div>
             {isModalOpen && portalElement
                 ?

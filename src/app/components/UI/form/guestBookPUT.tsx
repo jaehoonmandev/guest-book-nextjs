@@ -135,6 +135,7 @@ export default function GuestBookPUT({toggleHandler, guestBook, colors, changeLo
 
     }
 
+    const maxLength = 15
 
     return (
         <>
@@ -146,7 +147,9 @@ export default function GuestBookPUT({toggleHandler, guestBook, colors, changeLo
 
                 <label>
                     <p>제목</p>
-                    <input type="text" name="title" maxLength={20} value={formData.title} onChange={handleChange}/>
+                    <input type="text" name="title" maxLength={maxLength} value={formData.title}
+                           onChange={handleChange}/>
+                    <span className={styles.contentsSize}>{formData.title.length}/{maxLength}byte</span>
                     {!valid.title && <span className={styles.invalid}>제목을 입력해주세요</span>}
                 </label>
 
@@ -160,7 +163,7 @@ export default function GuestBookPUT({toggleHandler, guestBook, colors, changeLo
                 {/*작성자는 변경 불가능이므로 state로 관리 안하며, 값도 disable, 서버로 넘어가지 않도록 name도 제거 시킨다.*/}
                 <label>
                     <p>작성자</p>
-                    <input type="text" value={formData.writer} disabled={true}/>
+                    <input type="text" maxLength={maxLength} value={formData.writer} disabled={true}/>
                 </label>
 
                 <p>색상</p>

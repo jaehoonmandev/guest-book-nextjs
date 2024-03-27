@@ -8,7 +8,7 @@ export default function SideFunctions({toggleHandler}:{toggleHandler:()=> void})
     //일정 위치 이상 스크롤 했을 때만 보여주기
     useEffect(() => {
         const ShowButtonClick = () => {
-            if (window.scrollY > 100) {
+            if (window.scrollY > 400) {
                 setShowButton(true)
             } else {
                 setShowButton(false)

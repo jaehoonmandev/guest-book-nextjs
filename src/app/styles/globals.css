@@ -5,9 +5,9 @@
 @import url(//fonts.googleapis.com/earlyaccess/nanumbrushscript.css);
 @import url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10-21@1.0/KOTRA_SONGEULSSI.woff');
 
-html, body{
-    min-height: 100%;
-}
+/*html, body{*/
+/*    min-height: 100vh;*/
+/*}*/
 
 
 
@@ -15,7 +15,7 @@ html, body{
 html{
     /*그라디언트 설정*/
     background: linear-gradient(170deg ,rgba(236,160,160,1) 0%, rgba(255,255,255,1) 100%);
-
+    min-height: 100vh;
 
 }
 
@@ -35,16 +35,9 @@ body{
 
 }
 
-button {
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-
-    /*font-family: 'Nanum Brush Script', cursive;;*/
-    text-decoration: none;;
+* {
+    -webkit-tap-highlight-color: transparent;
 }
-
-
 
 
 @font-face {

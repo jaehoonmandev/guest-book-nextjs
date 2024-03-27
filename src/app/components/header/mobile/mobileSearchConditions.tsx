@@ -19,7 +19,7 @@ export default function MobileSearchConditions(){
 
     return (
         <div className={styles.sortCondition}>
-            <div className={styles.sortConditionTitle}>
+            <div className={styles.groupTitle}>
                 <span>정렬 기준</span>
             </div>
 

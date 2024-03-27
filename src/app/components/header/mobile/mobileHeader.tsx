@@ -4,8 +4,11 @@ import MobileMainTitle from "@/app/components/header/mobile/mobileMainTitle";
 import MobileMenuTrigger from "@/app/components/header/mobile/mobileMenuTrigger";
 import MobileSearchConditions from "@/app/components/header/mobile/mobileSearchConditions";
 import MobileSearchBar from "@/app/components/header/mobile/mobileSearchBar";
+import {useGuestBookContext} from "@/app/store/guestBook-context";
 
 export default function MobileHeader() {
+
+    const{orderField, orderDirection, searchWriter} = useGuestBookContext()
 
     //메뉴를 확장했는지 여부
     const [isExpansion, setIsExpansion] = useState(false);
@@ -28,15 +31,22 @@ export default function MobileHeader() {
         });
     }
 
+    //조건 변경 시 메뉴 넣어놓기
     useEffect(() => {
-        const hideHeader = () => {
-            setIsExpansion(false);
-        }
-        window.addEventListener("scroll", hideHeader)
-        return () => {
-            window.removeEventListener("scroll", hideHeader)
-        }
-    }, [])
+        changeHandler();
+    }, [orderField, orderDirection, searchWriter]);
+
+    // 스크롤 시 메뉴 닫기인데...
+    // 작성자로 검색할 때 스크롤 돼서 닫힌다. 고로 비활성화
+    // useEffect(() => {
+    //     const hideHeader = () => {
+    //         setIsExpansion(false);
+    //     }
+    //     window.addEventListener("scroll", hideHeader)
+    //     return () => {
+    //         window.removeEventListener("scroll", hideHeader)
+    //     }
+    // }, [])
 
 
     return (

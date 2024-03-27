@@ -7,7 +7,7 @@ export default function FormButton({handleReset, toggleHandler, action}:ButtonPr
         <div className={styles.buttonDiv}>
             <button className={styles.resetBtn} type={"button"} onClick={handleReset}>초기화</button>
             <div>
-                <button className={styles.cancleBtn} type={"button"} onClick={toggleHandler}>취소</button>
+                <button className={styles.cancelBtn} type={"button"} onClick={toggleHandler}>취소</button>
                 <button className={styles.submitBtn} type={"submit"}>{action}</button>
             </div>
         </div>

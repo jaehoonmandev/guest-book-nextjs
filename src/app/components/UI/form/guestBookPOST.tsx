@@ -136,6 +136,7 @@ export default function GuestBookPOST({toggleHandler, colors,changeLoadingState,
 
     }
 
+    const maxLength = 15
 
     return (
         <>
@@ -145,7 +146,9 @@ export default function GuestBookPOST({toggleHandler, colors,changeLoadingState,
 
                 <label>
                     <p>제목</p>
-                    <input type="text" name="title" maxLength={20}  value={formData.title} onChange={handleChange}/>
+                    <input type="text" name="title" maxLength={maxLength} value={formData.title}
+                           onChange={handleChange}/>
+                    <span className={styles.contentsSize}>{formData.title.length}/{maxLength}byte</span>
                     {!valid.title && <span className={styles.invalid}>제목을 입력해주세요</span>}
                 </label>
 
@@ -158,13 +161,17 @@ export default function GuestBookPOST({toggleHandler, colors,changeLoadingState,
 
                 <label>
                     <p>작성자</p>
-                    <input type="text" name="writer" maxLength={20} value={formData.writer} onChange={handleChange}/>
+                    <input type="text" name="writer" maxLength={maxLength} value={formData.writer}
+                           onChange={handleChange}/>
+                    <span className={styles.contentsSize}>{formData.writer.length}/{maxLength}byte</span>
                     {!valid.writer && <span className={styles.invalid}>작성자를 입력해주세요</span>}
                 </label>
 
                 <label>
                     <p>인증코드</p>
-                    <input type="password" name="permitCode"maxLength={20} value={formData.permitCode} onChange={handleChange}/>
+                    <input type="password" name="permitCode" maxLength={maxLength} value={formData.permitCode}
+                           onChange={handleChange}/>
+                    <span className={styles.contentsSize}>{formData.permitCode.length}/{maxLength}byte</span>
                     {!valid.permitCode && <span className={styles.invalid}>인증코드를 입력해주세요</span>}
 
                 </label>

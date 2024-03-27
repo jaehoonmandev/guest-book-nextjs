@@ -27,22 +27,29 @@ export default function MobileSearchBar(){
     };
 
     return (
-        <div className={styles.searchBar}>
-            <label>
+        <>
+            <div className={styles.searchBar}>
+                <div className={styles.groupTitle}>
+                    <span>검색</span>
+                </div>
+                <label>
+                    <input
+                        disabled={disabled}
+                        role="search"
+                        type="text"
+                        onChange={handleChange}
+                        onKeyDown={handleKeyDown}
+                        placeholder="작성자로 검색"/>
+                </label>
+                <div>
+                    <button
+                        disabled={disabled}
+                        onClick={() => handleClick()}
+                    />
+                </div>
+            </div>
 
-                <input
-                    disabled={disabled}
-                    role="search"
-                    type="text"
-                    onChange={handleChange}
-                    onKeyDown={handleKeyDown}
-                    placeholder="작성자로 검색"/>
+        </>
 
-                <button
-                    disabled={disabled}
-                    onClick={() => handleClick()}
-                />
-            </label>
-        </div>
     )
 }

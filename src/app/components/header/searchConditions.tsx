@@ -22,9 +22,9 @@ export default function SearchConditions(){
             </div>
 
             <ul>
-                <li>
-                    <span > [ </span>
-                </li>
+                {/*<li>*/}
+                {/*    <span > [ </span>*/}
+                {/*</li>*/}
                 <li>
                     <button
                         disabled={disabled ? true : false}
@@ -46,9 +46,9 @@ export default function SearchConditions(){
                         onClick={() => changeOrderField('writer')}>작성자
                     </button>
                 </li>
-                <li>
-                    <span> ] </span>
-                </li>
+                {/*<li>*/}
+                {/*    <span> ] </span>*/}
+                {/*</li>*/}
             </ul>
 
             <ul>

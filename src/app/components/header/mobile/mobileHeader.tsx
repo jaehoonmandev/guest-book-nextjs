@@ -1,9 +1,9 @@
 import styles from "./mobileHeader.module.css";
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import MobileMainTitle from "@/app/components/header/mobile/mobileMainTitle";
 import MobileMenuTrigger from "@/app/components/header/mobile/mobileMenuTrigger";
-import MobileSearchArea from "@/app/components/header/mobile/mobileSearchArea";
-import SearchConditions from "@/app/components/header/mobile/mobileSearchConditions";
+import MobileSearchConditions from "@/app/components/header/mobile/mobileSearchConditions";
+import MobileSearchBar from "@/app/components/header/mobile/mobileSearchBar";
 
 export default function MobileHeader() {
 
@@ -14,7 +14,7 @@ export default function MobileHeader() {
 
         setIsExpansion((prevState) => {
 
-            //이전 상태가 확장 상태가 아니라면 즉, 현재 사이드바를 확장하는 중이라면
+            // //이전 상태가 확장 상태가 아니라면 즉, 현재 사이드바를 확장하는 중이라면
             if(!prevState){
                 // body 스크롤을 방지한다
                 document.body.style.overflow = 'hidden';
@@ -28,19 +28,27 @@ export default function MobileHeader() {
         });
     }
 
+    useEffect(() => {
+        const hideHeader = () => {
+            setIsExpansion(false);
+        }
+        window.addEventListener("scroll", hideHeader)
+        return () => {
+            window.removeEventListener("scroll", hideHeader)
+        }
+    }, [])
+
 
     return (
         <>
             <div className={styles.header}>
                 <MobileMainTitle/>
-                <MobileMenuTrigger changeHandler={changeHandler}/>
+                <MobileMenuTrigger isExpansion={isExpansion} changeHandler={changeHandler}/>
             </div>
-
-            {isExpansion && (
-                <MobileSearchArea>
-                    <SearchConditions/>
-                </MobileSearchArea>
-            )}
+            <div className={`${styles.searchArea} ${isExpansion ? styles.active : ''}`}>
+                <MobileSearchConditions/>
+                <MobileSearchBar/>
+            </div>
         </>
 
     )

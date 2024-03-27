@@ -7,7 +7,7 @@
     left: 0;
     right: 0;
 
-    z-index: 101;
+    z-index: 19;
 
     height: 50px;
 
@@ -25,7 +25,7 @@
     /*        rgba(255, 255, 255, 0.8) 90%,*/
     /*        rgba(255, 255, 255, 0) 100%*/
     /*);*/
-    background: rgba(255, 255, 255, .8);
+    background: rgba(255, 255, 255, 1);
 }
 
 
@@ -39,7 +39,7 @@
 
 .title a {
     font-size: 1em;
-    font-family: "Pacifico";
+    font-family: "Pacifico", serif;
     color: inherit; /* 링크의 색상을 부모 요소로부터 상속받음 */
     text-decoration: none; /* 텍스트 밑줄 제거 */
 }
@@ -59,48 +59,92 @@
     all: unset;
     float: right;
     position: relative;
-    width: 40px;
-    height: 40px;
+    width: 30px;
+    height: 35px;
+
+    border: 1px black;
 
 }
 
 .menuTrigger button span{
     display: block;
-    height: 4px;
-    width: 35px;
+    height: 3px;
+    width: 30px;
     margin-bottom: 7px;
     position: relative;
     border-radius: 2px;
+
+    transition:  .3s linear;
 
     background-color: #000;
 }
 
 .menuTrigger button span:nth-child(3){
-    margin-bottom: 2px;
+    margin-bottom: 0;
 }
+
+.menuTrigger.active button span:nth-child(1) {
+    transform: rotate(45deg) translateX(8px) translateY(8px);
+}
+
+.menuTrigger.active button span:nth-child(2) {
+    opacity: 0;
+}
+
+.menuTrigger.active button span:nth-child(3) {
+    transform: rotate(-45deg) translateX(6px) translateY(-6px);;
+}
+
 
 /* ------ 검색 조건 Container ------ */
 
-.searchArea {
+/*.searchArea {*/
+/*    align-items: center; !* 수직 가운데 정렬 *!*/
 
+/*    width: 100%;*/
+/*    height: 100%;*/
+/*    position: fixed;*/
+/*    top: 50px;*/
+/*    right: 0;*/
+/*    !*background: linear-gradient(*!*/
+/*    !*        to left,*!*/
+/*    !*        rgba(255, 255, 255, 1) 0%,*!*/
+/*    !*        rgba(255, 255, 255, 0.9) 70%,*!*/
+/*    !*        rgba(255, 255, 255, 0) 100%*!*/
+/*    !*);*!*/
+/*    background: rgba(255, 255, 255, .8);*/
+
+
+/*    z-index: 80;*/
+/*}*/
+
+.searchArea {
     align-items: center; /* 수직 가운데 정렬 */
+
+    opacity: 0;
 
     width: 100%;
     height: 100%;
     position: fixed;
+    right: -100%;
     top: 50px;
-    right: 0;
+
+
     /*background: linear-gradient(*/
     /*        to left,*/
-    /*        rgba(255, 255, 255, 1) 0%,*/
-    /*        rgba(255, 255, 255, 0.9) 70%,*/
+    /*        rgba(255, 255, 255, 0.9) 0%,*/
+    /*        rgba(255, 255, 255, 0.7) 80%,*/
     /*        rgba(255, 255, 255, 0) 100%*/
     /*);*/
     background: rgba(255, 255, 255, .8);
 
+    transition: all 1000ms;
+    z-index: 18;
+}
 
-    z-index: 80;
-
+.searchArea.active {
+    opacity: 1;
+    right: 0;
 }
 
 
@@ -109,6 +153,7 @@
     align-items: center;
     margin: 0;
     padding: 0;
+    font-size: 2em;
 }
 
 .searchArea li {
@@ -120,36 +165,32 @@
 
 /* ------ 검색 조건 Container ------ */
 
-
-/*비활성화 */
-.searchDisable {
-    position: absolute;
-    top: -5px;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); /* 투명도 설정 */
-    z-index: 2; /* `searchArea` 위에 배치 */
-    padding: 5px 0px 5px 0px;
-    border-radius: 10px;
-}
-
 /* ------ 정렬 기준 ------ */
-.sortCondition div span{
-    font-size: 1.1rem;
-    font-weight: bolder;
-}
 
 .sortCondition {
+    padding: 5px;
     display: flex;
+    flex-direction: row;
     align-items: center;
+    justify-content: center;
     gap: 1rem; /* 간격 조절 */
+}
+
+.sortCondition .sortConditionTitle{
+    font-size: 1rem;
+    font-weight: bolder;
 }
 
 .sortCondition ul {
     list-style: none;
     padding: 0;
     margin: 0;
+}
+
+.backdrop {
+    width: 100%;
+    height: 100%;
+    background: black;
 }
 
 
@@ -161,7 +202,7 @@
     text-decoration: none; /* 밑줄 없음 */
     display: inline-block;
     cursor: pointer;
-    font-size: 0.8rem;
+    font-size: 1rem;
 }
 
 .sortCondition ul li button:active:hover{
@@ -170,12 +211,13 @@
 
 .sortCondition ul li button:disabled{
     cursor: not-allowed;
+
 }
 
 .sortCondition ul li button.active {
     font-weight: bolder;
     text-decoration: underline;
-    font-size: 0.9rem;
+    font-size: 1.1rem;
 }
 
 .sortCondition ul li:last-child {
@@ -187,7 +229,7 @@
 .toggle label {
     display: inline-flex;
     align-items: center;
-    font-size: 0.8rem;
+    font-size: 1rem;
 }
 .toggle input[role=switch] {
     appearance: none; /*기본 스타일 제거*/
@@ -252,7 +294,9 @@
 .searchBar{
     display: flex; /* 좌우 정렬을 위해 flex 사용 */
     align-items: center; /* 수직 가운데 정렬 */
+    justify-content: center;
     margin-left: auto;
+    padding: 50px 0px;
 }
 
 .searchBar input[role=search] {

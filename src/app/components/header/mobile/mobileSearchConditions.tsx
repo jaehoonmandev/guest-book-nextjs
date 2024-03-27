@@ -19,37 +19,31 @@ export default function MobileSearchConditions(){
 
     return (
         <div className={styles.sortCondition}>
-            <div>
+            <div className={styles.sortConditionTitle}>
                 <span>정렬 기준</span>
             </div>
 
             <ul>
                 <li>
-                    <span> [ </span>
-                </li>
-                <li>
                     <button
-                        disabled={disabled ? true : false}
+                        disabled={disabled}
                         className={orderField === 'createdTime' ? styles.active : styles.disabled}
                         onClick={() => changeOrderField('createdTime')}>날짜
                     </button>
                 </li>
                 <li>
                     <button
-                        disabled={disabled ? true : false}
+                        disabled={disabled}
                         className={orderField === 'title' ? styles.active : styles.disabled}
                         onClick={() => changeOrderField('title')}>제목
                     </button>
                 </li>
                 <li>
                     <button
-                        disabled={disabled ? true : false}
+                        disabled={disabled}
                         className={orderField === 'writer' ? styles.active : styles.disabled}
                         onClick={() => changeOrderField('writer')}>작성자
                     </button>
-                </li>
-                <li>
-                    <span> ] </span>
                 </li>
             </ul>
 
@@ -61,7 +55,7 @@ export default function MobileSearchConditions(){
                     <label>
                         내림차순
                         <input
-                            disabled={disabled ? true : false}
+                            disabled={disabled}
                             role="switch"
                             type="checkbox"
                             onClick={() => changeOrderDirection()}

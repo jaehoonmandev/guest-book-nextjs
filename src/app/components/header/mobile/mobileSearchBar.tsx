@@ -1,6 +1,7 @@
-import React, {ChangeEvent, useContext, useState} from "react";
-import styles from './header.module.css'
+import React, {ChangeEvent, useState} from "react";
+import styles from './mobileHeader.module.css'
 import {useGuestBookContext} from "@/app/store/guestBook-context";
+
 export default function MobileSearchBar(){
 
     const {
@@ -26,13 +27,13 @@ export default function MobileSearchBar(){
         <div className={styles.searchBar}>
             <label>
                 <input
-                    disabled={disabled ? true : false}
+                    disabled={disabled}
                     role="search"
                     type="text"
                     onChange={handleChange}
                     placeholder="작성자로 검색"/>
                 <button
-                    disabled={disabled ? true : false}
+                    disabled={disabled}
                     onClick={() => handleClick()}></button>
             </label>
         </div>

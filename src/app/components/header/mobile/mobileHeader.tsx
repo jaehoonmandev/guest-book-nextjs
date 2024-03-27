@@ -33,15 +33,15 @@ export default function MobileHeader() {
 
     //조건 변경 시 메뉴 넣어놓기
     useEffect(() => {
-        setIsExpansion((prevState) => {
-            // //이전 상태가 확장 상태가 아니라면 즉, 현재 사이드바를 확장하는 중이라면
-            if(prevState){
-                // body 스크롤을 방지한다
-                return false;
-            }else {
-                return true
-            }
-        });
+        // setIsExpansion((prevState) => {
+        //     // 사이드 메뉴가 확장된 상태라면
+        //     if(prevState){
+        //         return false; // 넣어주고
+        //     }else {
+        //         return prevState //아니라면 유지
+        //     }
+        // });
+        setIsExpansion(false);
     }, [orderField, orderDirection, searchWriter]);
 
     // 스크롤 시 메뉴 닫기인데...

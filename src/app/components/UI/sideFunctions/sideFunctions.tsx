@@ -1,7 +1,8 @@
 import styles from "@/app/components/UI/sideFunctions/sideFunctions.module.css";
 import React, {useEffect, useState} from "react";
+import {sideFunctionsProps} from "@/app/interfaces/IsideFunctions";
 
-export default function SideFunctions({toggleHandler}:{toggleHandler:()=> void}) {
+export default function SideFunctions({toggleHandler, isMobile}:sideFunctionsProps) {
 
     const [showButton, setShowButton] = useState(false);
 
@@ -34,7 +35,10 @@ export default function SideFunctions({toggleHandler}:{toggleHandler:()=> void})
 
             <div className={`${styles.sideFunctions} ${showButton && styles.active } `}>
 
-                <button className={`${styles.scrollToTop} ${styles.background}`} onClick={scrollToTop}>
+                <button
+                    className={`${styles.background} ${styles.scrollToTop}`}
+                    onClick={scrollToTop}
+                >
                 </button>
 
                 <button className={`${styles.sideAddGuestBook} ${styles.background}`} onClick={toggleHandler}>

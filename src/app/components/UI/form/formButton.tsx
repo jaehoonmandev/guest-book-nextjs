@@ -1,5 +1,5 @@
 import styles from "@/app/components/UI/form/form.module.css";
-import {ButtonProps} from "@/app/interfaces/form";
+import {ButtonProps} from "@/app/interfaces/Iform";
 
 
 export default function FormButton({handleReset, toggleHandler, action}:ButtonProps) {

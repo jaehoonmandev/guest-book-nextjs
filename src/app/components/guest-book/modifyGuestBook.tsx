@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import GuestBookModal from "@/app/components/UI/modal/guestBookModal";
 import {createPortal} from "react-dom";
-import {GuestBook} from "@/app/interfaces/guestBook";
+import {GuestBook} from "@/app/interfaces/IguestBook";
 import styles from "@/app/components/guest-book/guestBook.module.css";
 
 

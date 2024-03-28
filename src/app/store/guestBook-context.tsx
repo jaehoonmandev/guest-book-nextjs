@@ -1,7 +1,7 @@
 // guestBook-context.tsx
 import { createContext, useContext } from 'react';
 
-import { GuestBookContextProps } from "@/app/interfaces/guestBook";
+import { GuestBookContextProps } from "@/app/interfaces/IguestBook";
 
 /*Context로 활용할 Props interface 정의*/
 

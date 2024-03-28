@@ -1,10 +1,10 @@
 import {FormEvent, useEffect, useState} from "react";
 import styles from './form.module.css';
-import {PutModalProps} from "@/app/interfaces/modal";
+import {PutModalProps} from "@/app/interfaces/Imodal";
 import {useGuestBookContext} from "@/app/store/guestBook-context";
-import {PutFormData} from "@/app/interfaces/form";
+import {PutFormData} from "@/app/interfaces/Iform";
 import {PUT} from "@/app/guestBookAPI/APIComponent";
-import {putValidInterface} from "@/app/interfaces/valid";
+import {putValidInterface} from "@/app/interfaces/Ivalid";
 import {BadWordFilter, isBlank} from "@/app/utility/formDataValid";
 import FormButton from "@/app/components/UI/form/formButton";
 import MakeDelay from "@/app/utility/makeDelay";

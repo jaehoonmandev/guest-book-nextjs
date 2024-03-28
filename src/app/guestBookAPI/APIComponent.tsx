@@ -1,6 +1,6 @@
-import type {GuestBook} from '@/app/interfaces/guestBook'
+import type {GuestBook} from '@/app/interfaces/IguestBook'
 import {NextResponse} from "next/server";
-import {PutFormData} from "@/app/interfaces/form";
+import {PutFormData} from "@/app/interfaces/Iform";
 import {dateConvert} from "@/app/utility/dateConvert";
 
 //전역 변수 불러오기

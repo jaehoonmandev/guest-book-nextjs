@@ -1,6 +1,6 @@
 import Backdrop from "@/app/components/UI/modal/backdrop";
 
-import {ModalProps} from "@/app/interfaces/modal";
+import {ModalProps} from "@/app/interfaces/Imodal";
 import GuestBookPOST from "@/app/components/UI/form/guestBookPOST";
 import GuestBookPUT from "@/app/components/UI/form/guestBookPUT";
 import PermitCodeCheckForm from "@/app/components/UI/form/checkPermitCodeForm";

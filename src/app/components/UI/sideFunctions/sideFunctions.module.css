@@ -30,28 +30,21 @@
     transition: all 0.2s linear;
 }
 
-.scrollToTop {
-}
-
 .scrollToTop::after{
     content: "";
-
-    position: relative;
-
-
-    top: 3px;
-    display: block;
+    position: absolute;
+    top: 25px;
     width: 10px;
     height: 10px;
-
+    left: 19px;
     border-top: 2px solid #fff;
     border-left: 2px solid #fff;
     border-radius: 1px;
 }
+
 .scrollToTop::after {
     transform: rotate(45deg);
 }
-
 
 .scrollToTop:hover{
     transform: translate3d(0, -5px, 0);

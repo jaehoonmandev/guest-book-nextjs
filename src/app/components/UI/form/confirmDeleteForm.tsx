@@ -1,5 +1,5 @@
 import styles from "@/app/components/UI/form/form.module.css";
-import {DeleteModalProps, PermitCodeCheckProps} from "@/app/interfaces/modal";
+import {DeleteModalProps, PermitCodeCheckProps} from "@/app/interfaces/Imodal";
 import React, {FormEvent, useCallback, useState} from "react";
 import {CheckPermitCode} from "@/app/guestBookAPI/OtherAction";
 import {isBlank} from "@/app/utility/formDataValid";

@@ -1,11 +1,11 @@
 import {FormEvent, useState} from "react";
 import styles from './form.module.css';
 import {POST} from "@/app/guestBookAPI/APIComponent";
-import {PostModalProps} from "@/app/interfaces/modal";
+import {PostModalProps} from "@/app/interfaces/Imodal";
 import {useGuestBookContext} from "@/app/store/guestBook-context";
-import {PostFormData} from "@/app/interfaces/form";
+import {PostFormData} from "@/app/interfaces/Iform";
 import {BadWordFilter, isBlank} from "@/app/utility/formDataValid";
-import {postValidInterface} from "@/app/interfaces/valid";
+import {postValidInterface} from "@/app/interfaces/Ivalid";
 import FormButton from "@/app/components/UI/form/formButton";
 import MakeDelay from "@/app/utility/makeDelay";
 

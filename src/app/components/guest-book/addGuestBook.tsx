@@ -2,7 +2,7 @@ import styles from "@/app/components/guest-book/guestBook.module.css";
 import React, {useEffect, useState} from "react";
 import GuestBookModal from "@/app/components/UI/modal/guestBookModal";
 import {createPortal} from "react-dom";
-import {AddGuestBookProps} from "@/app/interfaces/guestBook";
+import {AddGuestBookProps} from "@/app/interfaces/IguestBook";
 
 
 export default function AddGuestBook({toggleHandler,isModalOpen}:AddGuestBookProps) {

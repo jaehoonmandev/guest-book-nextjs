@@ -1,4 +1,4 @@
-import {GuestBook} from "@/app/interfaces/guestBook";
+import {GuestBook} from "@/app/interfaces/IguestBook";
 
 export interface ModalProps {
     toggleHandler: () => void;

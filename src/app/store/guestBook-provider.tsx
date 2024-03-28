@@ -1,7 +1,7 @@
 // guestBook-provider.tsx
 import React, {useCallback, useState} from 'react';
 import GuestBookContext from './guestBook-context';
-import {GuestBook, GuestBookContextProps} from "@/app/interfaces/guestBook";
+import {GuestBook, GuestBookContextProps} from "@/app/interfaces/IguestBook";
 import {GET} from "@/app/guestBookAPI/APIComponent";
 import makeDelay from "@/app/utility/makeDelay";
 

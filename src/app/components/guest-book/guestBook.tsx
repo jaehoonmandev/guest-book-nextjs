@@ -28,7 +28,7 @@ export default function GuestBook({isMobile} : props) {
         searchWriter,
 
         //fetchedLength,
-        clearGuestBooks,
+        // clearGuestBooks,
 
         page,
         changePage,
@@ -153,7 +153,7 @@ export default function GuestBook({isMobile} : props) {
 
                         <div ref={endOfPageRef}/>
 
-                        <SideFunctions toggleHandler={toggleHandler}/>
+                        <SideFunctions isMobile={isMobile} toggleHandler={toggleHandler}/>
 
                     </>
                 ) : (

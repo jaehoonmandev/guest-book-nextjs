@@ -30,20 +30,16 @@
     transition: all 0.2s linear;
 }
 
-.scrollToTop::after{
-    content: "";
+.scrollToTop:before{
+    content: '';
     position: absolute;
-    top: 25px;
+    transform: translate(-50%, -30%) rotate(45deg);
     width: 10px;
     height: 10px;
-    left: 19px;
+
     border-top: 2px solid #fff;
     border-left: 2px solid #fff;
     border-radius: 1px;
-}
-
-.scrollToTop::after {
-    transform: rotate(45deg);
 }
 
 .scrollToTop:hover{

@@ -5,7 +5,7 @@ import {useGuestBookContext} from "@/app/store/guestBook-context";
 import {PutFormData} from "@/app/interfaces/form";
 import {PUT} from "@/app/guestBookAPI/APIComponent";
 import {putValidInterface} from "@/app/interfaces/valid";
-import {isBlank} from "@/app/utility/formDataValid";
+import {BadWordFilter, isBlank} from "@/app/utility/formDataValid";
 import FormButton from "@/app/components/UI/form/formButton";
 import MakeDelay from "@/app/utility/makeDelay";
 
@@ -69,6 +69,11 @@ export default function GuestBookPUT({toggleHandler, guestBook, colors, changeLo
 
     //submit 시 최종적으로 사용자가 입력한 데이터를 검증한다.
     const validation = () => {
+
+        // 나쁜말 치환하기
+        formData.title = BadWordFilter(formData.title);
+        formData.contents = BadWordFilter(formData.contents);
+
         const enteredTitleValid = !isBlank(formData.title);
         const enteredContentsValid = !isBlank(formData.contents);
         const enteredColorValid = !isBlank(formData.color);

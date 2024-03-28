@@ -33,14 +33,6 @@ export default function MobileHeader() {
 
     //조건 변경 시 메뉴 넣어놓기
     useEffect(() => {
-        // setIsExpansion((prevState) => {
-        //     // 사이드 메뉴가 확장된 상태라면
-        //     if(prevState){
-        //         return false; // 넣어주고
-        //     }else {
-        //         return prevState //아니라면 유지
-        //     }
-        // });
         setIsExpansion(false);
         document.body.style.removeProperty('overflow');
     }, [orderField, orderDirection, searchWriter]);

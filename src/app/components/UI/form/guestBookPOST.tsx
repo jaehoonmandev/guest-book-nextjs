@@ -4,7 +4,7 @@ import {POST} from "@/app/guestBookAPI/APIComponent";
 import {PostModalProps} from "@/app/interfaces/modal";
 import {useGuestBookContext} from "@/app/store/guestBook-context";
 import {PostFormData} from "@/app/interfaces/form";
-import {isBlank} from "@/app/utility/formDataValid";
+import {BadWordFilter, isBlank} from "@/app/utility/formDataValid";
 import {postValidInterface} from "@/app/interfaces/valid";
 import FormButton from "@/app/components/UI/form/formButton";
 import MakeDelay from "@/app/utility/makeDelay";
@@ -60,6 +60,11 @@ export default function GuestBookPOST({toggleHandler, colors,changeLoadingState,
 
     //submit 시 최종적으로 사용자가 입력한 데이터를 검증한다.
     const validation = () => {
+
+        // 나쁜말 치환하기
+        formData.title = BadWordFilter(formData.title);
+        formData.contents = BadWordFilter(formData.contents);
+        formData.writer = BadWordFilter(formData.writer);
 
         const enteredTitleValid = !isBlank(formData.title);
         const enteredContentsValid = !isBlank(formData.contents);

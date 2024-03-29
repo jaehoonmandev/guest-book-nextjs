@@ -19,6 +19,12 @@ export default async function Image() {
     //     new URL('./Inter-SemiBold.ttf', import.meta.url)
     // ).then((res) => res.arrayBuffer())
 
+    const url = `https://guestbook.jaehoonman.site/`; // 4. params로 받은 id값으로 해당 게시글 내용을 조회한다.
+    const post = await fetch(url).then((res) =>
+        res.json()
+    )
+
+
     return new ImageResponse(
         (
             // ImageResponse JSX element
@@ -33,7 +39,7 @@ export default async function Image() {
                     justifyContent: 'center',
                 }}
             >
-                About Acme
+                {post.title}
             </div>
         ),
         // ImageResponse options

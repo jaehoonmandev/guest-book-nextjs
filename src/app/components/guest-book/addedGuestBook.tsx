@@ -25,16 +25,22 @@ export default function AddedGuestBook({guestBooks}: AddedGuestBookProps) {
                                 <pre>{guestBook.contents}</pre>
                             </div>
 
-                            <div className={styles.writeInfo}>
-                                <p>{guestBook.writer}</p>
+                            {/*<div className={styles.writeInfo}>*/}
+                            <div className={styles.end}>
+                                <div className={styles.functions}>
+                                    <ModifyGuestBook {...guestBook}/>
+                                </div>
+                                <div className={styles.writeInfo}>
+                                    <p>{guestBook.writer}</p>
+                                    <p>{guestBook.createdTime.toLocaleString()}</p>
+                                </div>
 
-                                <p>{guestBook.createdTime.toLocaleString()}</p>
                             </div>
 
                         </div>
-                        <div className={styles.addedGuestBookOverlay}>
-                            <ModifyGuestBook {...guestBook}/>
-                        </div>
+                        {/*<div className={styles.addedGuestBookOverlay}>*/}
+                        {/*    <ModifyGuestBook {...guestBook}/>*/}
+                        {/*</div>*/}
                     </div>
                 ))}
         </>

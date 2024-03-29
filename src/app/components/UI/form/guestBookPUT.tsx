@@ -169,6 +169,7 @@ export default function GuestBookPUT({toggleHandler, guestBook, colors, changeLo
                 <label>
                     <p>작성자</p>
                     <input type="text" maxLength={maxLength} value={formData.writer} disabled={true}/>
+                    <span className={styles.contentsSize}>-</span>
                 </label>
 
                 <p>색상</p>

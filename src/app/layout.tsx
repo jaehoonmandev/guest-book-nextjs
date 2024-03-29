@@ -1,4 +1,3 @@
-import {Inter} from 'next/font/google'
 import React from "react";
 import "@fontsource/pacifico";
 
@@ -6,7 +5,14 @@ import './styles/globals.css'
 import {Metadata, Viewport} from "next";
 import {isMobileDevice} from "@/lib/isMobileDevice";
 
-const inter = Inter({subsets: ['latin']})
+
+import localFont from 'next/font/local'
+
+const pretendard = localFont({
+    src: '../../public/fonts/PretendardVariable.woff2',
+    display: 'swap',
+    weight: '45 920',
+})
 
 export const metadata: Metadata = {
     title: '재훈맨 방명록',
@@ -42,7 +48,7 @@ export default function RootLayout({children,}: { children: React.ReactNode }) {
             style={isMobile ? {minWidth: 220} : {minWidth: 630}}
             lang="kr">
 
-        <body className={inter.className}>
+        <body className={pretendard.className}>
 
         <main className={"container"}
 

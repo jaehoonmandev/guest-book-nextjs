@@ -10,7 +10,7 @@ export default function SuccessCheckmark(){
                 <span className="iconLine lineLong"></span>
             </div>
 
-            <div >
+            <div style={{marginTop: 10}}>
                 <span>성공하였습니다.</span>
             </div>
         </div>

@@ -11,6 +11,7 @@ const inter = Inter({subsets: ['latin']})
 export const metadata: Metadata = {
     title: '재훈맨 방명록',
     description: '재훈맨의 방명록 사이트',
+    authors: { name: '재훈맨', url: 'https://github.com/jaehoonmandev' },
     icons: {
         icon: "public/icon/favicon.ico",
     },

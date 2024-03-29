@@ -24,22 +24,29 @@ export default async function Image() {
         res.json()
     )
 
-
+    console.log(post)
     return new ImageResponse(
         (
             // ImageResponse JSX element
             <div
                 style={{
-                    fontSize: 128,
-                    background: 'white',
+                    // backgroundImage: `url(${post.thumbnail})`,
+                    backgroundPosition: 'center',
+                    backgroundRepeat: 'no-repeat',
+                    backgroundSize: 'cover',
                     width: '100%',
                     height: '100%',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
+
+                    // fontSize: 128,
+                    // background: 'white',
+                    // width: '100%',
+                    // height: '100%',
+                    // display: 'flex',
+                    // alignItems: 'center',
+                    // justifyContent: 'center',
                 }}
             >
-                재훈맨 방명록
+                {/*재훈맨 방명록*/}
             </div>
         ),
         // ImageResponse options

@@ -16,6 +16,11 @@ export const metadata: Metadata = {
         icon: "public/icon/favicon.ico",
     },
 
+    metadataBase: new URL('https://acme.com'),
+    // openGraph: {
+    //     images: '/og-image.png',
+    // },
+
 }
 
 // 모바일 환경 사용 시 input focus zoom-in 되지 않게 설정

@@ -39,7 +39,7 @@ export default async function Image() {
                     justifyContent: 'center',
                 }}
             >
-                {post.title}
+                재훈맨 방명록
             </div>
         ),
         // ImageResponse options

@@ -16,7 +16,7 @@ export const metadata: Metadata = {
         icon: "public/icon/favicon.ico",
     },
 
-    metadataBase: new URL('https://acme.com'),
+    metadataBase: new URL('https://guestbook.jaehoonman.site/'),
     // openGraph: {
     //     images: '/og-image.png',
     // },

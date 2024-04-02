@@ -3,13 +3,13 @@
 ---
 
 ## 프로젝트 정보
-방문자가 방명록 데이터를 작성, 수정, 삭제, 검색, 정렬할 수 있는 기능을 가진 사이트를 개발.
+방문자가 방명록 데이터를 작성, 수정, 삭제, 검색, 정렬할 수 있는 기능을 가진 웹 애플리케이션.
 
 ## 구조
 Server - Client 구성, Next.js로 구성된 Front와 REST API로 요청을 받는 Spring Boot Backend.
 
 ## 역할
-방명록 데이터의 CRUD를 클라이언트단에서 요청 받아 Backend로 넘겨주기 위한 Frontend.
+방명록 데이터의 CRUD 요청을 클라이언트로부터 요청받아 Backend로 넘겨주기 위한 Frontend.
 
 ## 특징
 - SPA 구성.

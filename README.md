@@ -1,36 +1,25 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# 방명록 프로젝트 Frontend By Next.js
 
-## Getting Started
+---
 
-First, run the development server:
+## 프로젝트 정보
+방문자가 방명록 데이터를 작성, 수정, 삭제, 검색, 정렬할 수 있는 기능을 가진 사이트를 개발.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## 구조
+Server - Client 구성, Next.js로 구성된 Front와 REST API로 요청을 받는 Spring Boot Backend.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 역할
+방명록 데이터의 CRUD를 클라이언트단에서 요청 받아 Backend로 넘겨주기 위한 Frontend.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 특징
+- SPA 구성.
+- App Router 기법 사용.
+- 무한 스크롤 적용.
+- 모바일 / 데스크탑 디바이스에 따른 스타일 변화.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## 기능 설명
+![how to use](how2use.png)
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## 프로젝트 링크
+- [재훈맨 방명록](https://guestbook.jaehoonman.site/)
+- [Backend 소스](https://github.com/jaehoonmandev/guest-book-spring-boot)

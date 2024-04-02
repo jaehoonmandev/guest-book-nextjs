@@ -65,7 +65,7 @@ export default function GuestBook({isMobile} : props) {
         };
 
         const observer = new IntersectionObserver(handleIntersect, {
-            threshold: 1 // 1로 설정하면 엘리먼트가 완전히 화면에 나타났을 때 콜백이 호출됩니다.
+            threshold: 1 // 1로 설정하면 엘리먼트가 완전히 화면에 나타났을 때 콜백이 호출.
         });
 
         // 관찰할 대상을 등록
@@ -103,19 +103,19 @@ export default function GuestBook({isMobile} : props) {
 
 
 
-
+    //생성, 수정, 삭제 등 Modal을 띄울 때 사용하는 State
     const [isModalOpen, setIsModalOpen] = useState(false);
 
     const toggleHandler = () => {
         if(!isLoading || guestBooks.length > 0){
 
             setIsModalOpen((prevIsModalOpen) => {
-                //이전 상태가 확장 상태가 아니라면 즉, 현재 사이드바를 확장하는 중이라면
+                //이전 상태가 확장 상태가 아니라면 즉, 현재 사이드바를 확장하는 중이라면,
                 if(!prevIsModalOpen){
                     // body 스크롤을 방지한다
                     document.body.style.overflow = 'hidden';
                 }else {
-                    //사이드를 닫는다면 스크롤을 다시 솰성 시킨다.
+                    //사이드를 닫는다면 스크롤을 다시 활성화.
                     document.body.style.removeProperty('overflow');
                 }
                 return !prevIsModalOpen

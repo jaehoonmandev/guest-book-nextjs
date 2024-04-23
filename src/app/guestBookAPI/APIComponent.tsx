@@ -145,15 +145,21 @@ export async function PUT(
 
 /**
  * 방명록 삭제하기
- * @param id
  * @constructor
+ * @param formData
  */
 export async function DELETE(
-    id : string
+    deleteData: GuestBook | undefined
 ) {
 
-    return fetch(Config().APIHost+ `/${id}`, {
+    const body = { id: deleteData?.id, permitCode: deleteData?.permitCode };
+
+    return fetch(Config().APIHost+ `/${deleteData?.id}`, {
         method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(body),
     })
         .then((response) => {
             if (!response.ok) {

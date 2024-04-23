@@ -23,7 +23,8 @@ export default function CheckPermitCodeForm({
     });
     const [valid, setValid] = useState(true)
 
-    const [failCount, setFailCount] = useState(0)
+    //실패 횟수(사용 안함)
+    // const [failCount, setFailCount] = useState(0)
 
 
     const handleChange = (event: FormEvent<HTMLInputElement>) => {
@@ -84,7 +85,8 @@ export default function CheckPermitCodeForm({
                     await MakeDelay();
 
                     //authority 상태 값 변경으로 인증 modal 더 이상 노출되지 않게.
-                    authorityConfirm && authorityConfirm()
+                    //인증 완료 시 permitCode를 변경하여 Double-check에 사용한다.
+                    authorityConfirm && authorityConfirm(permitCode)
                     //toggleHandler()
                 } else {
                     setPermitResult({

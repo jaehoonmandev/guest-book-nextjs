@@ -28,7 +28,7 @@ export default function GuestBook({isMobile} : props) {
         searchWriter,
 
         //fetchedLength,
-        // clearGuestBooks,
+        clearGuestBooks,
 
         page,
         changePage,
@@ -95,7 +95,7 @@ export default function GuestBook({isMobile} : props) {
             top: 0,
             behavior: 'smooth',
         });
-        // clearGuestBooks();
+        clearGuestBooks();
         changeIsEndOfData(false);
         changePage(0)
     }, [orderDirection, orderField, searchWriter, addOrModFlicker])

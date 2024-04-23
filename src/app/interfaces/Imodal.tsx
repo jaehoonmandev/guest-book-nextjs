@@ -3,7 +3,7 @@ import {GuestBook} from "@/app/interfaces/IguestBook";
 export interface ModalProps {
     toggleHandler: () => void;
 
-    authorityConfirm?: () => void;
+    authorityConfirm?: (permitCode:string) => void;
     guestBookId?:string;
 
     guestBook? : GuestBook;
@@ -29,17 +29,18 @@ export interface PutModalProps {
     changeErrorMsg: (msg : string) => void;
 }
 
-export interface PermitCodeCheckProps {
-    authorityConfirm?: () => void;
-
-    guestBookId : string,
+export interface DeleteModalProps {
+    guestBook? : GuestBook;
     toggleHandler: () => void;
     changeLoadingState: (flag : boolean) => void;
     changeRequestResult: (flag : boolean) => void;
     changeErrorMsg: (msg : string) => void;
 }
 
-export interface DeleteModalProps {
+
+export interface PermitCodeCheckProps {
+    authorityConfirm?: (permitCode:string) => void;
+
     guestBookId : string,
     toggleHandler: () => void;
     changeLoadingState: (flag : boolean) => void;

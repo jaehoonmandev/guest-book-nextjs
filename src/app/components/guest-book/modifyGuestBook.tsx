@@ -32,7 +32,7 @@ export default function ModifyGuestBook(guestBook: GuestBook) {
 
         setIsModalOpen((prevIsModalOpen) => {
             //이전 상태가 확장 상태가 아니라면 즉, 현재 사이드바를 확장하는 중이라면
-            if(prevIsModalOpen === false){
+            if(!prevIsModalOpen){
                 // body 스크롤을 방지한다
                 document.body.style.overflow = 'hidden';
             }else {
@@ -43,9 +43,24 @@ export default function ModifyGuestBook(guestBook: GuestBook) {
         });
     }
 
+    const [modifiedGuestBook, setModifiedGuestBook] = useState(guestBook);
+
     //인증이 완료 시 authority 상태 값을 변경하여 수정과 삭제 modal을 노출시킨다.
-    const authorityConfirm = () => {
+    const authorityConfirm = (PermitCode:string) => {
+        // // 인증 완료 상태
+        // setAuthority(true);
+        // // 인증 완료 후 해당 값 guestBook 객체에 넣어서 REST-API Double-check
+        // guestBook.permitCode = PermitCode;
+
+        // 인증 완료 상태
         setAuthority(true);
+
+        // 변경된 guestBook 객체에 permitCode 업데이트
+        const updatedGuestBook = { ...modifiedGuestBook };
+        updatedGuestBook.permitCode = PermitCode;
+
+        // 업데이트된 값을 setModifiedGuestBook에 저장
+        setModifiedGuestBook(updatedGuestBook);
     }
 
     return (
@@ -85,7 +100,7 @@ export default function ModifyGuestBook(guestBook: GuestBook) {
                                                 <GuestBookModal
                                                     toggleHandler={toggleHandler}
                                                     type={"PUT"}
-                                                    guestBook={guestBook}/>
+                                                    guestBook={modifiedGuestBook}/>
                                                 , document.getElementById('portal')!
                                             )
                                         );
@@ -95,7 +110,7 @@ export default function ModifyGuestBook(guestBook: GuestBook) {
                                                 <GuestBookModal
                                                     toggleHandler={toggleHandler}
                                                     type={"DELETE"}
-                                                    guestBookId={guestBook.id}/>
+                                                    guestBook={modifiedGuestBook}/>
                                                 , document.getElementById('portal')!
                                             )
                                         );

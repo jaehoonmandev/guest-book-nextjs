@@ -20,6 +20,7 @@ export default function GuestBookPUT({toggleHandler, guestBook, colors, changeLo
     const PutGuestBookInitState: PutFormData = {
         id: '',
         title: '',
+        permitCode:'',
         contents: '',
         writer: '',
         color: '',
@@ -35,6 +36,7 @@ export default function GuestBookPUT({toggleHandler, guestBook, colors, changeLo
                 id: guestBook.id || "",
                 title: guestBook.title || "",
                 writer: guestBook.writer || "",
+                permitCode: guestBook.permitCode || "",
                 contents: guestBook.contents || "",
                 color: guestBook.color || "",
             });
@@ -149,6 +151,7 @@ export default function GuestBookPUT({toggleHandler, guestBook, colors, changeLo
             <form className={styles.form} onSubmit={handleSubmit}>
 
                 <input type={"hidden"} name={"id"} value={formData.id}/>
+                <input type={"hidden"} name={"permitCode"} value={formData.permitCode}/>
 
                 <label>
                     <p>제목</p>

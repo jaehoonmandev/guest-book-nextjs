@@ -9,6 +9,7 @@ export interface PostFormData {
 export interface PutFormData {
     id?: string
     title: string
+    permitCode?:string
     writer?: string
     contents: string
     color:string

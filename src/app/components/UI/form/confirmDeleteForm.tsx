@@ -1,16 +1,13 @@
 import styles from "@/app/components/UI/form/form.module.css";
-import {DeleteModalProps, PermitCodeCheckProps} from "@/app/interfaces/Imodal";
-import React, {FormEvent, useCallback, useState} from "react";
-import {CheckPermitCode} from "@/app/guestBookAPI/OtherAction";
-import {isBlank} from "@/app/utility/formDataValid";
-import FormButton from "@/app/components/UI/form/formButton";
+import {DeleteModalProps} from "@/app/interfaces/Imodal";
+import React, {useCallback} from "react";
 import MakeDelay from "@/app/utility/makeDelay";
 import {DELETE} from "@/app/guestBookAPI/APIComponent";
 import {useGuestBookContext} from "@/app/store/guestBook-context";
 
 export default function ConfirmDeleteForm({
-                                              guestBookId,
                                               toggleHandler,
+                                              guestBook,
                                               changeLoadingState,
                                               changeRequestResult,
                                               changeErrorMsg
@@ -29,7 +26,7 @@ export default function ConfirmDeleteForm({
 
         try {
 
-            const response = await DELETE(guestBookId);
+            const response = await DELETE(guestBook);
 
             if (!response.ok) {
                 const {error} = await response.json();

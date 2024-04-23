@@ -86,8 +86,8 @@ export default function GuestBookModal(
                                                 case "DELETE":
                                                     return (
                                                         <ConfirmDeleteForm
-                                                            guestBookId={guestBookId}
                                                             toggleHandler={toggleHandler}
+                                                            guestBook={guestBook}
                                                             changeLoadingState={changeLoadingState}
                                                             changeRequestResult={changeRequestResult}
                                                             changeErrorMsg={changeErrorMsg}

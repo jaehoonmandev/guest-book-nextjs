@@ -22,5 +22,5 @@ Server - Client 구성, Next.js로 구성된 Front와 REST API로 요청을 받�
 ![how to use](how2use.png)
 
 ## 프로젝트 링크
-- [재훈맨 방명록](https://guestbook.jaehoonman.site/)
+- [재훈맨 방명록](https://guestbook.jaehoonman.dev/)
 - [Backend 소스](https://github.com/jaehoonmandev/guest-book-spring-boot)

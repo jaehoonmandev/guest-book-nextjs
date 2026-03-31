@@ -22,7 +22,7 @@ export const metadata: Metadata = {
         icon: "public/icon/favicon.ico",
     },
 
-    metadataBase: new URL('https://guestbook.jaehoonman.site/'),
+    metadataBase: new URL('https://guestbook.jaehoonman.dev/'),
     // openGraph: {
     //     images: '/og-image.png',
     // },

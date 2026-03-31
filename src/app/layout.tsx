@@ -38,9 +38,9 @@ export const viewport: Viewport = {
 
 }
 
-export default function RootLayout({children,}: { children: React.ReactNode }) {
+export default async function RootLayout({children,}: { children: React.ReactNode }) {
 
-    const isMobile = isMobileDevice();
+    const isMobile = await isMobileDevice();
 
 
     return (
